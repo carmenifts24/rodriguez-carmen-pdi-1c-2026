@@ -1,66 +1,42 @@
-# Laboratorio de Fundamentos de Procesamiento Digital de Imágenes, Visión por Computadora, VLMs y Agentic AI
+# Laboratorio de Fundamentos de Procesamiento Digital de Imagenes
 
-**Hacia una Visión Técnico-Humanista: Procesamiento, Algoritmos y Sociedad**
+**IFTS N 24 - Ciencia de Datos e Inteligencia Artificial**  
+**3er ano - 1er cuatrimestre 2026**
 
-**IFTS Nº 24 — Ciencia de Datos e Inteligencia Artificial**  
-**3er año — 1er cuatrimestre 2026**  
-**Martes 20:30–22:30 / Miércoles 18:30–22:30**
+Repositorio de trabajo para la cursada de Procesamiento Digital de Imagenes, Vision por Computadora y primeras practicas con herramientas visuales en Python.
 
-**Profesor Titular:** Matías Barreto — Especialista en Nuevos Medios e Interactividad  
-[matiasbarreto@ifts24.edu.ar](mailto:matiasbarreto@ifts24.edu.ar)
+## Que contiene este repositorio
 
-**Ayudante de Trabajos Prácticos:** Cynthia Marcela Villagra
+El material esta organizado por unidades numeradas. En cada unidad se separan, cuando corresponde:
 
----
+- `TEORIA`: presentaciones, apuntes y material de catedra
+- `PRACTICA`: notebooks, scripts y ejercicios para trabajar
+- `LABORATORIO`: actividades integradoras o entregas de laboratorio
+- `Extras`: guias de instalacion, uso diario y material complementario
 
-## Qué es este repositorio
+Hasta el estado actual del proyecto, el recorrido incluye:
 
-Este repositorio contiene el material de laboratorio de la materia. El material se organiza en carpetas numeradas (`001/`, `002/`, `003/`, ...) que se publican semana a semana a medida que avanza la cursada.
+- `001 - py5`: introduccion a programacion visual con `py5`
+- `002 - py5`: fundamentos de imagen digital con notebooks y scripts interactivos
+- `003 - librerias_fundamentos_pdi`: primeras practicas con OpenCV, canales, muestreo, segmentacion y preprocesamiento
 
-Cada carpeta corresponde a una unidad temática y contiene notebooks (`.ipynb`) y scripts (`.py`) para trabajar en clase y fuera de ella.
+## Tecnologias y librerias
 
-**Librerías principales del curso:**
-- **OpenCV (cv2):** Procesamiento de imágenes y visión computacional
-- **NumPy:** Manipulación de matrices y arrays
-- **Matplotlib:** Visualización de imágenes y gráficos
-- **Pillow (PIL):** Manipulación básica de imágenes
-- **scikit-image:** Algoritmos avanzados de procesamiento
-- **py5:** Introducción a conceptos visuales (unidades iniciales únicamente)
+Principales librerias usadas en la cursada:
 
----
+- `numpy`
+- `scipy`
+- `opencv-python`
+- `scikit-image`
+- `Pillow`
+- `matplotlib`
+- `jupyter`
+- `ipykernel`
+- `py5`
 
-## Importante: No necesitás permisos de administrador
+Nota: `py5` requiere Java. Si aparece un error relacionado con Java, revisar la documentacion oficial de instalacion de `py5`.
 
-Si trabajás en una computadora de tu empleo o no tenés permisos de admin, **esto no es un problema**. Todo el software se instala dentro de una carpeta del proyecto usando un **entorno virtual de Python**.
-
-El entorno virtual es una instalación aislada de Python que:
-- No requiere permisos de administrador
-- No modifica el Python del sistema
-- Todo queda dentro de la carpeta del repositorio
-- Podés borrarlo y recrearlo cuando quieras
-
----
-
-## Requisitos previos
-
-Antes de arrancar, asegurate de tener instalado en tu máquina:
-
-1. **Python 3.10 o superior** — [Descarga oficial](https://www.python.org/downloads/)
-   - Durante la instalación en Windows, marcá la opción **"Add Python to PATH"**
-   - **No necesitás "Install for all users"** — la instalación para tu usuario actual funciona perfectamente
-2. **Git** — [Descarga oficial](https://git-scm.com/downloads)
-   - Elegí la opción "Git from the command line and also from 3rd-party software"
-3. **Visual Studio Code** (recomendado) — [Descarga oficial](https://code.visualstudio.com/)
-   - Instalá la extensión **Python** desde el marketplace de VS Code
-   - Instalá la extensión **Jupyter** para trabajar con notebooks
-
-**Alternativa si no podés instalar nada:** Usá [Google Colab](https://colab.research.google.com) directamente. Los notebooks de este repositorio están preparados para ejecutarse en la nube.
-
----
-
-## Setup inicial (una sola vez)
-
-Abrí una terminal (en Windows: PowerShell o Git Bash) y ejecutá los siguientes comandos:
+## Instalacion local
 
 ### 1. Clonar el repositorio
 
@@ -69,176 +45,239 @@ git clone https://github.com/mattbarreto/ifts24-lab-pdi-2026.git
 cd ifts24-lab-pdi-2026
 ```
 
-### 2. Crear el entorno virtual
+### 2. Crear un entorno virtual
 
 ```bash
-python -m venv .venv
+python -m venv venv
 ```
 
-Esto crea una carpeta `.venv/` dentro del proyecto con una instalación limpia de Python.
+En Windows, si `python` no funciona, probar:
 
-### 3. Activar el entorno virtual
+```bash
+py -m venv venv
+```
 
-**Windows (PowerShell):**
+### 3. Activar el entorno
+
+PowerShell:
+
 ```powershell
-.venv\Scripts\Activate.ps1
+.\venv\Scripts\Activate.ps1
 ```
 
-**Windows (Git Bash / CMD):**
+CMD:
+
+```bat
+venv\Scripts\activate
+```
+
+macOS / Linux:
+
 ```bash
-.venv\Scripts\activate
+source venv/bin/activate
 ```
 
-**macOS / Linux:**
-```bash
-source .venv/bin/activate
-```
+Si PowerShell bloquea la activacion:
 
-Si PowerShell muestra un error de permisos, ejecutá primero (solo una vez en tu usuario):
 ```powershell
-Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
 ```
-
-Cuando el entorno esté activo, verás `(.venv)` al principio de la línea de la terminal.
 
 ### 4. Instalar dependencias
 
 ```bash
-pip install -r requirements.txt
+python -m pip install -r requirements.txt
 ```
 
-### 5. Verificar la instalación
+### 5. Verificar librerias principales
 
 ```bash
-python -c "import cv2; import numpy; print('OpenCV y NumPy instalados correctamente')"
+python -c "import cv2, numpy, PIL, matplotlib; print('Librerias principales OK')"
+python -c "import py5; print('py5 OK')"
 ```
 
----
+## Guias utiles incluidas
 
-## Cómo actualizar cada semana
+En la carpeta `Extras` hay documentacion pensada para uso practico:
 
-Cada vez que se publique material nuevo, desde la carpeta del repositorio ejecutá:
+- `Extras/instalacion_inicial.md`: puesta en marcha desde cero en otra computadora
+- `Extras/referencia_trabajo_diario.md`: comandos de todos los dias y problemas frecuentes
 
-```bash
-git pull
+## Estructura actual del proyecto
+
+```text
+rodriguez-carmen-pdi-1c-2026/
+|-- README.md
+|-- requirements.txt
+|-- 001 - py5/
+|   |-- TEORIA/
+|   |-- PRACTICA/
+|   `-- LABORATORIO/
+|-- 002 - py5/
+|   |-- TEORIA/
+|   |-- PRACTICA/
+|   `-- LABORATORIO/
+|-- 003 - librerias_fundamentos_pdi/
+|   `-- PRACTICA/
+`-- Extras/
 ```
 
-Si se agregan nuevas dependencias, se anunciará en clase. En ese caso, con el entorno activado:
+## Resumen por unidad
 
-```bash
-pip install -r requirements.txt
-```
+### 001 - py5
 
----
+Unidad centrada en la introduccion a `py5` y a la programacion visual.
 
-## Estructura del repositorio
+Incluye ejercicios de:
 
-```
-ifts24-lab-pdi-2026/
-├── README.md                    <- Este archivo
-├── requirements.txt             <- Dependencias del entorno
-├── .gitignore                   <- Archivos ignorados por git
-│
-├── 001/                         <- Unidad 1: Introducción con py5
-│   ├── 000_intro_py5.py
-│   ├── 001_basico.py
-│   ├── 001b_basico_HSV.py
-│   ├── 002_info.py
-│   ├── 003_RGB.py
-│   ├── 004_HSV.py
-│   ├── 005_upload_img.py
-│   ├── 006_pixeles.py
-│   ├── 007_pixeles.py
-│   ├── 008_filtro.py
-│   ├── 009_mouse.py
-│   ├── 009b_mouse.py
-│   ├── 009c_mouse.py
-│   ├── 010_filtro.py
-│   ├── 011_filtro.py
-│   ├── 012_filtro.py
-│   ├── 013_filtro.py
-│   ├── 014_filtro.py
-│   ├── 015_dibujo.py
-│   ├── img/                     <- Imágenes de ejemplo
-│   ├── save/                    <- Carpeta para guardar resultados
-│   └── info.txt                 <- Referencia rápida de py5
-│
-├── 002/                         <- Unidad 2: Fundamentos de la Imagen Digital
-│   ├── 00_setup_colab.ipynb     <- Configuración para Google Colab
-│   ├── 02a_fundamentos_teoria_colab.ipynb      <- Teoría (Colab)
-│   ├── 02b_fundamentos_practica_local.ipynb    <- Práctica (local)
-│   └── 02c_laboratorio_fundamentos.ipynb       <- Laboratorio
-│
-└── ...                          <- Unidades siguientes (se publican semanalmente)
-```
+- creacion de ventanas y sketches basicos
+- color en `RGB` y `HSV/HSB`
+- carga y visualizacion de imagenes
+- manipulacion manual de pixeles
+- filtros visuales
+- interaccion con mouse
+- dibujo generativo
 
----
+Archivos destacados en `001 - py5/PRACTICA`:
 
-## Cómo ejecutar los ejercicios
+- `000_intro_py5.py`
+- `001_basico.py`
+- `001b_basico_HSV.py`
+- `001c_hsv_gradiente.py`
+- `002_info.py`
+- `002b_info_visual.py`
+- `003_RGB.py`
+- `004_HSV.py`
+- `005_upload_img.py`
+- `006_pixeles.py`
+- `007_pixeles.py`
+- `008_filtro.py`
+- `009_mouse.py`
+- `009b_mouse.py`
+- `009c_mouse.py`
+- `010_filtro.py`
+- `011_filtro.py`
+- `012_filtro.py`
+- `013_filtro.py`
+- `014_filtro.py`
+- `015_dibujo.py`
 
-### Opción A: Trabajo local con VS Code (recomendado)
+Material complementario:
 
-1. Abrí la carpeta del repositorio en VS Code: `Archivo > Abrir carpeta...`
-2. Asegurate de tener el entorno virtual activado (ver `.venv` en la barra de estado de VS Code)
-3. Abrí cualquier archivo `.py` o `.ipynb`
-4. Para scripts `.py`: presioná `F5` o el botón de play
-5. Para notebooks `.ipynb`: ejecutá las celdas con `Shift + Enter`
+- `001 - py5/PRACTICA/README.md`
+- `001 - py5/PRACTICA/py5_referencia.md`
+- `001 - py5/PRACTICA/img/`
+- `001 - py5/PRACTICA/save/`
 
-### Opción B: Google Colab (sin instalación)
+### 002 - py5
 
-1. Andá a [Google Colab](https://colab.research.google.com)
-2. Subí el notebook `.ipynb` que querés ejecutar
-3. Los notebooks incluyen la configuración inicial para instalar dependencias en Colab
+Unidad orientada a fundamentos de imagen digital y primera articulacion entre teoria, practica y laboratorio.
 
----
+En `002 - py5/PRACTICA` hay:
 
-## Resolución de problemas frecuentes
+- `00_setup_colab.ipynb`
+- `02a_fundamentos_teoria_colab.ipynb`
+- `02a_fundamentos_teoria_local.ipynb`
+- `02b_fundamentos_practica_local.ipynb`
+- `02c_laboratorio_fundamentos.ipynb`
+- `canal_mouse.py`
+- `lupa.py`
 
-### "No se puede cargar el script porque la ejecución de scripts está deshabilitada en este sistema"
-Ejecutá en PowerShell como administrador (solo una vez):
+Temas trabajados:
+
+- lectura inicial de imagen digital
+- diferencia entre teoria en Colab y trabajo local
+- exploracion de canales de color
+- interaccion con el mouse sobre imagenes
+- zoom o efecto lupa sobre regiones de interes
+
+### 003 - librerias_fundamentos_pdi
+
+Unidad enfocada en el uso de librerias de procesamiento de imagenes mas alla de `py5`.
+
+Notebooks y archivos actuales en `003 - librerias_fundamentos_pdi/PRACTICA`:
+
+- `001 - entorno y librerias.ipynb`
+- `002 - imagenes en color y canales.ipynb`
+- `003 - operaciones basicas con opencv.ipynb`
+- `004 - muestreo y cuantizacion.ipynb`
+- `005 - practica guiada de procesamiento de imagenes.ipynb`
+- `005 - practica guiada de procesamiento carmen.py`
+- `006 - laboratorio 2 - segmentacion simple por color.ipynb`
+- `007 - recuperacion y preprocesamiento de imagenes propias.ipynb`
+- `008 - actividad integradora - segmentacion por color.ipynb`
+
+Temas trabajados:
+
+- preparacion del entorno
+- lectura y visualizacion de imagenes con librerias de Python
+- canales de color
+- operaciones basicas con OpenCV
+- muestreo y cuantizacion
+- segmentacion simple por color
+- recuperacion y preprocesamiento
+
+## Como trabajar con el material
+
+### Scripts `.py`
+
+- Activar el entorno virtual
+- Abrir la carpeta completa del proyecto en VS Code
+- Ejecutar el archivo desde VS Code o desde terminal con `python archivo.py`
+
+### Notebooks `.ipynb`
+
+- Abrir el notebook en VS Code o Jupyter
+- Verificar que el kernel seleccionado sea el del `venv`
+- Ejecutar las celdas en orden
+
+### Google Colab
+
+Algunos notebooks estan preparados para trabajo en Colab, especialmente los que ya lo indican en el nombre o incluyen una celda de setup.
+
+## Problemas frecuentes
+
+### PowerShell no deja activar el entorno virtual
+
 ```powershell
-Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
+.\venv\Scripts\Activate.ps1
 ```
 
-### "python no se reconoce como comando"
-Python no se agregó al PATH. Reinstalá marcando "Add Python to PATH", o usá `py` en lugar de `python` en Windows.
+### Faltan modulos como `cv2`, `numpy` o `PIL`
 
-### "No module named 'cv2'" / "No module named 'numpy'"
-Verificá que el entorno virtual esté activado (debés ver `(.venv)` al inicio de la línea). Si lo está, reinstalá las dependencias:
 ```bash
-pip install -r requirements.txt
+python -m pip install -r requirements.txt
 ```
 
-### Las imágenes no se cargan (error al leer imágenes)
-Verificá que:
-1. Las imágenes estén en la carpeta correspondiente
-2. Estés ejecutando el script desde la carpeta correcta
-3. Usás rutas relativas: `img/mi_imagen.jpg` en lugar de rutas absolutas
+### VS Code o Jupyter usan otro interprete
 
-### py5 no abre la ventana o no muestra la imagen
-En algunos sistemas operativos, py5 requiere un backend gráfico adicional. Instalá glfw:
+Seleccionar:
+
+```text
+.\venv\Scripts\python.exe
+```
+
+### `py5` falla al iniciar
+
+Primero probar:
+
 ```bash
-pip install glfw
+python -m pip install glfw
 ```
-Si el problema persiste, consultá la [guía de instalación de py5](https://py5coding.org/content/install.html) que detalla los requisitos específicos para cada sistema operativo.
 
-### Error de Java al ejecutar py5
-py5 requiere Java para funcionar. Si ves un error relacionado con Java, instalá la versión apropiada según tu sistema operativo siguiendo las [instrucciones oficiales de instalación de py5](https://py5coding.org/content/install.html).
+Si el error menciona Java, instalar Java y revisar la guia oficial de `py5`.
 
----
+## Recursos
 
-## Recursos adicionales
-
-- [Documentación de OpenCV](https://docs.opencv.org/)
-- [Documentación de NumPy](https://numpy.org/doc/)
-- [Documentación de Matplotlib](https://matplotlib.org/)
-- [Documentación de scikit-image](https://scikit-image.org/docs/)
-- [Documentación de py5](https://py5coding.org/)
-- [Guía de instalación de py5 (incluye requisitos de Java)](https://py5coding.org/content/install.html)
-- [Google Colab Help](https://colab.research.google.com/notebooks/intro.ipynb)
-
----
+- OpenCV: <https://docs.opencv.org/>
+- NumPy: <https://numpy.org/doc/>
+- Matplotlib: <https://matplotlib.org/>
+- scikit-image: <https://scikit-image.org/docs/>
+- py5: <https://py5coding.org/>
+- Instalacion de py5: <https://py5coding.org/content/install.html>
+- Google Colab: <https://colab.research.google.com/>
 
 ## Licencia
 
-Este material se distribuye bajo licencia [Creative Commons BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es): podés usarlo y adaptarlo con atribución, sin fines comerciales, y compartiendo bajo la misma licencia.
+Material de uso educativo para la cursada. Si mas adelante se define una licencia especifica para la materia, conviene agregarla en este archivo.
