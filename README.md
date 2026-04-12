@@ -1,28 +1,29 @@
-# Laboratorio de Fundamentos de Procesamiento Digital de Imagenes
+# Laboratorio de Fundamentos de Procesamiento Digital de Imágenes
 
-**IFTS N 24 - Ciencia de Datos e Inteligencia Artificial**  
-**3er ano - 1er cuatrimestre 2026**
+**IFTS N.º 24 - Ciencia de Datos e Inteligencia Artificial**  
+**3.er año - 1.er cuatrimestre 2026**
 
-Repositorio de trabajo para la cursada de Procesamiento Digital de Imagenes, Vision por Computadora y primeras practicas con herramientas visuales en Python.
+Repositorio personal de trabajo para la cursada de Procesamiento Digital de Imágenes. Reúne apuntes, prácticas, laboratorios y material complementario desarrollado durante la materia.
 
-## Que contiene este repositorio
+## Qué contiene este repositorio
 
-El material esta organizado por unidades numeradas. En cada unidad se separan, cuando corresponde:
+El material está organizado por unidades numeradas. En cada unidad se separan, cuando corresponde:
 
-- `TEORIA`: presentaciones, apuntes y material de catedra
-- `PRACTICA`: notebooks, scripts y ejercicios para trabajar
-- `LABORATORIO`: actividades integradoras o entregas de laboratorio
-- `Extras`: guias de instalacion, uso diario y material complementario
+- `001 - TEO`: teoría, presentaciones y material de cátedra
+- `002 - PRA`: prácticas, notebooks y ejercicios guiados
+- `003 - LAB`: trabajos de laboratorio, actividades integradoras o entregas
+- `Extras`: guías de instalación, uso diario y documentación complementaria
 
-Hasta el estado actual del proyecto, el recorrido incluye:
+Estado actual del recorrido:
 
-- `001 - py5`: introduccion a programacion visual con `py5`
-- `002 - py5`: fundamentos de imagen digital con notebooks y scripts interactivos
-- `003 - librerias_fundamentos_pdi`: primeras practicas con OpenCV, canales, muestreo, segmentacion y preprocesamiento
+- `001 - py5`: introducción a programación visual con `py5`
+- `002 - py5`: fundamentos de imagen digital e interacción visual
+- `003 - camara_oscura`: registro y material de trabajo asociado a la experiencia de cámara oscura
+- `004 - librerias_fundamentos_pdi`: procesamiento con librerías de Python, segmentación y preprocesamiento
 
-## Tecnologias y librerias
+## Tecnologías y librerías
 
-Principales librerias usadas en la cursada:
+Principales librerías usadas en la cursada:
 
 - `numpy`
 - `scipy`
@@ -34,15 +35,15 @@ Principales librerias usadas en la cursada:
 - `ipykernel`
 - `py5`
 
-Nota: `py5` requiere Java. Si aparece un error relacionado con Java, revisar la documentacion oficial de instalacion de `py5`.
+Nota: `py5` requiere Java. Si aparece un error relacionado con Java, conviene revisar la documentación oficial de instalación de `py5`.
 
-## Instalacion local
+## Instalación local
 
 ### 1. Clonar el repositorio
 
 ```bash
-git clone https://github.com/mattbarreto/ifts24-lab-pdi-2026.git
-cd ifts24-lab-pdi-2026
+git clone https://github.com/carmenifts24/rodriguez-carmen-pdi-1c-2026.git
+cd rodriguez-carmen-pdi-1c-2026
 ```
 
 ### 2. Crear un entorno virtual
@@ -77,7 +78,7 @@ macOS / Linux:
 source venv/bin/activate
 ```
 
-Si PowerShell bloquea la activacion:
+Si PowerShell bloquea la activación:
 
 ```powershell
 Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
@@ -89,19 +90,21 @@ Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
 python -m pip install -r requirements.txt
 ```
 
-### 5. Verificar librerias principales
+### 5. Verificar librerías principales
 
 ```bash
-python -c "import cv2, numpy, PIL, matplotlib; print('Librerias principales OK')"
+python -c "import cv2, numpy, PIL, matplotlib; print('Librerías principales OK')"
 python -c "import py5; print('py5 OK')"
 ```
 
-## Guias utiles incluidas
+## Guías útiles incluidas
 
-En la carpeta `Extras` hay documentacion pensada para uso practico:
+En la carpeta `Extras` hay documentación pensada para uso práctico:
 
 - `Extras/instalacion_inicial.md`: puesta en marcha desde cero en otra computadora
-- `Extras/referencia_trabajo_diario.md`: comandos de todos los dias y problemas frecuentes
+- `Extras/referencia_trabajo_diario.md`: comandos de uso frecuente y resolución de problemas comunes
+- `Extras/actualizar_github.md`: pasos para subir cambios al repositorio
+- `Extras/alternar_github.md`: notas de trabajo con remotos y cuentas GitHub
 
 ## Estructura actual del proyecto
 
@@ -110,15 +113,19 @@ rodriguez-carmen-pdi-1c-2026/
 |-- README.md
 |-- requirements.txt
 |-- 001 - py5/
-|   |-- TEORIA/
-|   |-- PRACTICA/
-|   `-- LABORATORIO/
+|   |-- 001 - TEO/
+|   |-- 002 - PRA/
+|   `-- 003 - LAB/
 |-- 002 - py5/
-|   |-- TEORIA/
-|   |-- PRACTICA/
-|   `-- LABORATORIO/
-|-- 003 - librerias_fundamentos_pdi/
-|   `-- PRACTICA/
+|   |-- 001 - TEO/
+|   |-- 002 - PRA/
+|   `-- 003 - LAB/
+|-- 003 - camara_oscura/
+|   `-- 003 - LAB/
+|-- 004 - librerias_fundamentos_pdi/
+|   |-- 001 - TEO/
+|   |-- 002 - PRA/
+|   `-- 003 - LAB/
 `-- Extras/
 ```
 
@@ -126,19 +133,19 @@ rodriguez-carmen-pdi-1c-2026/
 
 ### 001 - py5
 
-Unidad centrada en la introduccion a `py5` y a la programacion visual.
+Unidad centrada en la introducción a `py5` y a la programación visual.
 
 Incluye ejercicios de:
 
-- creacion de ventanas y sketches basicos
+- creación de ventanas y sketches básicos
 - color en `RGB` y `HSV/HSB`
-- carga y visualizacion de imagenes
-- manipulacion manual de pixeles
+- carga y visualización de imágenes
+- manipulación manual de píxeles
 - filtros visuales
-- interaccion con mouse
+- interacción con mouse
 - dibujo generativo
 
-Archivos destacados en `001 - py5/PRACTICA`:
+Archivos destacados en `001 - py5/002 - PRA`:
 
 - `000_intro_py5.py`
 - `001_basico.py`
@@ -162,18 +169,23 @@ Archivos destacados en `001 - py5/PRACTICA`:
 - `014_filtro.py`
 - `015_dibujo.py`
 
+En `001 - py5/003 - LAB` se encuentra:
+
+- `2026_PDI_RODRIGUEZ_CARMEN.py`
+
 Material complementario:
 
-- `001 - py5/PRACTICA/README.md`
-- `001 - py5/PRACTICA/py5_referencia.md`
-- `001 - py5/PRACTICA/img/`
-- `001 - py5/PRACTICA/save/`
+- `001 - py5/002 - PRA/README.md`
+- `001 - py5/002 - PRA/py5_referencia.md`
+- `001 - py5/002 - PRA/jupyter/`
+- `001 - py5/002 - PRA/img/`
+- `001 - py5/002 - PRA/save/`
 
 ### 002 - py5
 
-Unidad orientada a fundamentos de imagen digital y primera articulacion entre teoria, practica y laboratorio.
+Unidad orientada a fundamentos de imagen digital y primera articulación entre teoría, práctica y laboratorio.
 
-En `002 - py5/PRACTICA` hay:
+En `002 - py5/002 - PRA` hay:
 
 - `00_setup_colab.ipynb`
 - `02a_fundamentos_teoria_colab.ipynb`
@@ -183,57 +195,91 @@ En `002 - py5/PRACTICA` hay:
 - `canal_mouse.py`
 - `lupa.py`
 
+En `002 - py5/003 - LAB` se encuentran:
+
+- `2026_PDI_RODRIGUEZ_canal_mouse.py`
+- `2026_PDI_RODRIGUEZ_lupa.py`
+
 Temas trabajados:
 
 - lectura inicial de imagen digital
-- diferencia entre teoria en Colab y trabajo local
-- exploracion de canales de color
-- interaccion con el mouse sobre imagenes
-- zoom o efecto lupa sobre regiones de interes
+- diferencia entre teoría en Colab y trabajo local
+- exploración de canales de color
+- interacción con el mouse sobre imágenes
+- zoom o efecto lupa sobre regiones de interés
 
-### 003 - librerias_fundamentos_pdi
+### 003 - camara_oscura
 
-Unidad enfocada en el uso de librerias de procesamiento de imagenes mas alla de `py5`.
+Unidad destinada al registro de la experiencia de cámara oscura y a la producción de imágenes propias usadas luego en otras actividades.
 
-Notebooks y archivos actuales en `003 - librerias_fundamentos_pdi/PRACTICA`:
+En `003 - camara_oscura/003 - LAB` hay material de referencia y archivos asociados a la experiencia, incluyendo capturas como:
+
+- `Pequeno - 1.jpeg`
+- `Pequeno - 3.jpeg`
+- `imagen_preprocesada.png`
+
+Este material se articula especialmente con la unidad `004`, donde se trabaja recuperación, preprocesamiento y segmentación sobre imágenes propias.
+
+### 004 - librerias_fundamentos_pdi
+
+Unidad enfocada en el uso de librerías de procesamiento de imágenes más allá de `py5`.
+
+Notebooks y archivos de práctica en `004 - librerias_fundamentos_pdi/002 - PRA`:
 
 - `001 - entorno y librerias.ipynb`
 - `002 - imagenes en color y canales.ipynb`
 - `003 - operaciones basicas con opencv.ipynb`
 - `004 - muestreo y cuantizacion.ipynb`
 - `005 - practica guiada de procesamiento de imagenes.ipynb`
-- `005 - practica guiada de procesamiento carmen.py`
 - `006 - laboratorio 2 - segmentacion simple por color.ipynb`
 - `007 - recuperacion y preprocesamiento de imagenes propias.ipynb`
 - `008 - actividad integradora - segmentacion por color.ipynb`
+- `005 - practica guiada de procesamiento carmen.py`
+
+Material de laboratorio desarrollado en `004 - librerias_fundamentos_pdi/003 - LAB`:
+
+- `2026_PDI_RODRIGUEZ_proc_digital.ipynb`
+- `2026_PDI_RODRIGUEZ_segmentac_color.ipynb`
+- `2026_PDI_RODRIGUEZ_ rec_preproc_imag_propias.ipynb`
+- `2026_PDI_RODRIGUEZ_ integrador_segmentacion por color.ipynb`
+
+Imágenes y recursos usados en esta unidad:
+
+- `flowers.jpg`
+- `frutos_rojos.png`
+- `monedas.png`
+- `paisaje.png`
+- `texto.png`
+- `imagen_preprocesada.png`
 
 Temas trabajados:
 
-- preparacion del entorno
-- lectura y visualizacion de imagenes con librerias de Python
-- canales de color
-- operaciones basicas con OpenCV
-- muestreo y cuantizacion
-- segmentacion simple por color
-- recuperacion y preprocesamiento
+- preparación del entorno de trabajo con librerías
+- lectura y visualización de imágenes con OpenCV
+- análisis de canales e histogramas
+- operaciones básicas sobre imágenes
+- muestreo y cuantización
+- segmentación simple por color
+- recuperación y preprocesamiento de imágenes propias
+- actividad integradora de segmentación usando `imagen_preprocesada.png`
 
-## Como trabajar con el material
+## Cómo trabajar con el material
 
 ### Scripts `.py`
 
-- Activar el entorno virtual
-- Abrir la carpeta completa del proyecto en VS Code
-- Ejecutar el archivo desde VS Code o desde terminal con `python archivo.py`
+- activar el entorno virtual
+- abrir la carpeta completa del proyecto en VS Code
+- ejecutar el archivo desde VS Code o desde terminal con `python archivo.py`
 
 ### Notebooks `.ipynb`
 
-- Abrir el notebook en VS Code o Jupyter
-- Verificar que el kernel seleccionado sea el del `venv`
-- Ejecutar las celdas en orden
+- abrir el notebook en VS Code o Jupyter
+- verificar que el kernel seleccionado sea el del `venv`
+- ejecutar las celdas en orden
 
 ### Google Colab
 
-Algunos notebooks estan preparados para trabajo en Colab, especialmente los que ya lo indican en el nombre o incluyen una celda de setup.
+Algunos notebooks están preparados para trabajo en Colab, especialmente los que ya lo indican en el nombre o incluyen una celda de setup.
 
 ## Problemas frecuentes
 
@@ -244,13 +290,13 @@ Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
 .\venv\Scripts\Activate.ps1
 ```
 
-### Faltan modulos como `cv2`, `numpy` o `PIL`
+### Faltan módulos como `cv2`, `numpy` o `PIL`
 
 ```bash
 python -m pip install -r requirements.txt
 ```
 
-### VS Code o Jupyter usan otro interprete
+### VS Code o Jupyter usan otro intérprete
 
 Seleccionar:
 
@@ -266,7 +312,7 @@ Primero probar:
 python -m pip install glfw
 ```
 
-Si el error menciona Java, instalar Java y revisar la guia oficial de `py5`.
+Si el error menciona Java, instalar Java y revisar la guía oficial de `py5`.
 
 ## Recursos
 
@@ -275,9 +321,9 @@ Si el error menciona Java, instalar Java y revisar la guia oficial de `py5`.
 - Matplotlib: <https://matplotlib.org/>
 - scikit-image: <https://scikit-image.org/docs/>
 - py5: <https://py5coding.org/>
-- Instalacion de py5: <https://py5coding.org/content/install.html>
+- Instalación de py5: <https://py5coding.org/content/install.html>
 - Google Colab: <https://colab.research.google.com/>
 
 ## Licencia
 
-Material de uso educativo para la cursada. Si mas adelante se define una licencia especifica para la materia, conviene agregarla en este archivo.
+Material de uso educativo para la cursada. Si más adelante se define una licencia específica para la materia, conviene agregarla en este archivo.
