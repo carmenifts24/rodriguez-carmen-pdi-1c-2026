@@ -5,7 +5,7 @@ Esta guia resume el uso diario del proyecto y los problemas mas comunes. Para pr
 ## Flujo normal de trabajo
 
 ```powershell
-cd "C:\ruta\hasta\rodriguez-carmen-pdi-1c-2026"
+cd "C:\Proyectos\rodriguez-carmen-pdi-1c-2026"
 .\venv\Scripts\Activate.ps1
 ```
 

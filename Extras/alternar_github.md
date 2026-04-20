@@ -25,7 +25,7 @@ Regla de seguridad:
 ## Paso 1. Entrar a la carpeta correcta
 
 ```powershell
-cd "C:\Users\carme\OneDrive\Documents\Procesamiento de imágenes\rodriguez-carmen-pdi-1c-2026"
+cd "C:\Proyectos\rodriguez-carmen-pdi-1c-2026"
 ```
 
 Comentario:
@@ -256,7 +256,7 @@ git status
 Comentario:
 Estas son las dos verificaciones minimas para no empujar al repo equivocado ni subir cambios inesperados.
 
-## Señales de alerta
+## Senales de alerta
 
 - Si `origin` no apunta a mi GitHub, me detengo.
 - Si `git status` muestra archivos que no reconozco, me detengo.
@@ -266,7 +266,7 @@ Estas son las dos verificaciones minimas para no empujar al repo equivocado ni s
 ## Flujo resumido para todos los dias
 
 ```powershell
-cd "C:\Users\carme\OneDrive\Documents\Procesamiento de imágenes\rodriguez-carmen-pdi-1c-2026"
+cd "C:\Proyectos\rodriguez-carmen-pdi-1c-2026"
 .\venv\Scripts\Activate.ps1
 git remote -v
 git branch --show-current

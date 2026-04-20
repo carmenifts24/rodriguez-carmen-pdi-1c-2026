@@ -1,29 +1,30 @@
-# Laboratorio de Fundamentos de Procesamiento Digital de Imágenes
+# Laboratorio de Fundamentos de Procesamiento Digital de Imagenes
 
-**IFTS N.º 24 - Ciencia de Datos e Inteligencia Artificial**  
-**3.er año - 1.er cuatrimestre 2026**
+**IFTS N. 24 - Ciencia de Datos e Inteligencia Artificial**  
+**3.er ano - 1.er cuatrimestre 2026**
 
-Repositorio personal de trabajo para la cursada de Procesamiento Digital de Imágenes. Reúne apuntes, prácticas, laboratorios y material complementario desarrollado durante la materia.
+Repositorio personal de trabajo para la cursada de Procesamiento Digital de Imagenes. Reune apuntes, practicas, laboratorios y material complementario desarrollado durante la materia.
 
-## Qué contiene este repositorio
+## Que contiene este repositorio
 
-El material está organizado por unidades numeradas. En cada unidad se separan, cuando corresponde:
+El material esta organizado por unidades numeradas. En cada unidad se separan, cuando corresponde:
 
-- `001 - TEO`: teoría, presentaciones y material de cátedra
-- `002 - PRA`: prácticas, notebooks y ejercicios guiados
+- `001 - TEO`: teoria, presentaciones y material de catedra
+- `002 - PRA`: practicas, notebooks y ejercicios guiados
 - `003 - LAB`: trabajos de laboratorio, actividades integradoras o entregas
-- `Extras`: guías de instalación, uso diario y documentación complementaria
+- `Extras`: guias de instalacion, uso diario y documentacion complementaria
 
 Estado actual del recorrido:
 
-- `001 - py5`: introducción a programación visual con `py5`
-- `002 - py5`: fundamentos de imagen digital e interacción visual
-- `003 - camara_oscura`: registro y material de trabajo asociado a la experiencia de cámara oscura
-- `004 - librerias_fundamentos_pdi`: procesamiento con librerías de Python, segmentación y preprocesamiento
+- `001 - py5`: introduccion a programacion visual con `py5`
+- `002 - py5`: fundamentos de imagen digital e interaccion visual
+- `003 - camara_oscura`: registro y material de trabajo asociado a la experiencia de camara oscura
+- `004 - librerias_fundamentos_pdi`: procesamiento con librerias de Python, segmentacion y preprocesamiento
+- `005  - computer_vision_parte_1`: vision por computadora clasica con OpenCV
 
-## Tecnologías y librerías
+## Tecnologias y librerias
 
-Principales librerías usadas en la cursada:
+Principales librerias usadas en la cursada:
 
 - `numpy`
 - `scipy`
@@ -35,9 +36,9 @@ Principales librerías usadas en la cursada:
 - `ipykernel`
 - `py5`
 
-Nota: `py5` requiere Java. Si aparece un error relacionado con Java, conviene revisar la documentación oficial de instalación de `py5`.
+Nota: `py5` requiere Java. Si aparece un error relacionado con Java, conviene revisar la documentacion oficial de instalacion de `py5`.
 
-## Instalación local
+## Instalacion local
 
 ### 1. Clonar el repositorio
 
@@ -78,7 +79,7 @@ macOS / Linux:
 source venv/bin/activate
 ```
 
-Si PowerShell bloquea la activación:
+Si PowerShell bloquea la activacion:
 
 ```powershell
 Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
@@ -90,19 +91,19 @@ Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
 python -m pip install -r requirements.txt
 ```
 
-### 5. Verificar librerías principales
+### 5. Verificar librerias principales
 
 ```bash
-python -c "import cv2, numpy, PIL, matplotlib; print('Librerías principales OK')"
+python -c "import cv2, numpy, PIL, matplotlib; print('Librerias principales OK')"
 python -c "import py5; print('py5 OK')"
 ```
 
-## Guías útiles incluidas
+## Guias utiles incluidas
 
-En la carpeta `Extras` hay documentación pensada para uso práctico:
+En la carpeta `Extras` hay documentacion pensada para uso practico:
 
 - `Extras/instalacion_inicial.md`: puesta en marcha desde cero en otra computadora
-- `Extras/referencia_trabajo_diario.md`: comandos de uso frecuente y resolución de problemas comunes
+- `Extras/referencia_trabajo_diario.md`: comandos de uso frecuente y resolucion de problemas comunes
 - `Extras/actualizar_github.md`: pasos para subir cambios al repositorio
 - `Extras/alternar_github.md`: notas de trabajo con remotos y cuentas GitHub
 
@@ -121,11 +122,15 @@ rodriguez-carmen-pdi-1c-2026/
 |   |-- 002 - PRA/
 |   `-- 003 - LAB/
 |-- 003 - camara_oscura/
+|   |-- 001 - TEO/
+|   |-- 002 - PRA/
 |   `-- 003 - LAB/
 |-- 004 - librerias_fundamentos_pdi/
 |   |-- 001 - TEO/
 |   |-- 002 - PRA/
 |   `-- 003 - LAB/
+|-- 005  - computer_vision_parte_1/
+|   `-- 002 - PRA/
 `-- Extras/
 ```
 
@@ -133,16 +138,16 @@ rodriguez-carmen-pdi-1c-2026/
 
 ### 001 - py5
 
-Unidad centrada en la introducción a `py5` y a la programación visual.
+Unidad centrada en la introduccion a `py5` y a la programacion visual.
 
 Incluye ejercicios de:
 
-- creación de ventanas y sketches básicos
+- creacion de ventanas y sketches basicos
 - color en `RGB` y `HSV/HSB`
-- carga y visualización de imágenes
-- manipulación manual de píxeles
+- carga y visualizacion de imagenes
+- manipulacion manual de pixeles
 - filtros visuales
-- interacción con mouse
+- interaccion con mouse
 - dibujo generativo
 
 Archivos destacados en `001 - py5/002 - PRA`:
@@ -178,12 +183,10 @@ Material complementario:
 - `001 - py5/002 - PRA/README.md`
 - `001 - py5/002 - PRA/py5_referencia.md`
 - `001 - py5/002 - PRA/jupyter/`
-- `001 - py5/002 - PRA/img/`
-- `001 - py5/002 - PRA/save/`
 
 ### 002 - py5
 
-Unidad orientada a fundamentos de imagen digital y primera articulación entre teoría, práctica y laboratorio.
+Unidad orientada a fundamentos de imagen digital y primera articulacion entre teoria, practica y laboratorio.
 
 En `002 - py5/002 - PRA` hay:
 
@@ -203,28 +206,24 @@ En `002 - py5/003 - LAB` se encuentran:
 Temas trabajados:
 
 - lectura inicial de imagen digital
-- diferencia entre teoría en Colab y trabajo local
-- exploración de canales de color
-- interacción con el mouse sobre imágenes
-- zoom o efecto lupa sobre regiones de interés
+- diferencia entre teoria en Colab y trabajo local
+- exploracion de canales de color
+- interaccion con el mouse sobre imagenes
+- zoom o efecto lupa sobre regiones de interes
 
 ### 003 - camara_oscura
 
-Unidad destinada al registro de la experiencia de cámara oscura y a la producción de imágenes propias usadas luego en otras actividades.
+Unidad destinada al registro de la experiencia de camara oscura y a la produccion de imagenes propias usadas luego en otras actividades.
 
-En `003 - camara_oscura/003 - LAB` hay material de referencia y archivos asociados a la experiencia, incluyendo capturas como:
+En `003 - camara_oscura/003 - LAB` hay material de referencia y archivos asociados a la experiencia.
 
-- `Pequeno - 1.jpeg`
-- `Pequeno - 3.jpeg`
-- `imagen_preprocesada.png`
-
-Este material se articula especialmente con la unidad `004`, donde se trabaja recuperación, preprocesamiento y segmentación sobre imágenes propias.
+Este material se articula especialmente con la unidad `004`, donde se trabaja recuperacion, preprocesamiento y segmentacion sobre imagenes propias.
 
 ### 004 - librerias_fundamentos_pdi
 
-Unidad enfocada en el uso de librerías de procesamiento de imágenes más allá de `py5`.
+Unidad enfocada en el uso de librerias de procesamiento de imagenes mas alla de `py5`.
 
-Notebooks y archivos de práctica en `004 - librerias_fundamentos_pdi/002 - PRA`:
+Notebooks y archivos de practica en `004 - librerias_fundamentos_pdi/002 - PRA`:
 
 - `001 - entorno y librerias.ipynb`
 - `002 - imagenes en color y canales.ipynb`
@@ -234,7 +233,6 @@ Notebooks y archivos de práctica en `004 - librerias_fundamentos_pdi/002 - PRA`
 - `006 - laboratorio 2 - segmentacion simple por color.ipynb`
 - `007 - recuperacion y preprocesamiento de imagenes propias.ipynb`
 - `008 - actividad integradora - segmentacion por color.ipynb`
-- `005 - practica guiada de procesamiento carmen.py`
 
 Material de laboratorio desarrollado en `004 - librerias_fundamentos_pdi/003 - LAB`:
 
@@ -243,27 +241,62 @@ Material de laboratorio desarrollado en `004 - librerias_fundamentos_pdi/003 - L
 - `2026_PDI_RODRIGUEZ_ rec_preproc_imag_propias.ipynb`
 - `2026_PDI_RODRIGUEZ_ integrador_segmentacion por color.ipynb`
 
-Imágenes y recursos usados en esta unidad:
+Temas trabajados:
 
-- `flowers.jpg`
-- `frutos_rojos.png`
-- `monedas.png`
-- `paisaje.png`
-- `texto.png`
-- `imagen_preprocesada.png`
+- preparacion del entorno de trabajo con librerias
+- lectura y visualizacion de imagenes con OpenCV
+- analisis de canales e histogramas
+- operaciones basicas sobre imagenes
+- muestreo y cuantizacion
+- segmentacion simple por color
+- recuperacion y preprocesamiento de imagenes propias
+
+### 005  - computer_vision_parte_1
+
+Unidad enfocada en herramientas clasicas de vision por computadora sobre imagenes reales y sinteticas.
+
+Notebooks de practica en `005  - computer_vision_parte_1/002 - PRA`:
+
+- `001 - introduccion a opencv y espacios de color.ipynb`
+- `001B - practicas_hsv.ipynb`
+- `001C  - rueda cromatica.ipynb`
+- `002 - formatos de archivos de imagen.ipynb`
+- `003 - mejora de imagen y ecualizacion basica.ipynb`
+- `003B - mejora de imagen y ecualizacion basica img1.ipynb`
+- `004 - comparacion de estrategias de ecualizacion.ipynb`
+- `004b - operaciones basicas con imagenes.ipynb`
+- `004C - operaciones basicas con imagenes actividad.ipynb`
+- `005 - transformaciones geometricas y cambio de perspectiva.ipynb`
+- `006 - operaciones graficas.ipynb`
+- `006b - filtros de suavizado y reduccion de ruido.ipynb`
+- `006c - morfologia matematica para limpieza de mascaras.ipynb`
+- `006d - restauracion y algoritmos de inpainting.ipynb`
+- `007 - deteccion de contornos.ipynb`
+- `008 - propiedades geometricas de contornos.ipynb`
+- `009 - coincidencia por plantilla.ipynb`
+- `010 - deteccion de rostros con haar.ipynb`
+- `Utilidades_y_Plantillas.ipynb`
+
+Tambien hay recursos de apoyo:
+
+- carpeta `Imagenes/`
+- carpeta `exploratorios/`
+- versiones auxiliares `*_error.ipynb` creadas durante ajustes locales
 
 Temas trabajados:
 
-- preparación del entorno de trabajo con librerías
-- lectura y visualización de imágenes con OpenCV
-- análisis de canales e histogramas
-- operaciones básicas sobre imágenes
-- muestreo y cuantización
-- segmentación simple por color
-- recuperación y preprocesamiento de imágenes propias
-- actividad integradora de segmentación usando `imagen_preprocesada.png`
+- espacios de color y segmentacion HSV
+- formatos de imagen
+- mejora de imagen y ecualizacion
+- operaciones basicas y geometricas
+- suavizado y reduccion de ruido
+- morfologia matematica
+- inpainting
+- deteccion y medicion de contornos
+- coincidencia por plantilla
+- deteccion de rostros con cascadas Haar
 
-## Cómo trabajar con el material
+## Como trabajar con el material
 
 ### Scripts `.py`
 
@@ -279,7 +312,7 @@ Temas trabajados:
 
 ### Google Colab
 
-Algunos notebooks están preparados para trabajo en Colab, especialmente los que ya lo indican en el nombre o incluyen una celda de setup.
+Algunos notebooks estan preparados para trabajo en Colab, especialmente los que ya lo indican en el nombre o incluyen una celda de setup.
 
 ## Problemas frecuentes
 
@@ -290,13 +323,13 @@ Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
 .\venv\Scripts\Activate.ps1
 ```
 
-### Faltan módulos como `cv2`, `numpy` o `PIL`
+### Faltan modulos como `cv2`, `numpy` o `PIL`
 
 ```bash
 python -m pip install -r requirements.txt
 ```
 
-### VS Code o Jupyter usan otro intérprete
+### VS Code o Jupyter usan otro interprete
 
 Seleccionar:
 
@@ -312,7 +345,7 @@ Primero probar:
 python -m pip install glfw
 ```
 
-Si el error menciona Java, instalar Java y revisar la guía oficial de `py5`.
+Si el error menciona Java, instalar Java y revisar la guia oficial de `py5`.
 
 ## Recursos
 
@@ -321,9 +354,9 @@ Si el error menciona Java, instalar Java y revisar la guía oficial de `py5`.
 - Matplotlib: <https://matplotlib.org/>
 - scikit-image: <https://scikit-image.org/docs/>
 - py5: <https://py5coding.org/>
-- Instalación de py5: <https://py5coding.org/content/install.html>
+- Instalacion de py5: <https://py5coding.org/content/install.html>
 - Google Colab: <https://colab.research.google.com/>
 
 ## Licencia
 
-Material de uso educativo para la cursada. Si más adelante se define una licencia específica para la materia, conviene agregarla en este archivo.
+Material de uso educativo para la cursada. Si mas adelante se define una licencia especifica para la materia, conviene agregarla en este archivo.

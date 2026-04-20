@@ -7,7 +7,7 @@ Esta guia resume que hacer cada vez que quieras guardar cambios del proyecto en 
 Trabaja siempre desde la carpeta raiz del proyecto:
 
 ```powershell
-cd "C:\Users\carme\OneDrive\Documents\Procesamiento de imágenes\rodriguez-carmen-pdi-1c-2026"
+cd "C:\Proyectos\rodriguez-carmen-pdi-1c-2026"
 ```
 
 Si usas entorno virtual:
@@ -129,7 +129,7 @@ git status
 git status
 ```
 
-Si algo no deberia subirse, frená antes del `commit`.
+Si algo no deberia subirse, frena antes del `commit`.
 
 ## Idea practica
 

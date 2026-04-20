@@ -5,7 +5,7 @@ Esta guia sirve para dejar el proyecto listo desde cero en una PC nueva. Para el
 ## 1. Abrir PowerShell en la carpeta del proyecto
 
 ```powershell
-cd "C:\ruta\hasta\rodriguez-carmen-pdi-1c-2026"
+cd "C:\Proyectos\rodriguez-carmen-pdi-1c-2026"
 ```
 
 ## 2. Crear el entorno virtual
@@ -94,7 +94,7 @@ deactivate
 ## Resumen rapido
 
 ```powershell
-cd "C:\ruta\hasta\rodriguez-carmen-pdi-1c-2026"
+cd "C:\Proyectos\rodriguez-carmen-pdi-1c-2026"
 python -m venv venv
 .\venv\Scripts\Activate.ps1
 python -m pip install -r requirements.txt
