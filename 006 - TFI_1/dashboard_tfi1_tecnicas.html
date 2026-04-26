@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TFI 1 - Dashboard de tecnicas utilizadas</title>
+  <style>
+    :root {
+      --bg: #f7f8fb;
+      --surface: #ffffff;
+      --surface-alt: #eef3f8;
+      --text: #18202a;
+      --muted: #667085;
+      --line: #d7dde7;
+      --accent: #2f6f8f;
+      --accent-2: #7a5c9e;
+      --accent-3: #b35c2e;
+      --ok: #47704c;
+      --shadow: 0 14px 32px rgba(26, 38, 57, 0.10);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .wrap {
+      width: min(1440px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 28px 0 42px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 18px;
+      align-items: stretch;
+      margin-bottom: 18px;
+    }
+
+    .hero-copy,
+    .preview,
+    .filters,
+    .panel,
+    .tech-card,
+    .case-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-copy {
+      padding: 26px;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: clamp(2rem, 3.5vw, 3.7rem);
+      line-height: 1.05;
+      letter-spacing: 0;
+    }
+
+    .subtitle {
+      max-width: 78ch;
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 1rem;
+    }
+
+    .preview {
+      padding: 12px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .preview figure {
+      margin: 0;
+      display: grid;
+      gap: 8px;
+      align-content: start;
+    }
+
+    .preview img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      border-radius: 6px;
+      border: 1px solid var(--line);
+      background: var(--surface-alt);
+    }
+
+    .preview figcaption {
+      color: var(--muted);
+      font-size: 0.82rem;
+      line-height: 1.25;
+    }
+
+    .case-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .case-card {
+      padding: 16px;
+    }
+
+    .case-card h2 {
+      margin: 0 0 8px;
+      font-size: 1.05rem;
+    }
+
+    .case-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.5;
+      font-size: 0.94rem;
+    }
+
+    .filters {
+      padding: 16px;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr auto;
+      gap: 12px;
+      align-items: end;
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 0.88rem;
+    }
+
+    input,
+    select,
+    button {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--text);
+      padding: 11px 12px;
+      font-size: 0.96rem;
+    }
+
+    button {
+      cursor: pointer;
+      color: #fff;
+      border-color: var(--accent);
+      background: var(--accent);
+      font-weight: 800;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 310px 1fr;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .panel {
+      padding: 18px;
+      position: sticky;
+      top: 16px;
+    }
+
+    .panel h2 {
+      margin: 0 0 12px;
+      font-size: 1.1rem;
+    }
+
+    .flow {
+      display: grid;
+      gap: 10px;
+    }
+
+    .flow-item {
+      padding: 10px 12px;
+      border-radius: 8px;
+      background: var(--surface-alt);
+      border: 1px solid var(--line);
+      color: var(--muted);
+      line-height: 1.4;
+      font-size: 0.92rem;
+    }
+
+    .flow-item strong {
+      display: block;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+
+    .results-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .results-head h2 {
+      margin: 0;
+      font-size: 1.25rem;
+    }
+
+    .results-count {
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 14px;
+    }
+
+    .tech-card {
+      padding: 16px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .tech-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: start;
+    }
+
+    .tech-title {
+      margin: 0;
+      font-size: 1.08rem;
+      line-height: 1.3;
+    }
+
+    .badge {
+      display: inline-flex;
+      white-space: nowrap;
+      border-radius: 999px;
+      padding: 6px 9px;
+      font-weight: 800;
+      font-size: 0.76rem;
+      border: 1px solid transparent;
+    }
+
+    .cat-diagnostico {
+      color: var(--accent);
+      background: rgba(47, 111, 143, 0.10);
+      border-color: rgba(47, 111, 143, 0.22);
+    }
+
+    .cat-mejora {
+      color: var(--accent-3);
+      background: rgba(179, 92, 46, 0.12);
+      border-color: rgba(179, 92, 46, 0.22);
+    }
+
+    .cat-restauracion {
+      color: var(--accent-2);
+      background: rgba(122, 92, 158, 0.12);
+      border-color: rgba(122, 92, 158, 0.22);
+    }
+
+    .cat-soporte {
+      color: var(--ok);
+      background: rgba(71, 112, 76, 0.12);
+      border-color: rgba(71, 112, 76, 0.22);
+    }
+
+    .tech-section strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-size: 0.78rem;
+    }
+
+    .tech-section p {
+      margin: 0;
+      line-height: 1.52;
+      font-size: 0.94rem;
+    }
+
+    .case-tags,
+    .file-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .case-tag,
+    .file-chip {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      padding: 6px 9px;
+      font-size: 0.82rem;
+      line-height: 1.25;
+      border: 1px solid var(--line);
+      background: #fff;
+    }
+
+    .case-tag {
+      background: var(--surface-alt);
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    .file-chip {
+      color: var(--muted);
+    }
+
+    .empty {
+      display: none;
+      padding: 24px;
+      text-align: center;
+      color: var(--muted);
+      border: 1px dashed var(--line);
+      border-radius: 8px;
+      background: var(--surface);
+    }
+
+    @media (max-width: 980px) {
+      .hero,
+      .case-grid,
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .panel {
+        position: static;
+      }
+
+      .filters {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .wrap {
+        width: min(100% - 20px, 1440px);
+        padding-top: 18px;
+      }
+
+      .preview {
+        grid-template-columns: 1fr;
+      }
+
+      .filters {
+        grid-template-columns: 1fr;
+      }
+
+      .results-head {
+        align-items: start;
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <div class="hero-copy">
+        <h1>TFI 1: tecnicas usadas para mejorar y restaurar imagenes</h1>
+        <p class="subtitle">
+          Resumen de las operaciones aplicadas en los tres casos del trabajo: camara oscura, medio grafico color y medio grafico blanco/negro. Cada tecnica se relaciona con el problema que ayudo a tratar y con archivos del proyecto donde puede consultarse el procedimiento.
+        </p>
+      </div>
+      <div class="preview" aria-label="Imagenes finales del TFI">
+        <figure>
+          <img src="salidas_tfi1/camara_oscura_final.png" alt="Salida final del caso camara oscura">
+          <figcaption>Camara oscura: contraste local y suavizado leve.</figcaption>
+        </figure>
+        <figure>
+          <img src="salidas_tfi1/medio_grafico_color_final.png" alt="Salida final del caso medio grafico color">
+          <figcaption>Medio color: luminancia, saturacion y reduccion de ruido.</figcaption>
+        </figure>
+        <figure>
+          <img src="salidas_tfi1/medio_grafico_bn_final.png" alt="Salida final del caso blanco y negro">
+          <figcaption>Blanco/negro: contraste local e inpainting puntual.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="case-grid">
+      <article class="case-card">
+        <h2>Camara oscura</h2>
+        <p>Predominaron oscuridad, bajo contraste, orientacion invertida e iluminacion desigual. Convino corregir orientacion, recortar y usar una mejora local de contraste.</p>
+      </article>
+      <article class="case-card">
+        <h2>Medio grafico color</h2>
+        <p>La imagen tenia color apagado, velo gris, baja saturacion y ruido. Convino separar luminancia y color para intervenir de forma moderada.</p>
+      </article>
+      <article class="case-card">
+        <h2>Medio grafico blanco/negro</h2>
+        <p>El problema combino bajo contraste, manchas y rayas. Convino comparar ecualizacion global contra restauracion puntual basada en mascara.</p>
+      </article>
+    </section>
+
+    <section class="filters">
+      <div>
+        <label for="searchInput">Buscar</label>
+        <input id="searchInput" type="text" placeholder="Ejemplo: CLAHE, ruido, color, inpainting">
+      </div>
+      <div>
+        <label for="caseFilter">Caso</label>
+        <select id="caseFilter">
+          <option value="todos">Todos</option>
+          <option value="camara">Camara oscura</option>
+          <option value="color">Medio grafico color</option>
+          <option value="bn">Medio grafico blanco/negro</option>
+        </select>
+      </div>
+      <div>
+        <label for="categoryFilter">Categoria</label>
+        <select id="categoryFilter">
+          <option value="todas">Todas</option>
+          <option value="diagnostico">Diagnostico</option>
+          <option value="mejora">Mejora</option>
+          <option value="restauracion">Restauracion</option>
+          <option value="soporte">Soporte</option>
+        </select>
+      </div>
+      <div>
+        <label>&nbsp;</label>
+        <button id="resetButton" type="button">Limpiar</button>
+      </div>
+    </section>
+
+    <section class="layout">
+      <aside class="panel">
+        <h2>Lectura tecnica</h2>
+        <div class="flow">
+          <div class="flow-item"><strong>1. Diagnostico</strong>Mirar imagen, canales e histograma antes de aplicar filtros.</div>
+          <div class="flow-item"><strong>2. Comparacion</strong>Probar dos estrategias por caso para justificar una decision.</div>
+          <div class="flow-item"><strong>3. Parametros</strong>Elegir valores moderados para no saturar, borrar detalle ni crear resultados artificiales.</div>
+          <div class="flow-item"><strong>4. Limites</strong>Explicar que no se recupera informacion ausente, nitidez perdida o dano severo del soporte.</div>
+        </div>
+      </aside>
+
+      <main>
+        <div class="results-head">
+          <h2>Tecnicas y referencias</h2>
+          <div class="results-count" id="resultsCount">Mostrando 0 tecnicas</div>
+        </div>
+        <div class="cards" id="cards"></div>
+        <div class="empty" id="emptyState">No hay tecnicas que coincidan con los filtros actuales.</div>
+      </main>
+    </section>
+  </div>
+
+  <script>
+    const techniques = [
+      {
+        name: "Carga RGB y carga en escala de grises",
+        category: "soporte",
+        cases: ["camara", "color", "bn"],
+        use: "Permite abrir las imagenes en el formato adecuado para cada caso: RGB para color y gris para el medio blanco/negro.",
+        impact: "Evita errores de visualizacion por el orden BGR de OpenCV y deja cada imagen lista para diagnostico, comparacion y guardado.",
+        tfiUse: "Se uso en la carga de CajaOscura 7.png, UDO sola.jpeg y DreamTeam ByN.jpeg.",
+        files: [
+          "006 - TFI_1/TFI_1 - mejora y restauracion de imagenes.ipynb",
+          "005  - computer_vision_parte_1/002 - PRA/001 - introduccion a opencv y espacios de color.ipynb"
+        ]
+      },
+      {
+        name: "Histogramas en escala de grises",
+        category: "diagnostico",
+        cases: ["camara", "bn"],
+        use: "Muestran como se distribuyen las intensidades antes de intervenir la imagen.",
+        impact: "Ayudan a justificar bajo contraste, imagen lavada o concentracion tonal en zonas oscuras o claras.",
+        tfiUse: "Se usaron para iniciar el diagnostico en camara oscura y blanco/negro.",
+        files: [
+          "006 - TFI_1/TFI_1 - mejora y restauracion de imagenes.ipynb",
+          "Extras/resumen_tecnicas_tratamiento_imagenes.md",
+          "005  - computer_vision_parte_1/002 - PRA/004 - comparacion de estrategias de ecualizacion.ipynb"
+        ]
+      },
+      {
+        name: "Separacion de canales RGB",
+        category: "diagnostico",
+        cases: ["color"],
+        use: "Permite observar como se reparte la informacion de color en rojo, verde y azul.",
+        impact: "Ayuda a detectar colores apagados, dominantes o canales con mas detalle disponible.",
+        tfiUse: "Se uso para orientar el diagnostico de UDO sola.jpeg antes de ajustar luminancia y saturacion.",
+        files: [
+          "006 - TFI_1/TFI_1 - mejora y restauracion de imagenes.ipynb",
+          "004 - librerias_fundamentos_pdi/002 - PRA/002 - imagenes en color y canales.ipynb"
+        ]
+      },
+      {
+        name: "Rotacion y recorte de region util",
+        category: "mejora",
+        cases: ["camara"],
+        use: "Corrige la orientacion de la proyeccion y elimina zonas de la imagen que no aportan informacion.",
+        impact: "Hace que la comparacion sea mas clara y concentra el procesamiento sobre el contenido visible.",
+        tfiUse: "Se aplico sobre CajaOscura 7.png antes de comparar brillo/contraste contra CLAHE.",
+        files: [
+          "006 - TFI_1/TFI_1 - mejora y restauracion de imagenes.ipynb",
+          "005  - computer_vision_parte_1/002 - PRA/004b - operaciones basicas con imagenes.ipynb",
+          "005  - computer_vision_parte_1/002 - PRA/005 - transformaciones geometricas y cambio de perspectiva.ipynb"
+        ]
+      },
+      {
+        name: "Ajuste lineal de brillo y contraste",
+        category: "mejora",
+        cases: ["camara", "color"],
+        use: "Modifica la imagen de manera global con alpha para contraste y beta para brillo.",
+        impact: "Mejora rapido la visibilidad, aunque puede lavar zonas claras o saturar informacion si los valores son altos.",
+        tfiUse: "Fue estrategia inicial en camara oscura y medio color para comparar contra opciones locales.",
+        files: [
+          "006 - TFI_1/TFI_1 - mejora y restauracion de imagenes.ipynb",
+          "005  - computer_vision_parte_1/002 - PRA/003 - mejora de imagen y ecualizacion basica.ipynb",
+          "Extras/resumen_tecnicas_tratamiento_imagenes.md"
+        ]
+      },
+      {
+        name: "Conversion a LAB",
+        category: "mejora",
+        cases: ["camara", "color"],
+        use: "Separa luminosidad y color para intervenir el contraste sin alterar directamente los canales cromaticos.",
+        impact: "Permite aplicar CLAHE sobre el canal L y conservar mejor la relacion de color original.",
+        tfiUse: "Se uso en camara oscura y medio color para mejorar luminancia de forma controlada.",
+        files: [
+          "006 - TFI_1/TFI_1 - mejora y restauracion de imagenes.ipynb",
+          "005  - computer_vision_parte_1/002 - PRA/001 - introduccion a opencv y espacios de color.ipynb",
+          "005  - computer_vision_parte_1/002 - PRA/004 - comparacion de estrategias de ecualizacion.ipynb"
+        ]
+      },
+      {
+        name: "Conversion a HSV y ajuste de saturacion",
+        category: "mejora",
+        cases: ["color"],
+        use: "Trabaja sobre el canal S para recuperar intensidad cromatica de forma separada del brillo.",
+        impact: "Ayuda a compensar colores apagados sin cambiar toda la iluminacion de la imagen.",
+        tfiUse: "Se uso en las dos estrategias del medio grafico color con aumentos moderados de saturacion.",
+        files: [
+          "006 - TFI_1/TFI_1 - mejora y restauracion de imagenes.ipynb",
+          "005  - computer_vision_parte_1/002 - PRA/001B - practicas_hsv.ipynb",
+          "004 - librerias_fundamentos_pdi/002 - PRA/006 - laboratorio 2 - segmentacion simple por color.ipynb"
+        ]
+      },
+      {
+        name: "CLAHE",
+        category: "mejora",
+        cases: ["camara", "color", "bn"],
+        use: "Mejora contraste local por regiones, con control mediante clipLimit y tileGridSize.",
+        impact: "Resulta mas adecuado que una mejora global cuando la iluminacion es irregular o la imagen esta lavada.",
+        tfiUse: "Fue parte de las estrategias elegidas para los tres casos, con aplicacion en L o directamente en grises.",
+        files: [
+          "006 - TFI_1/TFI_1 - mejora y restauracion de imagenes.ipynb",
+          "005  - computer_vision_parte_1/002 - PRA/004 - comparacion de estrategias de ecualizacion.ipynb",
+          "Extras/dashboard_resumen_tecnicas.html"
+        ]
+      },
+      {
+        name: "Suavizado gaussiano leve",
+        category: "mejora",
+        cases: ["camara", "bn"],
+        use: "Reduce pequenas variaciones y grano con un kernel chico.",
+        impact: "Ayuda a integrar resultados y bajar ruido sin borrar demasiado detalle.",
+        tfiUse: "Se uso luego de CLAHE en camara oscura y antes de ecualizacion global en blanco/negro.",
+        files: [
+          "006 - TFI_1/TFI_1 - mejora y restauracion de imagenes.ipynb",
+          "005  - computer_vision_parte_1/002 - PRA/006b - filtros de suavizado y reduccion de ruido.ipynb"
+        ]
+      },
+      {
+        name: "Filtro bilateral",
+        category: "mejora",
+        cases: ["color"],
+        use: "Reduce ruido preservando bordes mejor que un suavizado promedio simple.",
+        impact: "Permite una limpieza leve en la foto color sin borrar completamente los contornos principales.",
+        tfiUse: "Se uso como denoise final en la estrategia elegida para UDO sola.jpeg.",
+        files: [
+          "006 - TFI_1/TFI_1 - mejora y restauracion de imagenes.ipynb",
+          "005  - computer_vision_parte_1/002 - PRA/006b - filtros de suavizado y reduccion de ruido.ipynb"
+        ]
+      },
+      {
+        name: "Ecualizacion global del histograma",
+        category: "mejora",
+        cases: ["bn"],
+        use: "Redistribuye las intensidades de toda la imagen para aumentar contraste general.",
+        impact: "Hace mas visibles rostros y ropa, pero tambien puede destacar manchas o ruido.",
+        tfiUse: "Fue la primera estrategia para DreamTeam ByN.jpeg despues de un suavizado leve.",
+        files: [
+          "006 - TFI_1/TFI_1 - mejora y restauracion de imagenes.ipynb",
+          "005  - computer_vision_parte_1/002 - PRA/003 - mejora de imagen y ecualizacion basica.ipynb",
+          "005  - computer_vision_parte_1/002 - PRA/004 - comparacion de estrategias de ecualizacion.ipynb"
+        ]
+      },
+      {
+        name: "Morfologia top-hat, apertura y dilatacion",
+        category: "restauracion",
+        cases: ["bn"],
+        use: "Resalta detalles claros locales, limpia puntos pequenos y amplifica una mascara de danos.",
+        impact: "Ayuda a construir una mascara conservadora para intervenir rayas o marcas sin restaurar toda la imagen.",
+        tfiUse: "Se uso para preparar la mascara de inpainting en DreamTeam ByN.jpeg.",
+        files: [
+          "006 - TFI_1/TFI_1 - mejora y restauracion de imagenes.ipynb",
+          "005  - computer_vision_parte_1/002 - PRA/006c - morfologia matematica para limpieza de mascaras.ipynb"
+        ]
+      },
+      {
+        name: "Umbralizacion para mascara de danos",
+        category: "restauracion",
+        cases: ["bn"],
+        use: "Convierte detalles detectados en una mascara binaria que indica donde intervenir.",
+        impact: "Permite controlar el alcance del inpainting y evitar una restauracion indiscriminada.",
+        tfiUse: "Se uso sobre el resultado top-hat para detectar marcas claras en el caso blanco/negro.",
+        files: [
+          "006 - TFI_1/TFI_1 - mejora y restauracion de imagenes.ipynb",
+          "005  - computer_vision_parte_1/002 - PRA/006b2 - umbralizacion global, Otsu y adaptive threshold - version simplificada.ipynb",
+          "005  - computer_vision_parte_1/002 - PRA/006c - morfologia matematica para limpieza de mascaras.ipynb"
+        ]
+      },
+      {
+        name: "Inpainting puntual",
+        category: "restauracion",
+        cases: ["bn"],
+        use: "Rellena zonas marcadas por una mascara usando informacion cercana.",
+        impact: "Reduce rayas o manchas pequenas, pero depende de una mascara precisa para no alterar contenido real.",
+        tfiUse: "Fue parte de la estrategia final del medio grafico blanco/negro.",
+        files: [
+          "006 - TFI_1/TFI_1 - mejora y restauracion de imagenes.ipynb",
+          "005  - computer_vision_parte_1/002 - PRA/006d - restauracion y algoritmos de inpainting.ipynb"
+        ]
+      },
+      {
+        name: "Comparacion visual y guardado de salidas",
+        category: "soporte",
+        cases: ["camara", "color", "bn"],
+        use: "Muestra original, estrategias y final; guarda las imagenes procesadas en salidas_tfi1.",
+        impact: "Hace reproducible la eleccion final y cumple con la entrega de resultados procesados.",
+        tfiUse: "Se uso en todos los casos para sostener la decision y generar los PNG finales.",
+        files: [
+          "006 - TFI_1/TFI_1 - mejora y restauracion de imagenes.ipynb",
+          "006 - TFI_1/salidas_tfi1/camara_oscura_final.png",
+          "006 - TFI_1/salidas_tfi1/medio_grafico_color_final.png",
+          "006 - TFI_1/salidas_tfi1/medio_grafico_bn_final.png"
+        ]
+      }
+    ];
+
+    const categoryLabels = {
+      diagnostico: "Diagnostico",
+      mejora: "Mejora",
+      restauracion: "Restauracion",
+      soporte: "Soporte"
+    };
+
+    const caseLabels = {
+      camara: "Camara oscura",
+      color: "Medio color",
+      bn: "Blanco/negro"
+    };
+
+    const cards = document.getElementById("cards");
+    const searchInput = document.getElementById("searchInput");
+    const caseFilter = document.getElementById("caseFilter");
+    const categoryFilter = document.getElementById("categoryFilter");
+    const resetButton = document.getElementById("resetButton");
+    const resultsCount = document.getElementById("resultsCount");
+    const emptyState = document.getElementById("emptyState");
+
+    function render(data) {
+      cards.innerHTML = "";
+
+      data.forEach(item => {
+        const card = document.createElement("article");
+        card.className = "tech-card";
+
+        const caseTags = item.cases
+          .map(caseId => `<span class="case-tag">${caseLabels[caseId]}</span>`)
+          .join("");
+
+        const fileChips = item.files
+          .map(file => `<span class="file-chip">${file}</span>`)
+          .join("");
+
+        card.innerHTML = `
+          <div class="tech-top">
+            <h3 class="tech-title">${item.name}</h3>
+            <span class="badge cat-${item.category}">${categoryLabels[item.category]}</span>
+          </div>
+          <div class="case-tags">${caseTags}</div>
+          <div class="tech-section">
+            <strong>Uso tecnico</strong>
+            <p>${item.use}</p>
+          </div>
+          <div class="tech-section">
+            <strong>Como mejora estas imagenes</strong>
+            <p>${item.impact}</p>
+          </div>
+          <div class="tech-section">
+            <strong>Aplicacion en el TFI</strong>
+            <p>${item.tfiUse}</p>
+          </div>
+          <div class="tech-section">
+            <strong>Referencias de busqueda</strong>
+            <div class="file-list">${fileChips}</div>
+          </div>
+        `;
+
+        cards.appendChild(card);
+      });
+
+      resultsCount.textContent = `Mostrando ${data.length} tecnica${data.length === 1 ? "" : "s"}`;
+      emptyState.style.display = data.length ? "none" : "block";
+    }
+
+    function filterTechniques() {
+      const search = searchInput.value.trim().toLowerCase();
+      const selectedCase = caseFilter.value;
+      const selectedCategory = categoryFilter.value;
+
+      const filtered = techniques.filter(item => {
+        const haystack = [
+          item.name,
+          item.category,
+          item.use,
+          item.impact,
+          item.tfiUse,
+          item.files.join(" ")
+        ].join(" ").toLowerCase();
+
+        const matchesSearch = haystack.includes(search);
+        const matchesCase = selectedCase === "todos" || item.cases.includes(selectedCase);
+        const matchesCategory = selectedCategory === "todas" || item.category === selectedCategory;
+
+        return matchesSearch && matchesCase && matchesCategory;
+      });
+
+      render(filtered);
+    }
+
+    searchInput.addEventListener("input", filterTechniques);
+    caseFilter.addEventListener("change", filterTechniques);
+    categoryFilter.addEventListener("change", filterTechniques);
+    resetButton.addEventListener("click", () => {
+      searchInput.value = "";
+      caseFilter.value = "todos";
+      categoryFilter.value = "todas";
+      filterTechniques();
+    });
+
+    render(techniques);
+  </script>
+</body>
+</html>

@@ -21,6 +21,7 @@ Estado actual del recorrido:
 - `003 - camara_oscura`: registro y material de trabajo asociado a la experiencia de camara oscura
 - `004 - librerias_fundamentos_pdi`: procesamiento con librerias de Python, segmentacion y preprocesamiento
 - `005  - computer_vision_parte_1`: vision por computadora clasica con OpenCV
+- `006 - TFI_1`: trabajo final integrador de mejora y restauracion de imagenes
 
 ## Tecnologias y librerias
 
@@ -32,6 +33,7 @@ Principales librerias usadas en la cursada:
 - `scikit-image`
 - `Pillow`
 - `matplotlib`
+- `pandas`
 - `jupyter`
 - `ipykernel`
 - `py5`
@@ -94,7 +96,7 @@ python -m pip install -r requirements.txt
 ### 5. Verificar librerias principales
 
 ```bash
-python -c "import cv2, numpy, PIL, matplotlib; print('Librerias principales OK')"
+python -c "import cv2, numpy, PIL, matplotlib, pandas; print('Librerias principales OK')"
 python -c "import py5; print('py5 OK')"
 ```
 
@@ -131,6 +133,13 @@ rodriguez-carmen-pdi-1c-2026/
 |   `-- 003 - LAB/
 |-- 005  - computer_vision_parte_1/
 |   `-- 002 - PRA/
+|-- 006 - TFI_1/
+|   |-- imagenes_tfi1/
+|   |-- salidas_tfi1/
+|   |-- README.md
+|   |-- dashboard_tfi1_tecnicas.html
+|   |-- TFI_1_Consigna_y_Rubrica.md
+|   `-- TFI_1 - mejora y restauracion de imagenes.ipynb
 `-- Extras/
 ```
 
@@ -295,6 +304,39 @@ Temas trabajados:
 - deteccion y medicion de contornos
 - coincidencia por plantilla
 - deteccion de rostros con cascadas Haar
+
+### 006 - TFI_1
+
+Unidad de integracion y cierre parcial del recorrido. El trabajo consiste en construir tres pipelines acotados de mejora y restauracion, comparar estrategias y justificar la decision final para cada tipo de imagen.
+
+Archivos principales:
+
+- `TFI_1_Consigna_y_Rubrica.md`: consigna, restricciones, entregables y rubrica de evaluacion.
+- `TFI_1 - mejora y restauracion de imagenes.ipynb`: notebook de resolucion del trabajo.
+- `README.md`: resumen especifico del TFI, casos trabajados, tecnicas usadas y limites.
+- `dashboard_tfi1_tecnicas.html`: tablero visual con tecnicas aplicadas, explicacion de uso y referencias de busqueda dentro del proyecto.
+- `imagenes_tfi1/`: imagenes originales seleccionadas.
+- `salidas_tfi1/`: resultados finales procesados.
+- `imagenes seleccionadas.pptx`: apoyo visual usado para comparar imagenes candidatas.
+
+Casos resueltos:
+
+- Camara oscura: `CajaOscura 7.png`
+- Medio grafico color: `UDO sola.jpeg`
+- Medio grafico blanco/negro: `DreamTeam ByN.jpeg`
+
+Tecnicas integradas:
+
+- diagnostico por observacion, canales e histogramas
+- rotacion, recorte y comparacion visual
+- ajuste lineal de brillo y contraste
+- conversion entre `RGB`, `HSV`, `LAB` y gris
+- `CLAHE` para contraste local
+- suavizado gaussiano y filtro bilateral
+- ecualizacion global del histograma
+- morfologia matematica para mascaras de dano
+- `inpainting` puntual
+- guardado de salidas finales y tabla comparativa con `pandas`
 
 ## Como trabajar con el material
 

@@ -10,6 +10,7 @@ Pillow>=10.0.0
 
 # Visualizacion
 matplotlib>=3.7.0
+pandas>=2.0.0
 
 # Cuadernos y entorno interactivo
 jupyter>=1.0.0
