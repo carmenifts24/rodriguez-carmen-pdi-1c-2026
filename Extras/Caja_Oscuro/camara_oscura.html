@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cámara Oscura — Construcción y Funcionamiento</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1a1614;
+    --ink-muted: #5c5249;
+    --ink-faint: #9c8f86;
+    --paper: #faf7f2;
+    --paper-warm: #f3ede3;
+    --paper-card: #ffffff;
+    --amber: #b87c2a;
+    --amber-light: #f5e6c8;
+    --teal: #2a6b6b;
+    --teal-light: #d4eeee;
+    --red: #8b3a2a;
+    --border: #d8cfc4;
+    --shadow: rgba(26,22,20,0.08);
+  }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.75;
+    font-size: 17px;
+  }
+
+  /* ── Page layout ── */
+  .page-wrap {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  /* ── Cover ── */
+  .cover {
+    text-align: center;
+    padding: 60px 0 48px;
+    border-bottom: 2px solid var(--border);
+    margin-bottom: 56px;
+  }
+  .cover .eyebrow {
+    font-family: 'Source Serif 4', serif;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 18px;
+  }
+  .cover h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(32px, 6vw, 58px);
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 20px;
+  }
+  .cover h1 em {
+    color: var(--amber);
+    font-style: italic;
+  }
+  .cover .subtitle {
+    font-size: 16px;
+    color: var(--ink-muted);
+    max-width: 480px;
+    margin: 0 auto;
+    font-style: italic;
+  }
+  .cover .ornament {
+    margin: 28px auto 0;
+    color: var(--amber);
+    font-size: 22px;
+    letter-spacing: 8px;
+  }
+
+  /* ── Sections ── */
+  section {
+    margin-bottom: 64px;
+  }
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--amber);
+    font-weight: 600;
+    margin-bottom: 10px;
+    font-family: 'Source Serif 4', serif;
+  }
+  h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 22px;
+    line-height: 1.25;
+  }
+  h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--ink);
+    margin: 28px 0 12px;
+    line-height: 1.3;
+  }
+  p {
+    margin-bottom: 16px;
+    color: var(--ink);
+  }
+
+  /* ── Diagrams ── */
+  .diagram-card {
+    background: var(--paper-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+    margin: 32px 0;
+    box-shadow: 0 2px 12px var(--shadow);
+  }
+  .diagram-card figcaption {
+    text-align: center;
+    font-size: 13px;
+    color: var(--ink-muted);
+    margin-top: 14px;
+    font-style: italic;
+  }
+  .diagram-card svg {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+  }
+
+  /* ── Photo box (dispositivo construido) ── */
+  .photo-box {
+    background: var(--ink);
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 32px 0;
+    box-shadow: 0 4px 24px rgba(26,22,20,0.22);
+  }
+  .photo-box .photo-inner {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #0d0b09;
+  }
+  .photo-box .photo-inner svg {
+    max-width: 100%;
+  }
+  .photo-box figcaption {
+    padding: 14px 20px;
+    background: #1a1614;
+    color: #c4b8ac;
+    font-size: 13px;
+    font-style: italic;
+    text-align: center;
+  }
+
+  /* ── Concept cards ── */
+  .concepts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+    margin: 28px 0;
+  }
+  .concept-card {
+    background: var(--paper-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 22px 20px;
+    box-shadow: 0 1px 6px var(--shadow);
+  }
+  .concept-card .icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    background: var(--amber-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 14px;
+  }
+  .concept-card h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--ink);
+  }
+  .concept-card p {
+    font-size: 14px;
+    color: var(--ink-muted);
+    margin: 0;
+    line-height: 1.6;
+  }
+  .concept-card.teal .icon { background: var(--teal-light); }
+  .concept-card.teal svg { color: var(--teal); }
+
+  /* ── Materials list ── */
+  .materials {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 8px;
+    margin: 18px 0;
+  }
+  .material-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 14px;
+    background: var(--paper-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 14px;
+    color: var(--ink);
+  }
+  .material-item::before {
+    content: "◆";
+    color: var(--amber);
+    font-size: 9px;
+    margin-top: 4px;
+    flex-shrink: 0;
+  }
+
+  /* ── Steps ── */
+  .steps { margin: 24px 0; }
+  .step {
+    display: flex;
+    gap: 18px;
+    margin-bottom: 22px;
+    align-items: flex-start;
+  }
+  .step-num {
+    flex-shrink: 0;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--amber);
+    color: #fff;
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
+  }
+  .step-body h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: var(--ink);
+  }
+  .step-body p {
+    font-size: 15px;
+    color: var(--ink-muted);
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  /* ── Pull quote ── */
+  .pull-quote {
+    border-left: 4px solid var(--amber);
+    margin: 32px 0;
+    padding: 16px 24px;
+    background: var(--amber-light);
+    border-radius: 0 8px 8px 0;
+  }
+  .pull-quote p {
+    font-style: italic;
+    font-size: 16px;
+    color: var(--ink);
+    margin: 0;
+  }
+
+  /* ── Formula box ── */
+  .formula-box {
+    text-align: center;
+    margin: 28px 0;
+    padding: 24px;
+    background: var(--paper-card);
+    border: 2px solid var(--teal);
+    border-radius: 12px;
+  }
+  .formula {
+    font-size: 22px;
+    font-family: 'Playfair Display', serif;
+    color: var(--teal);
+    font-style: italic;
+  }
+  .formula-desc {
+    font-size: 13px;
+    color: var(--ink-muted);
+    margin-top: 10px;
+    margin-bottom: 0;
+  }
+
+  /* ── Footer ── */
+  .doc-footer {
+    text-align: center;
+    padding-top: 40px;
+    border-top: 1px solid var(--border);
+    font-size: 13px;
+    color: var(--ink-faint);
+    font-style: italic;
+  }
+
+  @media print {
+    body { background: white; font-size: 12pt; }
+    .diagram-card, .concept-card, .photo-box { break-inside: avoid; }
+    section { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="page-wrap">
+
+  <!-- COVER -->
+  <div class="cover">
+    <p class="eyebrow">Física Óptica — Trabajo Práctico</p>
+    <h1>La <em>Cámara Oscura</em></h1>
+    <p class="subtitle">Construcción, registro y principios ópticos del dispositivo que precede a la fotografía moderna</p>
+    <div class="ornament">· · ·</div>
+  </div>
+
+  <!-- SECCIÓN 1: QUÉ ES -->
+  <section>
+    <p class="section-label">Introducción</p>
+    <h2>¿Qué es una cámara oscura?</h2>
+    <p>La cámara oscura (<em>camera obscura</em>, en latín "cuarto oscuro") es el dispositivo óptico más antiguo conocido capaz de proyectar una imagen del mundo exterior sobre una superficie. Su funcionamiento se basa en un único principio físico: <strong>la propagación rectilínea de la luz</strong>.</p>
+    <p>Un pequeño orificio practicado en una pared opaca permite que los rayos de luz provenientes de una escena exterior se crucen al pasar por él y se proyecten, de forma invertida tanto horizontal como verticalmente, sobre la pared opuesta. Artistas como Leonardo da Vinci y Johannes Vermeer la usaron como auxiliar de dibujo; más tarde, sirvió de base conceptual para la invención de la fotografía en el siglo XIX.</p>
+    <div class="pull-quote">
+      <p>"Todo lo que entra al ojo en una habitación oscura, si el sol ilumina el exterior, verás en el papel que está dentro —al revés." — Leonardo da Vinci, Manuscrito C, c. 1490</p>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 2: FOTO DEL DISPOSITIVO -->
+  <section>
+    <p class="section-label">El dispositivo construido</p>
+    <h2>Fotografía de la cámara</h2>
+    <p>A continuación se muestra la representación del dispositivo construido con materiales simples: una caja de zapatos negra en su interior, con un orificio de aprox. 1 mm de diámetro cubierto con papel de aluminio perforado, y en el extremo opuesto una pantalla de papel vegetal translúcido.</p>
+
+    <figure class="photo-box">
+      <div class="photo-inner">
+        <!-- Ilustración SVG del dispositivo construido -->
+        <svg viewBox="0 0 700 380" xmlns="http://www.w3.org/2000/svg" width="700" height="380">
+          <!-- Fondo oscuro de la escena -->
+          <rect width="700" height="380" fill="#0d0b09"/>
+          <!-- Mesa de apoyo -->
+          <rect x="60" y="330" width="580" height="14" rx="3" fill="#2a2018"/>
+          <rect x="100" y="344" width="40" height="28" rx="2" fill="#2a2018"/>
+          <rect x="560" y="344" width="40" height="28" rx="2" fill="#2a2018"/>
+
+          <!-- CAJA OSCURA (perspectiva lateral) -->
+          <!-- Cara superior -->
+          <polygon points="130,120 570,120 590,100 150,100" fill="#3d2e1e"/>
+          <!-- Cara inferior -->
+          <polygon points="130,310 570,310 590,290 150,290" fill="#2d2010"/>
+          <!-- Cara lateral izquierda (frente con orificio) -->
+          <rect x="130" y="120" width="40" height="190" fill="#4a3520"/>
+          <!-- Borde de la cara frontal -->
+          <rect x="130" y="120" width="40" height="190" fill="none" stroke="#6b4f32" stroke-width="1.5"/>
+          <!-- Cara lateral derecha (pantalla) -->
+          <rect x="570" y="120" width="20" height="190" fill="#1e1610"/>
+          <!-- Cara principal de la caja -->
+          <rect x="170" y="120" width="400" height="190" fill="#2a1e0e"/>
+          <rect x="170" y="120" width="400" height="190" fill="none" stroke="#5a3f22" stroke-width="1"/>
+          <!-- Interior visible parcialmente -->
+          <polygon points="150,100 590,100 570,120 170,120" fill="#3a2a14"/>
+
+          <!-- Orificio en la pared frontal (círculo negro + aro metálico) -->
+          <circle cx="152" cy="215" r="12" fill="#b87c2a" opacity="0.6"/>
+          <circle cx="152" cy="215" r="7" fill="#0d0b09"/>
+          <circle cx="152" cy="215" r="3" fill="#000"/>
+          <text x="152" y="248" text-anchor="middle" fill="#b87c2a" font-size="10" font-family="Georgia,serif">orificio</text>
+          <text x="152" y="260" text-anchor="middle" fill="#7a6040" font-size="9" font-family="Georgia,serif">(~1 mm)</text>
+
+          <!-- Pantalla translúcida interior (derecha) -->
+          <rect x="560" y="128" width="4" height="174" fill="#e8dcc8" opacity="0.7"/>
+          <!-- Imagen proyectada en la pantalla (borrosa, invertida) -->
+          <!-- árbol invertido (simple) -->
+          <ellipse cx="562" cy="180" rx="14" ry="18" fill="#2d6b1a" opacity="0.55"/>
+          <rect x="559" y="196" width="6" height="28" fill="#5a3a14" opacity="0.5"/>
+          <!-- figura de persona invertida -->
+          <circle cx="562" cy="260" r="5" fill="#7a6040" opacity="0.45"/>
+          <line x1="562" y1="265" x2="562" y2="282" stroke="#7a6040" stroke-width="2.5" opacity="0.45"/>
+          <line x1="562" y1="270" x2="555" y2="277" stroke="#7a6040" stroke-width="2" opacity="0.45"/>
+          <line x1="562" y1="270" x2="569" y2="277" stroke="#7a6040" stroke-width="2" opacity="0.45"/>
+          <line x1="562" y1="282" x2="557" y2="295" stroke="#7a6040" stroke-width="2.5" opacity="0.45"/>
+          <line x1="562" y1="282" x2="567" y2="295" stroke="#7a6040" stroke-width="2.5" opacity="0.45"/>
+          <text x="580" y="218" fill="#a89070" font-size="10" font-family="Georgia,serif" font-style="italic">imagen</text>
+          <text x="580" y="230" fill="#a89070" font-size="10" font-family="Georgia,serif" font-style="italic">proyectada</text>
+          <text x="580" y="242" fill="#a89070" font-size="10" font-family="Georgia,serif" font-style="italic">(invertida)</text>
+
+          <!-- Rayos de luz atravesando el orificio -->
+          <!-- desde árbol arriba-izquierda hacia abajo en pantalla -->
+          <line x1="90" y1="155" x2="152" y2="215" stroke="#e8c070" stroke-width="1" opacity="0.7"/>
+          <line x1="152" y1="215" x2="560" y2="300" stroke="#e8c070" stroke-width="1" opacity="0.55" stroke-dasharray="5,3"/>
+          <!-- desde figura abajo-izquierda hacia arriba en pantalla -->
+          <line x1="90" y1="285" x2="152" y2="215" stroke="#c8a050" stroke-width="1" opacity="0.7"/>
+          <line x1="152" y1="215" x2="560" y2="158" stroke="#c8a050" stroke-width="1" opacity="0.55" stroke-dasharray="5,3"/>
+
+          <!-- Escena exterior (izquierda de la caja) -->
+          <!-- Cielo -->
+          <rect x="0" y="80" width="130" height="250" fill="#1a2d4a" opacity="0.7"/>
+          <!-- Sol -->
+          <circle cx="30" cy="110" r="15" fill="#f5d060" opacity="0.85"/>
+          <!-- Árbol -->
+          <ellipse cx="75" cy="170" rx="22" ry="28" fill="#2d6b1a" opacity="0.9"/>
+          <rect x="72" y="196" width="8" height="40" fill="#5a3a14"/>
+          <!-- Persona (estilizada) -->
+          <circle cx="75" cy="254" r="7" fill="#c09060"/>
+          <line x1="75" y1="261" x2="75" y2="288" stroke="#c09060" stroke-width="3.5"/>
+          <line x1="75" y1="270" x2="63" y2="280" stroke="#c09060" stroke-width="3"/>
+          <line x1="75" y1="270" x2="87" y2="280" stroke="#c09060" stroke-width="3"/>
+          <line x1="75" y1="288" x2="67" y2="305" stroke="#c09060" stroke-width="3.5"/>
+          <line x1="75" y1="288" x2="83" y2="305" stroke="#c09060" stroke-width="3.5"/>
+          <!-- Suelo exterior -->
+          <rect x="0" y="308" width="130" height="20" fill="#3a2a10"/>
+          <!-- Etiqueta escena exterior -->
+          <text x="65" y="336" text-anchor="middle" fill="#7a8a9a" font-size="10" font-family="Georgia,serif">escena exterior</text>
+
+          <!-- Etiquetas de la caja -->
+          <text x="350" y="342" text-anchor="middle" fill="#7a6040" font-size="12" font-family="Georgia,serif">caja oscura (caja de zapatos forrada en negro)</text>
+
+          <!-- Flecha indicando interior oscuro -->
+          <text x="350" y="218" text-anchor="middle" fill="#4a3520" font-size="11" font-family="Georgia,serif" font-style="italic" opacity="0.7">interior completamente oscuro</text>
+        </svg>
+      </div>
+      <figcaption>Fig. 1 — Cámara oscura construida con caja de zapatos, papel de aluminio y papel vegetal. Vista esquemática con detalle del orificio y la imagen proyectada.</figcaption>
+    </figure>
+  </section>
+
+  <!-- SECCIÓN 3: PRINCIPIOS ÓPTICOS -->
+  <section>
+    <p class="section-label">Principios físicos</p>
+    <h2>Principio óptico: propagación rectilínea de la luz</h2>
+    <p>El funcionamiento de la cámara oscura puede explicarse completamente a partir de un solo postulado de la óptica geométrica: <strong>en un medio homogéneo, la luz se propaga en línea recta</strong>. Esta propiedad, conocida como propagación rectilínea, tiene una consecuencia directa cuando la luz pasa por un orificio muy pequeño.</p>
+    <p>Cada punto de una escena iluminada emite o refleja luz en todas las direcciones. Al colocar una barrera opaca con un orificio diminuto, solo pasan los rayos que tienen la dirección precisa para atravesarlo. Dichos rayos se cruzan en el orificio y continúan en línea recta, llegando a la pared opuesta pero en posición invertida: lo que estaba arriba se proyecta abajo, y lo que estaba a la izquierda aparece a la derecha.</p>
+
+    <!-- DIAGRAMA 1: Propagación rectilínea -->
+    <figure class="diagram-card">
+      <svg viewBox="0 0 680 340" xmlns="http://www.w3.org/2000/svg" role="img">
+        <title>Diagrama de propagación rectilínea</title>
+        <desc>Esquema que muestra cómo los rayos de luz de un objeto se cruzan al pasar por el orificio y se proyectan invertidos en el plano de imagen</desc>
+        <defs>
+          <marker id="arr1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </marker>
+        </defs>
+
+        <!-- Fondo neutro -->
+        <rect width="680" height="340" fill="#f8f5f0"/>
+
+        <!-- Objeto (flecha vertical, lado izquierdo) -->
+        <!-- Flecha del objeto -->
+        <line x1="110" y1="260" x2="110" y2="100" stroke="#1a1614" stroke-width="2.5" marker-end="url(#arr1)"/>
+        <line x1="104" y1="260" x2="116" y2="260" stroke="#1a1614" stroke-width="2"/>
+        <text x="65" y="185" text-anchor="middle" fill="#1a1614" font-size="13" font-family="Georgia,serif" font-style="italic">objeto</text>
+        <text x="65" y="200" text-anchor="middle" fill="#5c5249" font-size="11" font-family="Georgia,serif">(fuente)</text>
+
+        <!-- Punta de la flecha (arriba, punto A) -->
+        <circle cx="110" cy="100" r="4" fill="#b87c2a"/>
+        <!-- Base de la flecha (abajo, punto B) -->
+        <circle cx="110" cy="260" r="4" fill="#2a6b6b"/>
+
+        <!-- Barrera opaca con orificio -->
+        <rect x="330" y="40" width="14" height="118" rx="2" fill="#5c5249"/>
+        <rect x="330" y="182" width="14" height="118" rx="2" fill="#5c5249"/>
+        <!-- Orificio en la mitad -->
+        <circle cx="337" cy="170" r="5" fill="#f8f5f0"/>
+        <text x="337" y="348" text-anchor="middle" fill="#5c5249" font-size="11" font-family="Georgia,serif">pared opaca</text>
+        <text x="337" y="362" text-anchor="middle" fill="#5c5249" font-size="11" font-family="Georgia,serif">con orificio (f)</text>
+
+        <!-- Plano de imagen (derecha) -->
+        <rect x="550" y="40" width="6" height="260" rx="2" fill="#c09060" opacity="0.6"/>
+        <text x="590" y="172" text-anchor="start" fill="#9c8f86" font-size="11" font-family="Georgia,serif">plano de</text>
+        <text x="590" y="185" text-anchor="start" fill="#9c8f86" font-size="11" font-family="Georgia,serif">imagen</text>
+
+        <!-- Rayo desde punta A (arriba del objeto) atraviesa el orificio y llega abajo en imagen -->
+        <line x1="110" y1="100" x2="337" y2="170" stroke="#b87c2a" stroke-width="1.5" stroke-dasharray="6,3"/>
+        <line x1="337" y1="170" x2="553" y2="258" stroke="#b87c2a" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#arr1)"/>
+
+        <!-- Rayo desde base B (abajo del objeto) atraviesa el orificio y llega arriba en imagen -->
+        <line x1="110" y1="260" x2="337" y2="170" stroke="#2a6b6b" stroke-width="1.5" stroke-dasharray="6,3"/>
+        <line x1="337" y1="170" x2="553" y2="90" stroke="#2a6b6b" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#arr1)"/>
+
+        <!-- Imagen proyectada (flecha invertida) -->
+        <line x1="553" y1="90" x2="553" y2="258" stroke="#1a1614" stroke-width="2.5"/>
+        <!-- punta abajo (invertida) -->
+        <polygon points="553,258 548,248 558,248" fill="#1a1614"/>
+        <!-- texto imagen -->
+        <text x="640" y="172" text-anchor="middle" fill="#1a1614" font-size="13" font-family="Georgia,serif" font-style="italic">imagen</text>
+        <text x="640" y="188" text-anchor="middle" fill="#b87c2a" font-size="11" font-family="Georgia,serif">(invertida)</text>
+
+        <!-- Puntos de llegada en plano de imagen -->
+        <circle cx="553" cy="258" r="4" fill="#b87c2a"/>
+        <circle cx="553" cy="90" r="4" fill="#2a6b6b"/>
+
+        <!-- Indicación cruce de rayos en el orificio -->
+        <text x="337" y="155" text-anchor="middle" fill="#5c5249" font-size="10" font-family="Georgia,serif">× cruce</text>
+
+        <!-- Dimensiones -->
+        <!-- distancia objeto al orificio -->
+        <line x1="110" y1="300" x2="330" y2="300" stroke="#9c8f86" stroke-width="1" marker-end="url(#arr1)" marker-start="url(#arr1)"/>
+        <text x="220" y="320" text-anchor="middle" fill="#9c8f86" font-size="11" font-family="Georgia,serif" font-style="italic">d₁ (distancia objeto)</text>
+        <!-- distancia orificio a plano de imagen -->
+        <line x1="344" y1="300" x2="553" y2="300" stroke="#9c8f86" stroke-width="1" marker-end="url(#arr1)" marker-start="url(#arr1)"/>
+        <text x="448" y="320" text-anchor="middle" fill="#9c8f86" font-size="11" font-family="Georgia,serif" font-style="italic">d₂ (distancia imagen)</text>
+
+        <!-- Leyenda -->
+        <circle cx="56" cy="35" r="4" fill="#b87c2a"/>
+        <text x="66" y="39" fill="#5c5249" font-size="11" font-family="Georgia,serif">rayo desde extremo superior</text>
+        <circle cx="56" cy="55" r="4" fill="#2a6b6b"/>
+        <text x="66" y="59" fill="#5c5249" font-size="11" font-family="Georgia,serif">rayo desde extremo inferior</text>
+      </svg>
+      <figcaption>Fig. 2 — Propagación rectilínea y proyección invertida. Cada punto del objeto envía un rayo a través del orificio; al cruzarse, el punto superior se proyecta abajo y viceversa.</figcaption>
+    </figure>
+  </section>
+
+  <!-- SECCIÓN 4: PROYECCIÓN INVERTIDA Y PLANO DE IMAGEN -->
+  <section>
+    <p class="section-label">Conceptos clave</p>
+    <h2>Proyección invertida y plano de imagen</h2>
+    <p>La imagen que se forma dentro de la cámara oscura está invertida en dos sentidos: verticalmente (lo de arriba aparece abajo) y lateralmente (izquierda y derecha se intercambian). Esta inversión no es un defecto: es una consecuencia matemáticamente necesaria de la propagación rectilínea.</p>
+    <p>El <strong>plano de imagen</strong> es la superficie sobre la cual se forma la imagen proyectada. En una cámara simple, este plano es la pared posterior de la caja. En la fotografía, es la película o el sensor digital. La distancia entre el orificio y este plano determina el tamaño de la imagen formada.</p>
+
+    <div class="formula-box">
+      <div class="formula">h_imagen / h_objeto = d₂ / d₁</div>
+      <p class="formula-desc">Relación de semejanza de triángulos: el tamaño de la imagen es proporcional a la relación entre la distancia al plano de imagen (d₂) y la distancia al objeto (d₁).</p>
+    </div>
+
+    <!-- DIAGRAMA 2: Plano de imagen y escala -->
+    <figure class="diagram-card">
+      <svg viewBox="0 0 680 280" xmlns="http://www.w3.org/2000/svg" role="img">
+        <title>Plano de imagen y relación de escala</title>
+        <desc>Muestra cómo la posición del plano de imagen determina el tamaño de la imagen proyectada</desc>
+        <defs>
+          <marker id="arr2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </marker>
+        </defs>
+        <rect width="680" height="280" fill="#f8f5f0"/>
+
+        <!-- Objeto izquierda -->
+        <line x1="80" y1="210" x2="80" y2="100" stroke="#1a1614" stroke-width="2.5" marker-end="url(#arr2)"/>
+        <line x1="74" y1="210" x2="86" y2="210" stroke="#1a1614" stroke-width="2"/>
+        <text x="80" y="240" text-anchor="middle" fill="#5c5249" font-size="12" font-family="Georgia,serif">objeto (h)</text>
+
+        <!-- Pared con orificio -->
+        <rect x="230" y="50" width="12" height="78" rx="2" fill="#5c5249"/>
+        <rect x="230" y="152" width="12" height="78" rx="2" fill="#5c5249"/>
+        <circle cx="236" cy="155" r="4" fill="#f8f5f0"/>
+        <text x="236" y="248" text-anchor="middle" fill="#5c5249" font-size="11" font-family="Georgia,serif">f</text>
+
+        <!-- Rayos -->
+        <line x1="80" y1="100" x2="236" y2="155" stroke="#b87c2a" stroke-width="1.2" stroke-dasharray="5,3"/>
+        <line x1="80" y1="210" x2="236" y2="155" stroke="#2a6b6b" stroke-width="1.2" stroke-dasharray="5,3"/>
+
+        <!-- Plano de imagen CERCANO (pequeña imagen) -->
+        <rect x="360" y="60" width="6" height="180" rx="2" fill="#c09060" opacity="0.5"/>
+        <text x="363" y="252" text-anchor="middle" fill="#9c8f86" font-size="11" font-family="Georgia,serif" font-style="italic">d₂ corta</text>
+        <!-- imagen pequeña -->
+        <line x1="236" y1="155" x2="360" y2="210" stroke="#b87c2a" stroke-width="1.2" stroke-dasharray="5,3"/>
+        <line x1="236" y1="155" x2="360" y2="105" stroke="#2a6b6b" stroke-width="1.2" stroke-dasharray="5,3"/>
+        <line x1="360" y1="105" x2="360" y2="210" stroke="#1a1614" stroke-width="2.2"/>
+        <polygon points="360,210 355,200 365,200" fill="#1a1614"/>
+        <text x="372" y="160" fill="#b87c2a" font-size="11" font-family="Georgia,serif" font-style="italic">h'</text>
+
+        <!-- Plano de imagen LEJANO (grande imagen) -->
+        <rect x="540" y="60" width="6" height="180" rx="2" fill="#b87c2a" opacity="0.5"/>
+        <text x="543" y="252" text-anchor="middle" fill="#9c8f86" font-size="11" font-family="Georgia,serif" font-style="italic">d₂ larga</text>
+        <!-- imagen grande (líneas extendidas) -->
+        <line x1="360" y1="210" x2="540" y2="246" stroke="#b87c2a" stroke-width="1" stroke-dasharray="4,3" opacity="0.6"/>
+        <line x1="360" y1="105" x2="540" y2="70" stroke="#2a6b6b" stroke-width="1" stroke-dasharray="4,3" opacity="0.6"/>
+        <line x1="540" y1="70" x2="540" y2="246" stroke="#1a1614" stroke-width="2.5"/>
+        <polygon points="540,246 535,236 545,236" fill="#1a1614"/>
+        <text x="555" y="160" fill="#b87c2a" font-size="11" font-family="Georgia,serif" font-style="italic">H'</text>
+        <text x="555" y="175" fill="#2a6b6b" font-size="10" font-family="Georgia,serif">(h' &lt; H')</text>
+
+        <!-- d1 label -->
+        <line x1="80" y1="232" x2="230" y2="232" stroke="#9c8f86" stroke-width="0.8" marker-end="url(#arr2)" marker-start="url(#arr2)"/>
+        <text x="155" y="245" text-anchor="middle" fill="#9c8f86" font-size="10" font-family="Georgia,serif" font-style="italic">d₁</text>
+      </svg>
+      <figcaption>Fig. 3 — El tamaño de la imagen (h') aumenta al alejar el plano de imagen del orificio (mayor d₂). La proporción sigue la semejanza de triángulos.</figcaption>
+    </figure>
+  </section>
+
+  <!-- SECCIÓN 5: APERTURA Y NITIDEZ -->
+  <section>
+    <p class="section-label">Relación apertura–nitidez</p>
+    <h2>Tamaño del orificio y calidad de la imagen</h2>
+    <p>El orificio de la cámara oscura es el parámetro más delicado del dispositivo. Su tamaño determina directamente la <strong>nitidez</strong> de la imagen proyectada, aunque existe una relación de compromiso que no puede eludirse:</p>
+    <p><strong>Orificio demasiado grande:</strong> pasan muchos rayos desde cada punto del objeto, que llegan a distintos puntos del plano de imagen. Cada punto del objeto forma un pequeño "disco de confusión" en vez de un punto, y la imagen resulta borrosa.</p>
+    <p><strong>Orificio demasiado pequeño:</strong> la imagen es nítida geométricamente, pero llega muy poca luz y además comienza a intervenir la <em>difracción</em>, que vuelve a deteriorar la nitidez. Existe un tamaño óptimo que minimiza ambos efectos.</p>
+
+    <!-- DIAGRAMA 3: Apertura y círculo de confusión -->
+    <figure class="diagram-card">
+      <svg viewBox="0 0 680 310" xmlns="http://www.w3.org/2000/svg" role="img">
+        <title>Efecto del tamaño del orificio sobre la nitidez</title>
+        <desc>Comparación entre orificio pequeño (imagen nítida) y orificio grande (imagen borrosa)</desc>
+        <defs>
+          <marker id="arr3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </marker>
+        </defs>
+        <rect width="680" height="310" fill="#f8f5f0"/>
+
+        <!-- Título columna izquierda -->
+        <rect x="30" y="20" width="280" height="28" rx="6" fill="#d4eeee"/>
+        <text x="170" y="38" text-anchor="middle" fill="#2a6b6b" font-size="13" font-weight="600" font-family="Georgia,serif">Orificio pequeño → imagen nítida</text>
+
+        <!-- Título columna derecha -->
+        <rect x="370" y="20" width="280" height="28" rx="6" fill="#f5e6c8"/>
+        <text x="510" y="38" text-anchor="middle" fill="#b87c2a" font-size="13" font-weight="600" font-family="Georgia,serif">Orificio grande → imagen borrosa</text>
+
+        <!-- CASO 1: Orificio pequeño -->
+        <!-- punto fuente -->
+        <circle cx="60" cy="170" r="5" fill="#2a6b6b"/>
+        <text x="60" y="190" text-anchor="middle" fill="#5c5249" font-size="10" font-family="Georgia,serif">punto A</text>
+        <!-- pared con orificio pequeño -->
+        <rect x="150" y="80" width="10" height="70" rx="2" fill="#5c5249"/>
+        <rect x="150" y="168" width="10" height="70" rx="2" fill="#5c5249"/>
+        <line x1="155" y1="163" x2="155" y2="173" stroke="#f8f5f0" stroke-width="4"/>
+        <text x="155" y="258" text-anchor="middle" fill="#2a6b6b" font-size="10" font-family="Georgia,serif">f pequeño</text>
+        <!-- rayos convergentes a punto nítido -->
+        <line x1="60" y1="170" x2="155" y2="165" stroke="#2a6b6b" stroke-width="1.2" stroke-dasharray="4,2"/>
+        <line x1="60" y1="170" x2="155" y2="171" stroke="#2a6b6b" stroke-width="1.2" stroke-dasharray="4,2"/>
+        <line x1="155" y1="165" x2="290" y2="170" stroke="#2a6b6b" stroke-width="1.2" stroke-dasharray="4,2"/>
+        <line x1="155" y1="171" x2="290" y2="170" stroke="#2a6b6b" stroke-width="1.2" stroke-dasharray="4,2"/>
+        <!-- plano de imagen -->
+        <rect x="290" y="80" width="6" height="180" rx="2" fill="#c09060" opacity="0.5"/>
+        <!-- punto de imagen (nítido, pequeño) -->
+        <circle cx="293" cy="170" r="3" fill="#2a6b6b"/>
+        <text x="310" y="174" fill="#2a6b6b" font-size="11" font-family="Georgia,serif">punto nítido</text>
+        <text x="310" y="187" fill="#9c8f86" font-size="10" font-family="Georgia,serif">(círculo mínimo)</text>
+
+        <!-- Separador vertical -->
+        <line x1="345" y1="60" x2="345" y2="280" stroke="#d8cfc4" stroke-width="1.5" stroke-dasharray="6,4"/>
+
+        <!-- CASO 2: Orificio grande -->
+        <!-- punto fuente -->
+        <circle cx="400" cy="170" r="5" fill="#b87c2a"/>
+        <text x="400" y="190" text-anchor="middle" fill="#5c5249" font-size="10" font-family="Georgia,serif">punto A</text>
+        <!-- pared con orificio grande -->
+        <rect x="490" y="80" width="10" height="55" rx="2" fill="#5c5249"/>
+        <rect x="490" y="193" width="10" height="55" rx="2" fill="#5c5249"/>
+        <line x1="495" y1="135" x2="495" y2="193" stroke="#f8f5f0" stroke-width="12"/>
+        <text x="495" y="270" text-anchor="middle" fill="#b87c2a" font-size="10" font-family="Georgia,serif">f grande</text>
+        <!-- rayos que forman disco de confusión -->
+        <line x1="400" y1="170" x2="495" y2="140" stroke="#b87c2a" stroke-width="1.2" stroke-dasharray="4,2" opacity="0.7"/>
+        <line x1="400" y1="170" x2="495" y2="190" stroke="#b87c2a" stroke-width="1.2" stroke-dasharray="4,2" opacity="0.7"/>
+        <line x1="495" y1="140" x2="630" y2="155" stroke="#b87c2a" stroke-width="1.2" stroke-dasharray="4,2" opacity="0.7"/>
+        <line x1="495" y1="190" x2="630" y2="185" stroke="#b87c2a" stroke-width="1.2" stroke-dasharray="4,2" opacity="0.7"/>
+        <!-- plano de imagen -->
+        <rect x="630" y="80" width="6" height="180" rx="2" fill="#c09060" opacity="0.5"/>
+        <!-- disco de confusión (grande y borroso) -->
+        <ellipse cx="633" cy="170" rx="3" ry="18" fill="#b87c2a" opacity="0.35"/>
+        <ellipse cx="633" cy="170" rx="2" ry="12" fill="#b87c2a" opacity="0.4"/>
+        <text x="648" y="162" fill="#b87c2a" font-size="11" font-family="Georgia,serif">disco de</text>
+        <text x="648" y="175" fill="#b87c2a" font-size="11" font-family="Georgia,serif">confusión</text>
+        <text x="648" y="188" fill="#9c8f86" font-size="10" font-family="Georgia,serif">(imagen borrosa)</text>
+      </svg>
+      <figcaption>Fig. 4 — Con un orificio pequeño, todos los rayos de un punto convergen en un punto de la imagen. Con un orificio grande, los rayos forman un disco de confusión que produce borrosidad.</figcaption>
+    </figure>
+
+    <h3>Tamaño óptimo del orificio</h3>
+    <p>Para una cámara oscura casera con longitud de caja <em>d₂</em> = 20 cm, el diámetro óptimo del orificio puede calcularse con la fórmula de Rayleigh:</p>
+    <div class="formula-box">
+      <div class="formula">d_opt = 1,9 · √(λ · d₂)</div>
+      <p class="formula-desc">Donde λ ≈ 550 nm (luz verde visible). Para d₂ = 20 cm → d_opt ≈ 0,4 mm. En la práctica, orificios entre 0,3 y 1 mm producen imágenes aceptables.</p>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 6: CONSTRUCCIÓN -->
+  <section>
+    <p class="section-label">Guía de construcción</p>
+    <h2>Materiales y procedimiento</h2>
+
+    <h3>Materiales necesarios</h3>
+    <div class="materials">
+      <div class="material-item">Caja de cartón (caja de zapatos o similar)</div>
+      <div class="material-item">Pintura negra mate o papel negro</div>
+      <div class="material-item">Papel de aluminio</div>
+      <div class="material-item">Papel vegetal o papel manteca</div>
+      <div class="material-item">Aguja de coser o alfiler fino</div>
+      <div class="material-item">Cúter o tijera</div>
+      <div class="material-item">Cinta adhesiva opaca</div>
+      <div class="material-item">Regla y lápiz</div>
+    </div>
+
+    <h3>Pasos de construcción</h3>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h4>Forrar el interior de negro</h4>
+          <p>Pintar o tapizar con papel negro todas las paredes internas de la caja para eliminar reflexiones internas que degradarían la imagen.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h4>Practicar el orificio</h4>
+          <p>En el centro de una de las caras angostas, pegar un cuadrado de papel de aluminio (3×3 cm). Con una aguja, perforar un orificio de aprox. 0,5–1 mm en el centro del aluminio. El aluminio permite controlar mejor el tamaño del orificio que el cartón.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h4>Instalar la pantalla</h4>
+          <p>En la cara opuesta al orificio, recortar un rectángulo y cubrir la apertura con papel vegetal bien tenso, fijado con cinta. Esta será la pantalla de proyección (plano de imagen).</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <h4>Sellar la caja</h4>
+          <p>Cubrir todas las juntas y posibles entradas de luz con cinta adhesiva opaca, excepto el orificio y la pantalla. Cualquier fuga de luz arruina el contraste de la imagen.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-body">
+          <h4>Observar la imagen</h4>
+          <p>Apuntar el orificio hacia una escena bien iluminada (exterior con sol, lampara intensa). Observar la pantalla vegetal desde atrás: se verá la imagen invertida de la escena. Para mayor contraste, cubrir la cabeza y la pantalla con una tela oscura.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 7: CONCEPTOS CLAVE (tarjetas) -->
+  <section>
+    <p class="section-label">Síntesis conceptual</p>
+    <h2>Conceptos fundamentales</h2>
+
+    <div class="concepts-grid">
+      <div class="concept-card">
+        <div class="icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <line x1="2" y1="11" x2="20" y2="11" stroke="#b87c2a" stroke-width="2" stroke-linecap="round"/>
+            <line x1="15" y1="6" x2="20" y2="11" stroke="#b87c2a" stroke-width="2" stroke-linecap="round"/>
+            <line x1="15" y1="16" x2="20" y2="11" stroke="#b87c2a" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h4>Propagación rectilínea</h4>
+        <p>En un medio homogéneo, la luz viaja en línea recta. Este es el principio que hace posible la formación de imagen: solo pasan los rayos con la dirección exacta del orificio.</p>
+      </div>
+
+      <div class="concept-card">
+        <div class="icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <line x1="3" y1="4" x2="11" y2="18" stroke="#b87c2a" stroke-width="2" stroke-linecap="round"/>
+            <line x1="19" y1="4" x2="11" y2="18" stroke="#b87c2a" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="3,2"/>
+            <circle cx="11" cy="11" r="2.5" fill="#b87c2a" opacity="0.4"/>
+          </svg>
+        </div>
+        <h4>Proyección invertida</h4>
+        <p>Los rayos se cruzan al pasar por el orificio. El punto superior del objeto proyecta su rayo hacia abajo en el plano de imagen, y viceversa. La imagen aparece invertida vertical y lateralmente.</p>
+      </div>
+
+      <div class="concept-card teal">
+        <div class="icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="16" y="2" width="4" height="18" rx="1" fill="#2a6b6b" opacity="0.7"/>
+            <line x1="4" y1="7" x2="15" y2="11" stroke="#2a6b6b" stroke-width="1.5" stroke-dasharray="3,2"/>
+            <line x1="4" y1="15" x2="15" y2="11" stroke="#2a6b6b" stroke-width="1.5" stroke-dasharray="3,2"/>
+          </svg>
+        </div>
+        <h4>Plano de imagen</h4>
+        <p>Superficie donde se forma la imagen proyectada. Su distancia al orificio (d₂) determina el tamaño de la imagen. Cuanto más lejos, más grande pero también más tenue.</p>
+      </div>
+
+      <div class="concept-card teal">
+        <div class="icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="11" cy="11" r="3" fill="none" stroke="#2a6b6b" stroke-width="2"/>
+            <circle cx="11" cy="11" r="7" fill="none" stroke="#2a6b6b" stroke-width="1" stroke-dasharray="2,2"/>
+          </svg>
+        </div>
+        <h4>Apertura y nitidez</h4>
+        <p>Un orificio más pequeño produce imágenes más nítidas (menor disco de confusión) pero más oscuras. Un orificio mayor da más luz pero mayor borrosidad. Existe un diámetro óptimo según la longitud de la cámara.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PIE DE PÁGINA -->
+  <div class="doc-footer">
+    <p>Documento generado con fines educativos · Física Óptica · Cámara Oscura</p>
+  </div>
+
+</div>
+</body>
+</html>
