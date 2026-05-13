@@ -22,6 +22,7 @@ Estado actual del recorrido:
 - `004 - librerias_fundamentos_pdi`: procesamiento con librerias de Python, segmentacion y preprocesamiento
 - `005  - computer_vision_parte_1`: vision por computadora clasica con OpenCV
 - `006 - TFI_1`: trabajo final integrador de mejora y restauracion de imagenes
+- `006_fotografia_digital`: trabajo practico complementario sobre lenguaje fotografico y composicion visual
 
 ## Tecnologias y librerias
 
@@ -140,6 +141,17 @@ rodriguez-carmen-pdi-1c-2026/
 |   |-- dashboard_tfi1_tecnicas.html
 |   |-- TFI_1_Consigna_y_Rubrica.md
 |   `-- TFI_1 - mejora y restauracion de imagenes.ipynb
+`-- 006_fotografia_digital/
+|   |-- README.md
+|   |-- De la camara oscura a la imagen intencional.pdf
+|   |-- De la camara oscura a la imagen intencional.pptx
+|   |-- 001_imagenes/
+|   |   |-- originales/
+|   |   |-- procesadas/
+|   |   `-- descartes/
+|   |-- 002_codigo/
+|   |   `-- Trabajo Practico 006 - Fotografia Digital.ipynb
+|   `-- 003_recursos/
 `-- Extras/
 ```
 
@@ -337,6 +349,32 @@ Tecnicas integradas:
 - morfologia matematica para mascaras de dano
 - `inpainting` puntual
 - guardado de salidas finales y tabla comparativa con `pandas`
+
+### 006_fotografia_digital
+
+Trabajo practico complementario sobre lenguaje fotografico aplicado. Todas las imagenes fueron capturadas por la estudiante. El trabajo integra teoria fotografica y procesamiento digital en cinco partes:
+
+- **Parte 1 - Camara oscura:** retoma la imagen capturada con camara oscura artesanal. Se aplica rotacion, recorte y ecualizacion del canal `V` en espacio `HSV` para mejorar el contraste sin distorsionar los colores.
+- **Parte 2 - Composicion y lenguaje visual:** reencuadre compositivo, conversion a escala de grises, binarizacion con umbral de Otsu y ecualizacion de histograma para analizar como la forma prevalece sobre el color.
+- **Parte 3 - Reencuadre y reinterpretacion:** a partir de una unica imagen amplia se generan dos recortes con lecturas intencionalmente distintas (arquitectonica y narrativa), demostrando como el encuadre construye sentido.
+- **Parte 4 - Punto de vista:** comparacion de dos fotografias del mismo sujeto desde distintas posiciones para analizar escala, contexto y relacion emocional.
+- **Parte 5 - Fotografia basada en la luz:** analisis cuantitativo (luminosidad, contraste, rango, histograma) de cuatro fotografias en distintas condiciones de luz, con seleccion y esquema anotado de direccion de luz.
+
+Archivos principales:
+
+- `002_codigo/Trabajo Practico 006 - Fotografia Digital.ipynb`: notebook de resolucion
+- `001_imagenes/originales/`: fotografias propias usadas como insumo
+- `001_imagenes/procesadas/`: resultados generados por el notebook
+- `De la camara oscura a la imagen intencional.pdf`: presentacion conceptual del recorrido
+- `README.md`: documentacion especifica del trabajo
+
+Tecnicas aplicadas:
+
+- conversion `RGB` → `HSV` y ecualizacion selectiva por canal
+- umbral de Otsu para binarizacion automatica
+- ecualizacion global del histograma en escala de grises
+- analisis de metricas de luminosidad y contraste con `numpy` y `pandas`
+- visualizacion comparativa y anotacion de mapas de reencuadre con `matplotlib`
 
 ## Como trabajar con el material
 
