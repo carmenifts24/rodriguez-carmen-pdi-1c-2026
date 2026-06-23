@@ -20,12 +20,15 @@ Estado actual del recorrido:
 - `002 - py5`: fundamentos de imagen digital e interaccion visual
 - `003 - camara_oscura`: registro y material de trabajo asociado a la experiencia de camara oscura
 - `004 - librerias_fundamentos_pdi`: procesamiento con librerias de Python, segmentacion y preprocesamiento
-- `005  - computer_vision_parte_1`: vision por computadora clasica con OpenCV
-- `006_TFI_1`: trabajo final integrador de mejora y restauracion de imagenes
-- `007_fotografia_digital`: trabajo practico complementario sobre lenguaje fotografico y composicion visual
-- `008_redes_neuronales_parte_1`: primera introduccion a redes neuronales, clasificacion de imagenes, CNNs y Gradio
-- `009_redes_neuronales_parte_2`: redes neuronales aplicadas, modelos preentrenados, transferencia, Hugging Face y OCR
-- `010_redes_neuronales_parte_3`: entrenamiento y comparacion de CNNs para clasificacion de frutas, visualizacion de convoluciones y pruebas con camara
+- `005 - computer_vision_parte_1`: vision por computadora clasica con OpenCV
+- `006 - TFI_1`: trabajo final integrador de mejora y restauracion de imagenes
+- `007 - fotografia_digital`: trabajo practico complementario sobre lenguaje fotografico y composicion visual
+- `008 - redes_neuronales_parte_1`: primera introduccion a redes neuronales, clasificacion de imagenes y CNNs
+- `008 - redes_neuronales_parte_2`: modelos preentrenados, transferencia de aprendizaje, Hugging Face, Spaces y OCR
+- `008 - redes_neuronales_parte_3`: entrenamiento y comparacion de CNNs propias, visualizacion de convoluciones
+- `009 - vision_artificial_aplicada`: deteccion de puntos clave con MediaPipe, control gestual e integracion con Gradio
+- `010 - modelos_difusion`: modelos generativos de difusion, text-to-image y aceleracion con LCM-LoRA
+- `011 - clase magistral_dev_despliegue`: entornos de desarrollo, Docker, despliegue en Hugging Face Spaces
 
 ## Tecnologias y librerias
 
@@ -50,10 +53,14 @@ Principales librerias usadas en la cursada:
 - `transformers`
 - `gradio`
 - `gdown`
+- `mediapipe`
+- `diffusers`
 
 Nota: `py5` requiere Java. Si aparece un error relacionado con Java, conviene revisar la documentacion oficial de instalacion de `py5`.
 
 Nota sobre redes neuronales: las unidades `008`, `009` y `010` pueden descargar datasets o pesos preentrenados desde internet. Para entrenamientos pesados, inferencia con modelos grandes o acceso a camara/webcam, Google Colab puede ser mas comodo que la ejecucion local.
+
+Nota sobre modelos de difusion: la unidad `010` es especialmente exigente en hardware. Se recomienda ejecutar en Google Colab con GPU T4 o superior.
 
 ## Instalacion local
 
@@ -116,6 +123,20 @@ python -c "import py5; print('py5 OK')"
 python -c "import tensorflow, sklearn, gradio; print('Redes neuronales basicas OK')"
 ```
 
+### Entornos por unidad
+
+Las unidades mas recientes (`009`, `010`, `011`) usan entornos virtuales propios dentro de su carpeta. Cada una incluye un `README.md` con instrucciones especificas. Los entornos activos en el proyecto son:
+
+| Entorno | Uso |
+|---|---|
+| `venv/` | entorno general, unidades 001–008 |
+| `venv312/` | Python 3.12, TensorFlow y variantes |
+| `venv_tf/` | TensorFlow especifico |
+| `.venv_teachable/` | Teachable Machine + Gradio |
+| `.venv_pytorch_resnet18/` | PyTorch + ResNet18 |
+| `.venv_pytorch_huggingface_vision/` | PyTorch + HuggingFace Vision |
+| `.venv_vision_aplicada/` | unidad 009 — MediaPipe + Gradio |
+
 ## Guias utiles incluidas
 
 En la carpeta `Extras` hay documentacion pensada para uso practico:
@@ -131,6 +152,7 @@ En la carpeta `Extras` hay documentacion pensada para uso practico:
 rodriguez-carmen-pdi-1c-2026/
 |-- README.md
 |-- requirements.txt
+|-- tools/
 |-- 001 - py5/
 |   |-- 001 - TEO/
 |   |-- 002 - PRA/
@@ -149,50 +171,46 @@ rodriguez-carmen-pdi-1c-2026/
 |   `-- 003 - LAB/
 |-- 005  - computer_vision_parte_1/
 |   `-- 002 - PRA/
-|-- 006_TFI_1/
+|-- 006 - TFI_1/
 |   |-- imagenes_tfi1/
 |   |-- salidas_tfi1/
 |   |-- README.md
 |   |-- dashboard_tfi1_tecnicas.html
 |   |-- TFI_1_Consigna_y_Rubrica.md
 |   `-- TFI_1_Mejora y restauracion de imagenes.ipynb
-|-- 007_fotografia_digital/
+|-- 007 - fotografia_digital/
 |   |-- README.md
 |   |-- De la camara oscura a la imagen intencional.pdf
-|   |-- De la camara oscura a la imagen intencional.pptx
 |   |-- 002_codigo/
-|   |   `-- Trabajo Practico 006 - Fotografia Digital.ipynb
 |   `-- 003_recursos/
-|-- 008_redes_neuronales_parte_1/
+|-- 008 - redes_neuronales_parte_1/
 |   |-- README.md
-|   |-- datos/
-|   |-- 001_Red_Neuronal.ipynb
-|   |-- 002_Clasificacion.ipynb
-|   |-- 003_CNNs_Full.ipynb
-|   `-- 004_Teachable_Machine_Dataset_Propio_Gradio.ipynb
-|-- 009_redes_neuronales_parte_2/
-|   |-- datos/
-|   |-- 01_Fundamentos_Red_Neuronal_Simple.ipynb
-|   |-- 02_Clasificacion_Letras_MLP.ipynb
-|   |-- 03_Clasificacion_Letras_CNN.ipynb
-|   |-- 04_Visualizacion_Filtros_y_Activaciones_CNN.ipynb
-|   |-- 05_Clasificacion_Preentrenados_ResNet18.ipynb
-|   |-- 06_Transfer_Learning_MobileNetV2.ipynb
-|   |-- 07_Modelos_Preentrenados_HuggingFace.ipynb
-|   |-- 08_Laboratorio_Desarrollo_Space_Gradio.ipynb
-|   |-- 09_Cheatsheet_Desarrollo_Space.ipynb
-|   |-- 10_Cheatsheet_Caja_de_Herramientas.ipynb
-|   |-- 11_Laboratorio_Integrador_Redes.ipynb
-|   `-- 12_Laboratorio_OCR_Investigacion_Critica.ipynb
-|-- 010_redes_neuronales_parte_3/
-|   |-- arq/
-|   |-- clasificador_frutas_extended.ipynb
-|   |-- comparacion_modelos.ipynb
-|   |-- crea_tu_propio_modelo_cnn.ipynb
-|   |-- probamos_el_modelo_con_camweb.ipynb
-|   |-- prueba_colab_desde_folder.ipynb
-|   |-- una_convolucion_por_dentro_random.ipynb
-|   `-- una_convolucion_por_dentro_train.ipynb
+|   |-- 001 - TEO/
+|   |-- 002 - PRA/
+|   `-- 003 - LAB/
+|-- 008 - redes_neuronales_parte_2/
+|   |-- 001 - TEO/
+|   |-- 002 - PRA/
+|   `-- 003 - LAB/
+|       |-- 09_Laboratorio_Integrador_Redes.ipynb
+|       |-- 10_Laboratorio_OCR_Investigacion_Critica.ipynb
+|       `-- rodriguez-carmen-pdi_Space_Gradio/
+|-- 008 - redes_neuronales_parte_3/
+|   |-- 001 - TEO/
+|   |-- 002 - PRA/
+|   `-- 003 - LAB/
+|-- 009 - vision_artificial_aplicada/
+|   |-- 001 - TEO/
+|   |-- 002 - PRA/
+|   `-- 003 - LAB/
+|-- 010 - modelos_difusion/
+|   |-- 001 - TEO/
+|   |-- 002 - PRA/
+|   `-- 003 - LAB/
+|-- 011 - clase magistral_dev_despliegue/
+|   |-- 001 - TEO/
+|   |-- 002 - PRA/
+|   `-- 003 - LAB/
 `-- Extras/
 ```
 
@@ -313,7 +331,7 @@ Temas trabajados:
 - segmentacion simple por color
 - recuperacion y preprocesamiento de imagenes propias
 
-### 005  - computer_vision_parte_1
+### 005 - computer_vision_parte_1
 
 Unidad enfocada en herramientas clasicas de vision por computadora sobre imagenes reales y sinteticas.
 
@@ -358,7 +376,7 @@ Temas trabajados:
 - coincidencia por plantilla
 - deteccion de rostros con cascadas Haar
 
-### 006_TFI_1
+### 006 - TFI_1
 
 Unidad de integracion y cierre parcial del recorrido. El trabajo consiste en construir tres pipelines acotados de mejora y restauracion, comparar estrategias y justificar la decision final para cada tipo de imagen.
 
@@ -391,7 +409,7 @@ Tecnicas integradas:
 - `inpainting` puntual
 - guardado de salidas finales y tabla comparativa con `pandas`
 
-### 007_fotografia_digital
+### 007 - fotografia_digital
 
 Trabajo practico complementario sobre lenguaje fotografico aplicado. Todas las imagenes fueron capturadas por la estudiante. El trabajo integra teoria fotografica y procesamiento digital en cinco partes:
 
@@ -416,16 +434,16 @@ Tecnicas aplicadas:
 - analisis de metricas de luminosidad y contraste con `numpy` y `pandas`
 - visualizacion comparativa y anotacion de mapas de reencuadre con `matplotlib`
 
-### 008_redes_neuronales_parte_1
+### 008 - redes_neuronales_parte_1
 
 Unidad de entrada a redes neuronales con foco didactico. Parte de una regresion simple de Celsius a Fahrenheit, avanza hacia clasificacion de letras y culmina con CNNs para imagenes y una actividad con Teachable Machine + Gradio.
 
-Notebooks principales:
+Notebooks en `008 - redes_neuronales_parte_1/002 - PRA`:
 
 - `001_Red_Neuronal.ipynb`: primera red neuronal y lectura de pesos aprendidos.
 - `002_Clasificacion.ipynb`: clasificacion multiclase de letras manuscritas.
-- `003_CNNs_Full.ipynb`: CNNs sobre MNIST y `cats_vs_dogs`, con comparacion entre datos controlados e imagenes reales.
-- `004_Teachable_Machine_Dataset_Propio_Gradio.ipynb`: diseno de dataset propio, exportacion de modelo e interfaz Gradio.
+- `003_CNNs_Full_colab.ipynb`: CNNs sobre MNIST y `cats_vs_dogs` en Colab.
+- `003_CNNs_Full_visual.ipynb`: version con visualizaciones locales.
 
 Temas trabajados:
 
@@ -435,24 +453,26 @@ Temas trabajados:
 - sesgo de dataset, fondos, iluminacion y variacion de encuadre
 - despliegue didactico de clasificadores con Gradio
 
-### 009_redes_neuronales_parte_2
+### 008 - redes_neuronales_parte_2
 
-Unidad de profundizacion en redes neuronales para imagenes. Repite conceptos base con mayor detalle y suma modelos preentrenados, transferencia de aprendizaje, Hugging Face, Spaces, Gradio y OCR con investigacion critica.
+Unidad de profundizacion en redes neuronales para imagenes. Suma modelos preentrenados, transferencia de aprendizaje, Hugging Face, Spaces, Gradio y OCR con investigacion critica.
 
-Notebooks principales:
+Notebooks en `008 - redes_neuronales_parte_2/002 - PRA`:
 
-- `01_Fundamentos_Red_Neuronal_Simple.ipynb`
+- `01_Fundamentos_Red_Neuronal_Simple_colab.ipynb`
+- `01_Fundamentos_Red_Neuronal_Simple_visual.ipynb`
 - `02_Clasificacion_Letras_MLP.ipynb`
 - `03_Clasificacion_Letras_CNN.ipynb`
 - `04_Visualizacion_Filtros_y_Activaciones_CNN.ipynb`
 - `05_Clasificacion_Preentrenados_ResNet18.ipynb`
 - `06_Transfer_Learning_MobileNetV2.ipynb`
 - `07_Modelos_Preentrenados_HuggingFace.ipynb`
-- `08_Laboratorio_Desarrollo_Space_Gradio.ipynb`
-- `09_Cheatsheet_Desarrollo_Space.ipynb`
-- `10_Cheatsheet_Caja_de_Herramientas.ipynb`
-- `11_Laboratorio_Integrador_Redes.ipynb`
-- `12_Laboratorio_OCR_Investigacion_Critica.ipynb`
+
+Laboratorios en `008 - redes_neuronales_parte_2/003 - LAB`:
+
+- `09_Laboratorio_Integrador_Redes.ipynb`
+- `10_Laboratorio_OCR_Investigacion_Critica.ipynb`
+- `rodriguez-carmen-pdi_Space_Gradio/`: proyecto Gradio desplegado en Hugging Face Spaces.
 
 Temas trabajados:
 
@@ -463,11 +483,11 @@ Temas trabajados:
 - construccion de demos con Gradio y Hugging Face Spaces
 - OCR como caso de investigacion tecnica y validacion de fuentes
 
-### 010_redes_neuronales_parte_3
+### 008 - redes_neuronales_parte_3
 
 Unidad orientada a experimentacion con CNNs propias para clasificacion de frutas y comprension interna de las convoluciones. Incluye notebooks de entrenamiento, comparacion de arquitecturas, prueba con camara y visualizacion de filtros reales o aleatorios.
 
-Archivos principales:
+Archivos en `008 - redes_neuronales_parte_3/002 - PRA`:
 
 - `clasificador_frutas_extended.ipynb`: entrenamiento extendido de CNN para naranjas y manzanas.
 - `comparacion_modelos.ipynb`: comparacion de modelos y estrategias.
@@ -485,6 +505,86 @@ Temas trabajados:
 - inspeccion de filtros, activaciones y max pooling
 - prueba de inferencia con imagenes reales o camara web
 
+### 009 - vision_artificial_aplicada
+
+Unidad centrada en vision artificial en tiempo real con MediaPipe. Trabaja deteccion de puntos clave faciales, control gestual con las manos, estimacion de pose e integracion de modelos de vision con interfaces web.
+
+Notebooks en `009 - vision_artificial_aplicada/002 - PRA`:
+
+- `01_Deteccion_Puntos_Clave_Faciales_original.ipynb`: Face Mesh con 478 landmarks sobre imagen estatica.
+- `01_Deteccion_Puntos_Clave_Faciales_grupo.ipynb`: version trabajada en clase.
+- `01_Deteccion_Puntos_Clave_Faciales_dos_comentado.ipynb`: version comentada y ampliada.
+- `02_Control_Volumen_con_Manos.ipynb`: Hand Landmarker para control de volumen en tiempo real.
+- `03_Integracion_Gradio_y_MediaPipe.ipynb`: concepto de Skills, `gr.Interface` y `gr.Blocks` con MediaPipe.
+- `04_Proyecto_Pose_y_Despliegue.ipynb`: estimacion de pose + deploy en Hugging Face Spaces.
+
+Laboratorios en `009 - vision_artificial_aplicada/003 - LAB`:
+
+- `Analisis_Avanzado_Landmarks_Faciales.ipynb`
+- `Integracion_Gradio_MediaPipe.ipynb`
+- `Variantes_Control_Volumen.ipynb`
+- `Pose_Despliegue/`: proyecto de pose para despliegue.
+
+Temas trabajados:
+
+- deteccion de landmarks faciales, de manos y de pose con MediaPipe
+- control de volumen del sistema mediante gestos (Windows)
+- construccion de Skills como unidades de procesamiento reutilizables
+- integracion de MediaPipe con `gr.Interface` y `gr.Blocks`
+- despliegue de aplicaciones de vision en Hugging Face Spaces
+
+Entorno: `.venv_vision_aplicada/`. Ver `002 - PRA/README.md` para instrucciones de instalacion con `uv`.
+
+### 010 - modelos_difusion
+
+Unidad sobre modelos generativos de difusion. Cubre desde los fundamentos teoricos hasta la aceleracion mediante LCM-LoRA y la generacion text-to-image optimizada para CPU y GPU. Los notebooks estan disenados para ejecutarse en Google Colab con GPU T4.
+
+Notebooks en `010 - modelos_difusion/002 - PRA`:
+
+- `01_Introduccion_Conceptual_Difusion.ipynb`: fundamentos y visualizacion del proceso forward/reverse.
+- `02_Paradigmas_y_Modelos_Difusion.ipynb`: del paradigma tradicional al generativo, historia y primer demo.
+- `03_Aplicaciones_Practicas_Difusion.ipynb`: inpainting, super-resolution e image-to-image.
+- `04_Text_to_Image_SDXL_Turbo.ipynb`: inferencia ultra-rapida de 1024x1024 en un solo paso.
+- `05_Text_to_Image_SDXS_CPU.ipynb`: generacion text-to-image de baja latencia optimizada para CPU.
+- `06_Aceleracion_LCM_LoRA.ipynb`: Latent Consistency Models y adaptacion de bajo rango (LoRA).
+
+Temas trabajados:
+
+- proceso de difusion forward y reverse
+- DDPM, DDIM y schedulers
+- pipelines de `diffusers` para text-to-image, inpainting y super-resolution
+- SDXL Turbo, SDXS y LCM-LoRA para inferencia rapida
+- optimizaciones de memoria para GPU con poca VRAM y ejecucion en CPU
+
+Nota: la instalacion local requiere descargar modelos de 1 a 7 GB. Ver `002 - PRA/README.md` para instrucciones.
+
+### 011 - clase magistral_dev_despliegue
+
+Clase magistral sobre entornos de desarrollo, contenerizacion con Docker y despliegue de aplicaciones de vision artificial. Integra MediaPipe, Gradio y modelos de Hugging Face en un flujo completo de desarrollo y despliegue.
+
+Notebooks en `011 - clase magistral_dev_despliegue/002 - PRA/notebooks`:
+
+- `01_Entornos_de_Desarrollo.ipynb`: entornos virtuales vs Docker, cuando usar cada uno.
+- `02_Control_Volumen_con_Manos.ipynb`: Hand Landmarker + control de volumen en tiempo real.
+- `03_Integracion_Gradio_y_MediaPipe.ipynb`: Skills, `gr.Interface`, `gr.Blocks` y Face Mesh en Gradio.
+- `04_Proyecto_Pose_y_Despliegue.ipynb`: MediaPipe Pose + deploy en Hugging Face Spaces.
+- `05_Modelos_Preentrenados_HuggingFace.ipynb`: ViT, CLIP (zero-shot) y DETR con `pipeline` de HF.
+- `06_Cheatsheet_Desarrollo_Space.ipynb`: referencia rapida de git, Gradio, Transformers y arquitectura 3 capas.
+
+Infraestructura en `011 - clase magistral_dev_despliegue/002 - PRA`:
+
+- `Dockerfile` + `docker-compose.yml`: entorno JupyterLab listo para levantar con `docker compose up`.
+- `requirements.txt`: dependencias del contenedor.
+- `mi-pose-app/`: proyecto de pose para despliegue.
+
+Temas trabajados:
+
+- gestion de entornos virtuales y contenerizacion con Docker
+- deteccion de landmarks de manos, cara y pose con MediaPipe
+- construccion de interfaces con `gr.Interface` y `gr.Blocks`
+- inferencia con modelos ViT, CLIP y DETR desde Hugging Face
+- despliegue en Hugging Face Spaces con git y doble remote (GitHub + HF)
+
 ## Como trabajar con el material
 
 ### Scripts `.py`
@@ -496,12 +596,24 @@ Temas trabajados:
 ### Notebooks `.ipynb`
 
 - abrir el notebook en VS Code o Jupyter
-- verificar que el kernel seleccionado sea el del `venv`
+- verificar que el kernel seleccionado sea el del `venv` correspondiente a la unidad
 - ejecutar las celdas en orden
 
 ### Google Colab
 
-Algunos notebooks estan preparados para trabajo en Colab, especialmente los que ya lo indican en el nombre o incluyen una celda de setup.
+Algunos notebooks estan preparados para trabajo en Colab, especialmente los que ya lo indican en el nombre o incluyen una celda de setup. La unidad `010 - modelos_difusion` esta disenada exclusivamente para Colab con GPU.
+
+### Docker (unidad 011)
+
+```bash
+# Primera vez — construye la imagen (~10 min por torch)
+docker compose up --build
+
+# Las siguientes veces
+docker compose up
+```
+
+Abre http://localhost:8888 — token: `clase`
 
 ## Problemas frecuentes
 
@@ -536,6 +648,10 @@ python -m pip install glfw
 
 Si el error menciona Java, instalar Java y revisar la guia oficial de `py5`.
 
+### MediaPipe no encuentra la camara
+
+Verificar que el entorno activo sea `.venv_vision_aplicada` y que los archivos `.task` de MediaPipe esten en la misma carpeta que el notebook.
+
 ## Recursos
 
 - OpenCV: <https://docs.opencv.org/>
@@ -544,6 +660,9 @@ Si el error menciona Java, instalar Java y revisar la guia oficial de `py5`.
 - scikit-image: <https://scikit-image.org/docs/>
 - py5: <https://py5coding.org/>
 - Instalacion de py5: <https://py5coding.org/content/install.html>
+- MediaPipe: <https://ai.google.dev/edge/mediapipe/solutions/guide>
+- Diffusers: <https://huggingface.co/docs/diffusers/>
+- Hugging Face: <https://huggingface.co/docs>
 - Google Colab: <https://colab.research.google.com/>
 
 ## Licencia

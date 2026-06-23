@@ -56,7 +56,7 @@ git add "ruta\\del\\archivo"
 ## Paso 4. Confirmar los cambios
 
 ```powershell
-git commit -m "Escribe aqui un mensaje corto y claro"
+git commit -m "Actualización de los proyectos de clases"
 ```
 
 Ejemplos:

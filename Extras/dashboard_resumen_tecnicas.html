@@ -17,10 +17,11 @@
       --accent-3:      #9b8ff8;
       --ok:            #3dd68c;
       --warn:          #fb923c;
+      --learn:         #38bdf8;
+      --gen:           #f472b6;
       --shadow:        0 16px 40px rgba(0, 8, 30, 0.55);
       --shadow-hover:  0 20px 52px rgba(5, 15, 50, 0.70), 0 0 0 1px rgba(79, 142, 247, 0.22);
       --radius:        18px;
-      --learn:         #38bdf8;
     }
 
     * { box-sizing: border-box; }
@@ -38,7 +39,6 @@
       min-height: 100vh;
     }
 
-    /* Dot grid pattern — evoca mapas de activaciones / grids de neuronas */
     body::before {
       content: "";
       position: fixed;
@@ -93,7 +93,6 @@
       background: radial-gradient(circle, rgba(79, 142, 247, 0.20), transparent 68%);
     }
 
-    /* Banda decorativa superior del hero */
     .hero-card::before {
       content: "";
       position: absolute;
@@ -296,6 +295,7 @@
     .swatch-geo     { background: var(--ok);       color: var(--ok); }
     .swatch-detect  { background: var(--warn);     color: var(--warn); }
     .swatch-learn   { background: var(--learn);    color: var(--learn); }
+    .swatch-gen     { background: var(--gen);      color: var(--gen); }
 
     /* ── Stats ──────────────────────────────────────── */
     .stats-list { display: grid; gap: 12px; margin-top: 20px; }
@@ -416,6 +416,12 @@
       border-color: rgba(56, 189, 248, 0.22);
     }
 
+    .cat-generacion {
+      background: rgba(244, 114, 182, 0.10);
+      color: var(--gen);
+      border-color: rgba(244, 114, 182, 0.24);
+    }
+
     /* ── Tech sections ──────────────────────────────── */
     .tech-section strong {
       display: block;
@@ -504,14 +510,14 @@
       <article class="hero-card">
         <h1>Dashboard · Tecnicas de Tratamiento de Imagenes</h1>
         <p class="subtitle">
-          Resumen visual y consultable de las tecnicas aplicadas en el proyecto, desde procesamiento clasico de imagenes hasta redes neuronales profundas. Consolida metodos de las unidades 004, 005, 006, 008 y 009 en un solo tablero, sin duplicados.
+          Resumen visual y consultable de las tecnicas aplicadas en el proyecto, desde procesamiento clasico de imagenes hasta redes neuronales profundas, modelos generativos de difusion y despliegue de aplicaciones. Consolida metodos de los modulos 001 a 011 en un solo tablero, sin duplicados.
         </p>
         <div class="tag-row">
           <span class="tag">PDI · IFTS 24</span>
           <span class="tag">Resumen unificado</span>
           <span class="tag">Sin tecnicas duplicadas</span>
-          <span class="tag">Deep Learning incluido</span>
-          <span class="tag">Consulta rapida</span>
+          <span class="tag">Deep Learning + Difusion</span>
+          <span class="tag">MediaPipe · Docker · HF Spaces</span>
         </div>
       </article>
 
@@ -519,12 +525,12 @@
         <article class="summary-card">
           <div class="summary-label">Tecnicas registradas</div>
           <div class="summary-value" id="totalTech">0</div>
-          <div class="summary-note">Incluye mejora, segmentacion, geometria, deteccion, tecnicas base y aprendizaje profundo.</div>
+          <div class="summary-note">Incluye mejora, segmentacion, geometria, deteccion, aprendizaje profundo y modelos generativos.</div>
         </article>
         <article class="summary-card">
           <div class="summary-label">Familias principales</div>
-          <div class="summary-value">6</div>
-          <div class="summary-note">Nucleo, mejora, segmentacion, geometria, deteccion y aprendizaje profundo.</div>
+          <div class="summary-value">7</div>
+          <div class="summary-note">Nucleo, mejora, segmentacion, geometria, deteccion, aprendizaje profundo y generacion.</div>
         </article>
       </div>
     </section>
@@ -532,7 +538,7 @@
     <section class="filters">
       <div>
         <label for="searchInput">Buscar tecnica o palabra clave</label>
-        <input id="searchInput" type="text" placeholder="Ejemplo: contraste, contornos, CNN, transfer learning...">
+        <input id="searchInput" type="text" placeholder="Ejemplo: CLAHE, landmarks, difusion, Docker, transfer learning...">
       </div>
       <div>
         <label for="categoryFilter">Categoria</label>
@@ -544,6 +550,7 @@
           <option value="geometria">Geometria</option>
           <option value="deteccion">Deteccion</option>
           <option value="aprendizaje">Aprendizaje profundo</option>
+          <option value="generacion">Generacion</option>
         </select>
       </div>
       <div>
@@ -556,30 +563,35 @@
       <aside class="panel">
         <h2>Mapa rapido</h2>
         <div class="legend">
-          <div class="legend-item"><span class="swatch swatch-core"></span> Nucleo: representacion, canales, histogramas, ROI y operaciones base.</div>
-          <div class="legend-item"><span class="swatch swatch-contrast"></span> Mejora: contraste, ecualizacion, CLAHE, ruido e inpainting.</div>
+          <div class="legend-item"><span class="swatch swatch-core"></span> Nucleo: representacion, canales, histogramas, ROI, Docker y operaciones base.</div>
+          <div class="legend-item"><span class="swatch swatch-contrast"></span> Mejora: contraste, ecualizacion, CLAHE, ruido, inpainting clasico y super-resolucion.</div>
           <div class="legend-item"><span class="swatch swatch-seg"></span> Segmentacion: umbralado, color, mascaras y morfologia.</div>
           <div class="legend-item"><span class="swatch swatch-geo"></span> Geometria: recortes, perspectiva, rotacion, volteo y escalado.</div>
-          <div class="legend-item"><span class="swatch swatch-detect"></span> Deteccion: bordes, contornos, medidas, plantillas y Haar.</div>
-          <div class="legend-item"><span class="swatch swatch-learn"></span> Aprendizaje: normalizacion, MLP, CNNs, modelos preentrenados, Gradio y OCR.</div>
+          <div class="legend-item"><span class="swatch swatch-detect"></span> Deteccion: bordes, contornos, landmarks, medidas, plantillas y Haar.</div>
+          <div class="legend-item"><span class="swatch swatch-learn"></span> Aprendizaje: MLP, CNN, transfer learning, Gradio, HF Spaces y OCR.</div>
+          <div class="legend-item"><span class="swatch swatch-gen"></span> Generacion: difusion, text-to-image, inpainting generativo, aceleracion.</div>
         </div>
 
         <div class="stats-list">
           <div class="stats-line">
-            <strong>Pipeline recomendado</strong>
-            <span>Conversion de color → histograma/canales → suavizado opcional → umbralizacion o segmentacion → morfologia → contornos → medicion.</span>
-          </div>
-          <div class="stats-line">
-            <strong>Decision clave</strong>
-            <span>Elegir la tecnica segun el defecto principal: contraste, ruido, iluminacion desigual, color apagado, mascara o dano localizado.</span>
+            <strong>Pipeline clasico recomendado</strong>
+            <span>Conversion de color → histograma/canales → suavizado → umbralizacion → morfologia → contornos → medicion.</span>
           </div>
           <div class="stats-line">
             <strong>MLP vs CNN</strong>
-            <span>MLP aplana la imagen y pierde estructura espacial. CNN conserva vecindad y aprende filtros locales. Para letras o formas similares, CNN es mas confiable.</span>
+            <span>MLP aplana la imagen y pierde estructura espacial. CNN conserva vecindad y aprende filtros locales. Para formas visuales, CNN es mas confiable.</span>
+          </div>
+          <div class="stats-line">
+            <strong>venv vs Docker</strong>
+            <span>Entorno virtual para desarrollo individual rapido. Docker para despliegue y reproducibilidad garantizada entre maquinas.</span>
+          </div>
+          <div class="stats-line">
+            <strong>Inpainting clasico vs generativo</strong>
+            <span>TELEA/NS interpolan desde el borde. Difusion genera contenido nuevo semanticamente coherente con el prompt.</span>
           </div>
           <div class="stats-line">
             <strong>Archivos donde aparece</strong>
-            <span>Cada tarjeta incluye notebooks o laboratorios representativos donde esa tecnica fue usada dentro del repositorio.</span>
+            <span>Cada tarjeta incluye notebooks o archivos representativos donde esa tecnica fue usada dentro del repositorio.</span>
           </div>
         </div>
       </aside>
@@ -594,7 +606,7 @@
         <div class="empty" id="emptyState">No hay tecnicas que coincidan con los filtros actuales.</div>
 
         <p class="footer-note">
-          Dashboard generado a partir del resumen del repositorio. Consolida las tecnicas principales en una sola entrada sin duplicados. Cada tarjeta incluye referencias a notebooks y una nota de cautela sobre casos donde no conviene aplicar la tecnica.
+          Dashboard generado a partir del resumen del repositorio. Consolida las tecnicas principales en una sola entrada sin duplicados. Cada tarjeta incluye referencias a notebooks y una nota de cautela sobre casos donde no conviene aplicar la tecnica. Cubre modulos 001 a 011 del curso PDI · IFTS 24 · 2026.
         </p>
       </main>
     </section>
@@ -602,46 +614,72 @@
 
   <script>
     const techniques = [
+      /* ── NUCLEO ──────────────────────────────────────────────────── */
       {
         name: "Conversion de espacios de color",
         category: "nucleo",
-        use: "Adaptar la representacion al problema: visualizar correctamente, pasar a gris para bordes o ecualizacion, usar HSV para saturacion y LAB para separar luminosidad de color.",
-        improve: "Hace mas interpretable la informacion relevante y permite intervenir luminancia, color o intensidad sin mezclar todos los problemas en una sola operacion.",
+        use: "Adaptar la representacion al problema: pasar a gris para bordes o ecualizacion, usar HSV para saturacion y tonalidad, LAB para separar luminosidad de color sin alterar crominancia.",
+        improve: "Hace mas interpretable la informacion relevante y permite intervenir luminancia, color o intensidad en canales independientes.",
         when: "Cuando la imagen se ve bien pero el analisis falla en el espacio original.",
-        notWhen: "No conviene convertir sin un objetivo claro, porque cada cambio puede descartar o mezclar informacion relevante para otra etapa.",
+        notWhen: "No conviene convertir sin objetivo claro; cada cambio puede descartar informacion relevante para otra etapa.",
         files: [
-          "006_TFI_1/TFI_1_Mejora y restauracion de imagenes.ipynb",
+          "006 - TFI_1/TFI_1_Mejora y restauracion de imagenes.ipynb",
           "004 - librerias_fundamentos_pdi/002 - PRA/002 - imagenes en color y canales.ipynb",
-          "004 - librerias_fundamentos_pdi/002 - PRA/007 - recuperacion y preprocesamiento de imagenes propias.ipynb",
           "005  - computer_vision_parte_1/002 - PRA/001 - introduccion a opencv y espacios de color.ipynb",
           "005  - computer_vision_parte_1/002 - PRA/007 - deteccion de contornos.ipynb"
         ]
       },
       {
-        name: "Ajuste de saturacion en HSV",
-        category: "mejora",
-        use: "Aumentar o moderar la intensidad cromatica trabajando sobre el canal S del espacio HSV.",
-        improve: "Recupera color en imagenes lavadas o apagadas sin modificar directamente la estructura de brillo.",
-        when: "Cuando el problema principal es color debil o baja saturacion y se quiere evitar una correccion global agresiva.",
-        notWhen: "No conviene si la imagen ya tiene colores intensos, dominantes fuertes o si se busca conservar fidelidad cromatica documental.",
+        name: "Separacion de canales e histogramas",
+        category: "nucleo",
+        use: "Analizar distribuciones de intensidad y decidir que canal o rango conviene usar para una tecnica posterior.",
+        improve: "Permite justificar umbrales, contraste y segmentacion con evidencia visual y numerica.",
+        when: "Antes de definir umbrales, comparar metodos o estudiar bajo contraste.",
+        notWhen: "Es una herramienta de diagnostico, no una restauracion por si misma.",
         files: [
-          "006_TFI_1/TFI_1_Mejora y restauracion de imagenes.ipynb",
-          "005  - computer_vision_parte_1/002 - PRA/001B - practicas_hsv.ipynb",
+          "004 - librerias_fundamentos_pdi/002 - PRA/006 - laboratorio 2 - segmentacion simple por color.ipynb",
+          "004 - librerias_fundamentos_pdi/002 - PRA/007 - recuperacion y preprocesamiento de imagenes propias.ipynb",
+          "005  - computer_vision_parte_1/002 - PRA/004 - comparacion de estrategias de ecualizacion.ipynb"
+        ]
+      },
+      {
+        name: "Muestreo y cuantizacion",
+        category: "nucleo",
+        use: "Reducir resolucion espacial o niveles tonales para estudiar como cambia la imagen al perder informacion.",
+        improve: "Ayuda a entender perdida de detalle, bandas y relacion entre representacion y calidad perceptual.",
+        when: "En fundamentos o para simplificar la imagen en analisis exploratorios.",
+        notWhen: "No conviene como mejora final; reduce resolucion o niveles tonales irreversiblemente.",
+        files: [
+          "004 - librerias_fundamentos_pdi/002 - PRA/004 - muestreo y cuantizacion.ipynb",
           "004 - librerias_fundamentos_pdi/002 - PRA/006 - laboratorio 2 - segmentacion simple por color.ipynb"
         ]
       },
       {
-        name: "Separacion de canales e histogramas",
+        name: "Contenerizacion con Docker",
         category: "nucleo",
-        use: "Analizar distribuciones de intensidad y decidir que canal o rango conviene usar.",
-        improve: "Permite justificar umbrales, contraste y segmentacion con evidencia visual y numerica.",
-        when: "Antes de definir umbrales, comparar metodos o estudiar bajo contraste.",
-        notWhen: "No conviene usarlo como mejora final: es una herramienta de diagnostico, no una restauracion por si misma.",
+        use: "Empaquetar el entorno completo (sistema operativo, Python, dependencias, notebooks) en una imagen reproducible. docker-compose define puertos, volumenes montados y variables de entorno. En contenedores se usa opencv-python-headless en lugar de opencv-python.",
+        improve: "Garantiza que el entorno es identico en cualquier maquina. Elimina conflictos de dependencias y el problema 'funciona en mi maquina'.",
+        when: "Para despliegue, entornos de equipo o cuando se necesita reproducibilidad garantizada del entorno de ejecucion.",
+        notWhen: "No conviene para desarrollo exploratorio rapido donde se cambian dependencias frecuentemente; el overhead de rebuild es mayor que en un venv.",
         files: [
-          "004 - librerias_fundamentos_pdi/002 - PRA/006 - laboratorio 2 - segmentacion simple por color.ipynb",
-          "004 - librerias_fundamentos_pdi/002 - PRA/007 - recuperacion y preprocesamiento de imagenes propias.ipynb",
-          "004 - librerias_fundamentos_pdi/002 - PRA/008 - actividad integradora - segmentacion por color.ipynb",
-          "005  - computer_vision_parte_1/002 - PRA/004 - comparacion de estrategias de ecualizacion.ipynb"
+          "011 - clase magistral_dev_despliegue/002 - PRA/Dockerfile",
+          "011 - clase magistral_dev_despliegue/002 - PRA/docker-compose.yml",
+          "011 - clase magistral_dev_despliegue/002 - PRA/notebooks/01_Entornos_de_Desarrollo.ipynb"
+        ]
+      },
+
+      /* ── MEJORA ───────────────────────────────────────────────────── */
+      {
+        name: "Ajuste de saturacion en HSV",
+        category: "mejora",
+        use: "Aumentar o moderar la intensidad cromatica trabajando sobre el canal S del espacio HSV.",
+        improve: "Recupera color en imagenes lavadas o apagadas sin modificar directamente la estructura de brillo.",
+        when: "Cuando el problema principal es color debil o baja saturacion.",
+        notWhen: "No conviene si la imagen ya tiene colores intensos o si se busca conservar fidelidad cromatica documental.",
+        files: [
+          "006 - TFI_1/TFI_1_Mejora y restauracion de imagenes.ipynb",
+          "005  - computer_vision_parte_1/002 - PRA/001B - practicas_hsv.ipynb",
+          "004 - librerias_fundamentos_pdi/002 - PRA/006 - laboratorio 2 - segmentacion simple por color.ipynb"
         ]
       },
       {
@@ -650,11 +688,10 @@
         use: "Corregir imagenes oscuras, lavadas o con bajo contraste y generar variantes de prueba.",
         improve: "Resalta diferencias de intensidad que facilitan la lectura visual y pasos posteriores.",
         when: "Cuando la imagen esta subexpuesta, sobreexpuesta o con rango tonal comprimido.",
-        notWhen: "No conviene cuando la iluminacion es muy irregular o hay zonas casi saturadas, porque puede lavar claros o empastar sombras.",
+        notWhen: "No conviene con iluminacion muy irregular; puede lavar claros o empastar sombras.",
         files: [
-          "006_TFI_1/TFI_1_Mejora y restauracion de imagenes.ipynb",
+          "006 - TFI_1/TFI_1_Mejora y restauracion de imagenes.ipynb",
           "004 - librerias_fundamentos_pdi/002 - PRA/007 - recuperacion y preprocesamiento de imagenes propias.ipynb",
-          "004 - librerias_fundamentos_pdi/003 - LAB/2026_PDI_RODRIGUEZ_ rec_preproc_imag_propias.ipynb",
           "005  - computer_vision_parte_1/002 - PRA/003 - mejora de imagen y ecualizacion basica.ipynb",
           "005  - computer_vision_parte_1/002 - PRA/004 - comparacion de estrategias de ecualizacion.ipynb"
         ]
@@ -665,104 +702,24 @@
         use: "Redistribuir intensidades para aumentar contraste global en gris, por canal o sobre V en HSV.",
         improve: "Hace visibles detalles poco notorios, aunque puede exagerar ruido o alterar color.",
         when: "Cuando el contraste global es bajo y se busca una mejora rapida.",
-        notWhen: "No conviene cuando hay mucho ruido, manchas o iluminacion desigual, porque puede amplificar defectos en toda la imagen.",
+        notWhen: "No conviene con mucho ruido o iluminacion desigual; puede amplificar defectos en toda la imagen.",
         files: [
-          "006_TFI_1/TFI_1_Mejora y restauracion de imagenes.ipynb",
+          "006 - TFI_1/TFI_1_Mejora y restauracion de imagenes.ipynb",
           "005  - computer_vision_parte_1/002 - PRA/003 - mejora de imagen y ecualizacion basica.ipynb",
-          "005  - computer_vision_parte_1/002 - PRA/003B - mejora de imagen y ecualizacion basica img1.ipynb",
           "005  - computer_vision_parte_1/002 - PRA/004 - comparacion de estrategias de ecualizacion.ipynb"
         ]
       },
       {
         name: "CLAHE",
         category: "mejora",
-        use: "Mejorar contraste local sin tratar toda la imagen de forma uniforme.",
-        improve: "Recupera detalle en regiones oscuras o con iluminacion despareja.",
+        use: "Mejorar contraste local sin tratar toda la imagen de forma uniforme, aplicando ecualizacion por bloques con limite de amplificacion.",
+        improve: "Recupera detalle en regiones oscuras o con iluminacion despareja sin saturar otras zonas.",
         when: "Cuando hay iluminacion no uniforme o interes por detalles locales.",
-        notWhen: "No conviene con parametros altos si la imagen tiene mucho ruido o textura de soporte, porque puede exagerarlos y generar aspecto artificial.",
+        notWhen: "No conviene con parametros altos si la imagen tiene mucho ruido; puede exagerarlos y generar aspecto artificial.",
         files: [
-          "006_TFI_1/TFI_1_Mejora y restauracion de imagenes.ipynb",
+          "006 - TFI_1/TFI_1_Mejora y restauracion de imagenes.ipynb",
           "004 - librerias_fundamentos_pdi/002 - PRA/007 - recuperacion y preprocesamiento de imagenes propias.ipynb",
-          "004 - librerias_fundamentos_pdi/003 - LAB/2026_PDI_RODRIGUEZ_ rec_preproc_imag_propias.ipynb",
           "005  - computer_vision_parte_1/002 - PRA/004 - comparacion de estrategias de ecualizacion.ipynb"
-        ]
-      },
-      {
-        name: "Muestreo y cuantizacion",
-        category: "nucleo",
-        use: "Reducir resolucion espacial o niveles tonales para estudiar como cambia la imagen.",
-        improve: "Ayuda a entender perdida de detalle, bandas y relacion entre representacion y calidad.",
-        when: "En fundamentos o para simplificar la imagen en analisis exploratorios.",
-        notWhen: "No conviene como mejora final si se busca conservar detalle, porque reduce resolucion espacial o niveles tonales.",
-        files: [
-          "004 - librerias_fundamentos_pdi/002 - PRA/004 - muestreo y cuantizacion.ipynb",
-          "004 - librerias_fundamentos_pdi/002 - PRA/006 - laboratorio 2 - segmentacion simple por color.ipynb",
-          "005  - computer_vision_parte_1/002 - PRA/exploratorios/laboratorio guiado de exploracion - color, paleta y segmentacion.ipynb"
-        ]
-      },
-      {
-        name: "Recorte de ROI",
-        category: "geometria",
-        use: "Aislar una region puntual de interes para observarla o procesarla aparte.",
-        improve: "Reduce ruido contextual y centra el analisis en el objeto importante.",
-        when: "Cuando el problema esta localizado en una parte de la escena.",
-        notWhen: "No conviene si todavia no esta claro donde esta la informacion importante, porque puede eliminar contexto necesario.",
-        files: [
-          "004 - librerias_fundamentos_pdi/002 - PRA/003 - operaciones basicas con opencv.ipynb",
-          "004 - librerias_fundamentos_pdi/002 - PRA/005 - practica guiada de procesamiento de imagenes.ipynb",
-          "005  - computer_vision_parte_1/002 - PRA/004b - operaciones basicas con imagenes.ipynb",
-          "005  - computer_vision_parte_1/002 - PRA/004C - operaciones basicas con imagenes actividad.ipynb"
-        ]
-      },
-      {
-        name: "Redimensionado",
-        category: "geometria",
-        use: "Cambiar el tamano de una imagen o recorte para visualizacion, comparacion o estandarizacion.",
-        improve: "Facilita inspeccion y unifica dimensiones de entrada.",
-        when: "Cuando hace falta comparar regiones o preparar una imagen para otra etapa.",
-        notWhen: "No conviene si se cambia la proporcion o se reduce demasiado el tamano antes de medir detalles finos.",
-        files: [
-          "002 - py5/002 - PRA/lupa.py",
-          "004 - librerias_fundamentos_pdi/002 - PRA/003 - operaciones basicas con opencv.ipynb",
-          "005  - computer_vision_parte_1/002 - PRA/004b - operaciones basicas con imagenes.ipynb",
-          "005  - computer_vision_parte_1/002 - PRA/009 - coincidencia por plantilla.ipynb"
-        ]
-      },
-      {
-        name: "Volteo y rotacion",
-        category: "geometria",
-        use: "Cambiar orientacion o generar variantes simples de una escena.",
-        improve: "Ayuda a entender la geometria de la imagen y el efecto de la orientacion.",
-        when: "Cuando importa estudiar sensibilidad a la orientacion o practicar transformaciones basicas.",
-        notWhen: "No conviene aplicarlo por costumbre: solo corresponde si la orientacion afecta la lectura o la comparacion.",
-        files: [
-          "006_TFI_1/TFI_1_Mejora y restauracion de imagenes.ipynb",
-          "005  - computer_vision_parte_1/002 - PRA/004b - operaciones basicas con imagenes.ipynb",
-          "005  - computer_vision_parte_1/002 - PRA/004C - operaciones basicas con imagenes actividad.ipynb"
-        ]
-      },
-      {
-        name: "Transformacion de perspectiva",
-        category: "geometria",
-        use: "Rectificar objetos fotografiados en perspectiva para verlos de frente.",
-        improve: "Corrige distorsion geometrica y vuelve mas comparable el objeto.",
-        when: "Cuando el objeto aparece inclinado o deformado por la toma.",
-        notWhen: "No conviene si no se pueden identificar puntos confiables o si la deformacion no es el problema principal.",
-        files: [
-          "005  - computer_vision_parte_1/002 - PRA/005 - transformaciones geometricas y cambio de perspectiva.ipynb"
-        ]
-      },
-      {
-        name: "Deteccion de bordes con Canny",
-        category: "deteccion",
-        use: "Resaltar limites por cambios fuertes de intensidad y comparar sensibilidad por umbrales.",
-        improve: "Simplifica la escena y destaca bordes utiles para deteccion y analisis de forma.",
-        when: "Cuando interesan bordes mas que color o textura.",
-        notWhen: "No conviene cuando la imagen tiene mucho ruido o bajo contraste sin preprocesamiento, porque genera bordes falsos o fragmentados.",
-        files: [
-          "004 - librerias_fundamentos_pdi/002 - PRA/003 - operaciones basicas con opencv.ipynb",
-          "004 - librerias_fundamentos_pdi/002 - PRA/005 - practica guiada de procesamiento de imagenes.ipynb",
-          "004 - librerias_fundamentos_pdi/003 - LAB/2026_PDI_RODRIGUEZ_proc_digital.ipynb"
         ]
       },
       {
@@ -771,36 +728,71 @@
         use: "Atenuar ruido gaussiano o sal y pimienta con filtros promedio, gaussiano, mediana y bilateral.",
         improve: "Produce imagenes mas estables para umbralado, contornos o visualizacion.",
         when: "Antes de segmentar o detectar bordes en imagenes ruidosas.",
-        notWhen: "No conviene usarlo con demasiada intensidad cuando los detalles finos son importantes, porque puede borrar bordes y textura util.",
+        notWhen: "No conviene con demasiada intensidad cuando los detalles finos son importantes; puede borrar bordes y textura util.",
         files: [
-          "006_TFI_1/TFI_1_Mejora y restauracion de imagenes.ipynb",
-          "004 - librerias_fundamentos_pdi/002 - PRA/007 - recuperacion y preprocesamiento de imagenes propias.ipynb",
+          "006 - TFI_1/TFI_1_Mejora y restauracion de imagenes.ipynb",
           "005  - computer_vision_parte_1/002 - PRA/006b - filtros de suavizado y reduccion de ruido.ipynb",
           "005  - computer_vision_parte_1/002 - PRA/004 - comparacion de estrategias de ecualizacion.ipynb"
         ]
       },
       {
+        name: "Inpainting clasico (TELEA / NS)",
+        category: "mejora",
+        use: "Restaurar zonas danadas o faltantes interpolando desde el contexto vecino. TELEA usa Fast Marching; NS usa ecuaciones diferenciales de Navier-Stokes.",
+        improve: "Recupera continuidad visual y permite comparar estrategias de reconstruccion deterministas.",
+        when: "Cuando hay rayas, manchas o faltantes localizados y existe una mascara del dano.",
+        notWhen: "No conviene sin una mascara precisa de dano, ni cuando la zona a restaurar es grande y requiere contenido semanticamente nuevo.",
+        files: [
+          "006 - TFI_1/TFI_1_Mejora y restauracion de imagenes.ipynb",
+          "005  - computer_vision_parte_1/002 - PRA/006d - restauracion y algoritmos de inpainting.ipynb"
+        ]
+      },
+      {
+        name: "Inpainting generativo con difusion",
+        category: "mejora",
+        use: "Rellenar zonas enmascaradas de una imagen con contenido nuevo sintetizado por un modelo de difusion, guiado por un prompt de texto. A diferencia de TELEA/NS, puede generar contenido semanticamente coherente que no estaba en el original.",
+        improve: "Permite eliminar objetos, restaurar zonas danadas con coherencia semantica o cambiar elementos de una escena de forma controlada.",
+        when: "Cuando el inpainting clasico no produce resultados aceptables porque la zona requiere reconstruccion semantica, no solo interpolacion local.",
+        notWhen: "No conviene si se busca fidelidad exacta al original o reproducibilidad determinista; los modelos de difusion son estocasticos.",
+        files: [
+          "010 - modelos_difusion/03_Aplicaciones_Practicas_Difusion.ipynb"
+        ]
+      },
+      {
+        name: "Super-resolucion con difusion",
+        category: "mejora",
+        use: "Aumentar la resolucion de una imagen de baja calidad generando detalles plausibles con un pipeline image-to-image de difusion. El modelo sintetiza texturas consistentes con el contenido original.",
+        improve: "Produce resultados mas naturales y detallados que la interpolacion bilineal o bicubica clasica.",
+        when: "Cuando se necesita ampliar imagenes y la interpolacion clasica produce resultados borrosos o con artefactos.",
+        notWhen: "No conviene cuando los detalles no pueden ser especulativos; el modelo inventa texturas que pueden no coincidir con la realidad.",
+        files: [
+          "010 - modelos_difusion/03_Aplicaciones_Practicas_Difusion.ipynb"
+        ]
+      },
+
+      /* ── SEGMENTACION ─────────────────────────────────────────────── */
+      {
         name: "Umbralizacion global manual",
         category: "segmentacion",
         use: "Separar fondo y objeto con un unico valor de corte elegido a mano.",
-        improve: "Convierte una imagen continua en una mascara facil de limpiar y medir; permite ver como cambia el resultado al subir o bajar el umbral.",
+        improve: "Convierte una imagen continua en una mascara facil de limpiar y medir.",
         when: "Cuando hay iluminacion pareja y diferencia clara entre fondo y objeto en intensidad.",
-        notWhen: "No conviene con iluminacion desigual o fondos variables, porque un unico corte puede perder objeto o incorporar ruido.",
+        notWhen: "No conviene con iluminacion desigual o fondos variables; un unico corte puede perder objeto o incorporar ruido.",
         files: [
           "005  - computer_vision_parte_1/002 - PRA/006b2 - umbralizacion global, Otsu y adaptive threshold - version simplificada.ipynb",
-          "005  - computer_vision_parte_1/002 - PRA/006c - morfologia matematica para limpieza de mascaras.ipynb",
-          "005  - computer_vision_parte_1/002 - PRA/006c - morfologia matematica para limpieza de mascaras_error.ipynb"
+          "005  - computer_vision_parte_1/002 - PRA/006c - morfologia matematica para limpieza de mascaras.ipynb"
         ]
       },
       {
         name: "Umbralizacion automatica con Otsu",
         category: "segmentacion",
-        use: "Calcular automaticamente un umbral global a partir del histograma, con o sin suavizado previo.",
+        use: "Calcular automaticamente un umbral global a partir del histograma, maximizando la varianza entre clases.",
         improve: "Evita elegir el corte manualmente y genera una mascara reproducible cuando fondo y objeto forman grupos tonales distinguibles.",
         when: "Cuando el histograma sugiere dos grupos principales y se busca una primera decision automatica.",
-        notWhen: "No conviene si el histograma no separa claramente fondo y objeto, o si hay iluminacion muy irregular.",
+        notWhen: "No conviene si el histograma no separa claramente fondo y objeto, o con iluminacion muy irregular.",
         files: [
-          "005  - computer_vision_parte_1/002 - PRA/006b2 - umbralizacion global, Otsu y adaptive threshold - version simplificada.ipynb"
+          "005  - computer_vision_parte_1/002 - PRA/006b2 - umbralizacion global, Otsu y adaptive threshold - version simplificada.ipynb",
+          "007 - fotografia_digital/002 - PRA/parte_3_reencuadre.ipynb"
         ]
       },
       {
@@ -809,7 +801,7 @@
         use: "Calcular umbrales locales por vecindarios para imagenes con iluminacion desigual.",
         improve: "Mantiene mejor la separacion entre objeto y fondo cuando hay sombras, reflejos o zonas con distinto brillo.",
         when: "Cuando un unico umbral global falla por iluminacion no uniforme.",
-        notWhen: "No conviene como salida final para fotos tonales cuando se quiere conservar grises, porque binariza y pierde matices.",
+        notWhen: "No conviene como salida final para fotos tonales cuando se quiere conservar grises; binariza y pierde matices.",
         files: [
           "005  - computer_vision_parte_1/002 - PRA/006b2 - umbralizacion global, Otsu y adaptive threshold - version simplificada.ipynb",
           "005  - computer_vision_parte_1/002 - PRA/006c - morfologia matematica para limpieza de mascaras.ipynb"
@@ -818,24 +810,23 @@
       {
         name: "Segmentacion por color con rangos",
         category: "segmentacion",
-        use: "Aislar objetos por color en HSV o RGB.",
-        improve: "Permite construir mascaras muy utiles cuando el objeto se distingue cromaticamente.",
+        use: "Aislar objetos por color definiendo rangos en HSV o RGB con cv2.inRange.",
+        improve: "Permite construir mascaras muy utiles cuando el objeto se distingue cromaticamente del fondo.",
         when: "Cuando el color es mas estable que la forma o la textura.",
         notWhen: "No conviene si el color del objeto cambia mucho por iluminacion, sombras o reflejos, o si se parece al fondo.",
         files: [
           "004 - librerias_fundamentos_pdi/002 - PRA/006 - laboratorio 2 - segmentacion simple por color.ipynb",
           "004 - librerias_fundamentos_pdi/002 - PRA/008 - actividad integradora - segmentacion por color.ipynb",
-          "005  - computer_vision_parte_1/002 - PRA/001 - introduccion a opencv y espacios de color.ipynb",
           "005  - computer_vision_parte_1/002 - PRA/007 - deteccion de contornos.ipynb"
         ]
       },
       {
         name: "Operaciones bit a bit",
         category: "segmentacion",
-        use: "Aplicar mascaras a la imagen o combinar rangos parciales.",
-        improve: "Permiten ver con precision que quedo segmentado y unir resultados parciales.",
-        when: "Despues de construir mascaras, para inspeccion o fusion.",
-        notWhen: "No conviene antes de tener una mascara confiable, porque solo aplican o combinan decisiones tomadas en pasos previos.",
+        use: "Aplicar mascaras a la imagen (bitwise_and) o combinar rangos parciales para construir mascaras compuestas.",
+        improve: "Permiten ver con precision que quedo segmentado y unir resultados parciales de varios rangos.",
+        when: "Despues de construir mascaras, para inspeccion o fusion de segmentos.",
+        notWhen: "No conviene antes de tener una mascara confiable; solo aplican o combinan decisiones tomadas en pasos previos.",
         files: [
           "005  - computer_vision_parte_1/002 - PRA/001 - introduccion a opencv y espacios de color.ipynb",
           "005  - computer_vision_parte_1/002 - PRA/001B - practicas_hsv.ipynb",
@@ -845,27 +836,91 @@
       {
         name: "Morfologia matematica",
         category: "segmentacion",
-        use: "Limpiar mascaras, eliminar ruido pequeno, cerrar huecos, consolidar regiones o resaltar detalles locales con operaciones como top-hat.",
+        use: "Limpiar mascaras, eliminar ruido pequeno, cerrar huecos, consolidar regiones o resaltar detalles locales. Operaciones principales: erosion, dilatacion, apertura, cierre, top-hat.",
         improve: "Hace las mascaras mas coherentes y estables para contornos, medicion o restauracion localizada.",
         when: "Cuando la mascara tiene agujeros, puntos sueltos o bordes rotos, o cuando se necesita preparar una mascara de danos.",
-        notWhen: "No conviene si la mascara inicial es mala o si el kernel es muy grande, porque puede borrar estructuras reales o deformarlas.",
+        notWhen: "No conviene si la mascara inicial es mala o si el kernel es muy grande; puede borrar estructuras reales o deformarlas.",
         files: [
-          "006_TFI_1/TFI_1_Mejora y restauracion de imagenes.ipynb",
+          "006 - TFI_1/TFI_1_Mejora y restauracion de imagenes.ipynb",
           "005  - computer_vision_parte_1/002 - PRA/006c - morfologia matematica para limpieza de mascaras.ipynb",
-          "005  - computer_vision_parte_1/002 - PRA/exploratorios/laboratorio guiado de exploracion - color, paleta y segmentacion.ipynb",
+          "005  - computer_vision_parte_1/002 - PRA/007 - deteccion de contornos.ipynb"
+        ]
+      },
+
+      /* ── GEOMETRIA ────────────────────────────────────────────────── */
+      {
+        name: "Recorte de ROI",
+        category: "geometria",
+        use: "Aislar una region puntual de interes para observarla o procesarla aparte.",
+        improve: "Reduce ruido contextual y centra el analisis en el objeto importante.",
+        when: "Cuando el problema esta localizado en una parte de la escena.",
+        notWhen: "No conviene si todavia no esta claro donde esta la informacion importante; puede eliminar contexto necesario.",
+        files: [
+          "004 - librerias_fundamentos_pdi/002 - PRA/003 - operaciones basicas con opencv.ipynb",
+          "005  - computer_vision_parte_1/002 - PRA/004b - operaciones basicas con imagenes.ipynb",
+          "005  - computer_vision_parte_1/002 - PRA/004C - operaciones basicas con imagenes actividad.ipynb"
+        ]
+      },
+      {
+        name: "Redimensionado",
+        category: "geometria",
+        use: "Cambiar el tamano de una imagen o recorte para visualizacion, comparacion o estandarizacion de entrada.",
+        improve: "Facilita inspeccion y unifica dimensiones de entrada para modelos o comparaciones.",
+        when: "Cuando hace falta comparar regiones o preparar una imagen para otra etapa.",
+        notWhen: "No conviene si se cambia la proporcion o se reduce demasiado el tamano antes de medir detalles finos.",
+        files: [
+          "002 - py5/002 - PRA/lupa.py",
+          "004 - librerias_fundamentos_pdi/002 - PRA/003 - operaciones basicas con opencv.ipynb",
+          "005  - computer_vision_parte_1/002 - PRA/009 - coincidencia por plantilla.ipynb"
+        ]
+      },
+      {
+        name: "Volteo y rotacion",
+        category: "geometria",
+        use: "Cambiar orientacion o generar variantes simples de una escena.",
+        improve: "Ayuda a entender la geometria de la imagen y el efecto de la orientacion en el analisis.",
+        when: "Cuando importa estudiar sensibilidad a la orientacion o practicar transformaciones basicas.",
+        notWhen: "No conviene aplicarlo por costumbre; solo corresponde si la orientacion afecta la lectura o la comparacion.",
+        files: [
+          "006 - TFI_1/TFI_1_Mejora y restauracion de imagenes.ipynb",
+          "005  - computer_vision_parte_1/002 - PRA/004b - operaciones basicas con imagenes.ipynb"
+        ]
+      },
+      {
+        name: "Transformacion de perspectiva",
+        category: "geometria",
+        use: "Rectificar objetos fotografiados en perspectiva para verlos de frente usando cuatro puntos de control.",
+        improve: "Corrige distorsion geometrica y vuelve mas comparable el objeto entre distintas tomas.",
+        when: "Cuando el objeto aparece inclinado o deformado por el angulo de la toma.",
+        notWhen: "No conviene si no se pueden identificar puntos confiables o si la deformacion no es el problema principal.",
+        files: [
+          "005  - computer_vision_parte_1/002 - PRA/005 - transformaciones geometricas y cambio de perspectiva.ipynb"
+        ]
+      },
+
+      /* ── DETECCION ────────────────────────────────────────────────── */
+      {
+        name: "Deteccion de bordes con Canny",
+        category: "deteccion",
+        use: "Resaltar limites por cambios fuertes de intensidad. Canny aplica suavizado gaussiano, gradiente, supresion de no-maximos y doble umbral.",
+        improve: "Simplifica la escena y destaca bordes utiles para deteccion y analisis de forma.",
+        when: "Cuando interesan bordes mas que color o textura.",
+        notWhen: "No conviene con mucho ruido o bajo contraste sin preprocesamiento; genera bordes falsos o fragmentados.",
+        files: [
+          "004 - librerias_fundamentos_pdi/002 - PRA/003 - operaciones basicas con opencv.ipynb",
+          "004 - librerias_fundamentos_pdi/002 - PRA/005 - practica guiada de procesamiento de imagenes.ipynb",
           "005  - computer_vision_parte_1/002 - PRA/007 - deteccion de contornos.ipynb"
         ]
       },
       {
         name: "Deteccion de contornos",
         category: "deteccion",
-        use: "Recuperar el borde de regiones binarias para dibujar, filtrar y medir objetos.",
-        improve: "Transforma una mascara en estructuras geometricas analizables.",
+        use: "Recuperar el borde de regiones binarias con findContours para dibujar, filtrar y medir objetos.",
+        improve: "Transforma una mascara en estructuras geometricas analizables: lista de puntos por objeto.",
         when: "Cuando ya existe una mascara razonable del objeto de interes.",
-        notWhen: "No conviene sobre imagenes sin una mascara previa razonable, porque detecta ruido y regiones irrelevantes.",
+        notWhen: "No conviene sobre imagenes sin mascara previa razonable; detecta ruido y regiones irrelevantes.",
         files: [
           "004 - librerias_fundamentos_pdi/002 - PRA/006 - laboratorio 2 - segmentacion simple por color.ipynb",
-          "004 - librerias_fundamentos_pdi/003 - LAB/2026_PDI_RODRIGUEZ_segmentac_color.ipynb",
           "005  - computer_vision_parte_1/002 - PRA/007 - deteccion de contornos.ipynb",
           "005  - computer_vision_parte_1/003 - LAB/2026_PDI_RODRIGUEZ_deteccion de contornos.ipynb"
         ]
@@ -873,20 +928,19 @@
       {
         name: "Propiedades geometricas de contornos",
         category: "deteccion",
-        use: "Medir area, perimetro, centroide, bounding box y aproximacion poligonal.",
-        improve: "Permite describir cuantitativamente un objeto detectado.",
-        when: "Cuando se necesita comparar formas o justificar una deteccion.",
-        notWhen: "No conviene si los contornos estan rotos o contienen falsos positivos, porque las medidas resultan poco confiables.",
+        use: "Medir area, perimetro, centroide, bounding box, elipse ajustada y aproximacion poligonal.",
+        improve: "Permite describir cuantitativamente un objeto detectado y comparar formas.",
+        when: "Cuando se necesita comparar formas, justificar una deteccion o extraer metricas.",
+        notWhen: "No conviene si los contornos estan rotos o contienen falsos positivos; las medidas resultan poco confiables.",
         files: [
           "004 - librerias_fundamentos_pdi/002 - PRA/006 - laboratorio 2 - segmentacion simple por color.ipynb",
-          "005  - computer_vision_parte_1/002 - PRA/008 - propiedades geometricas de contornos.ipynb",
-          "005  - computer_vision_parte_1/002 - PRA/007 - deteccion de contornos.ipynb"
+          "005  - computer_vision_parte_1/002 - PRA/008 - propiedades geometricas de contornos.ipynb"
         ]
       },
       {
         name: "Filtrado por area de contorno",
         category: "deteccion",
-        use: "Descartar regiones pequenas o irrelevantes tras la segmentacion.",
+        use: "Descartar regiones pequenas o irrelevantes tras la segmentacion comparando cv2.contourArea con un umbral.",
         improve: "Reduce falsos positivos y deja objetos compatibles con el tamano esperado.",
         when: "Cuando aparecen manchas pequenas o ruido residual en la mascara.",
         notWhen: "No conviene si los objetos de interes tienen tamanos muy variados o si no se definio un criterio de escala.",
@@ -896,22 +950,10 @@
         ]
       },
       {
-        name: "Inpainting",
-        category: "mejora",
-        use: "Restaurar zonas danadas o faltantes a partir del contexto vecino.",
-        improve: "Recupera continuidad visual y permite comparar estrategias de reconstruccion.",
-        when: "Cuando hay rayas, manchas o faltantes localizados y existe una mascara del dano.",
-        notWhen: "No conviene aplicarlo sin una mascara precisa de dano, porque puede inventar contenido y alterar informacion real.",
-        files: [
-          "006_TFI_1/TFI_1_Mejora y restauracion de imagenes.ipynb",
-          "005  - computer_vision_parte_1/002 - PRA/006d - restauracion y algoritmos de inpainting.ipynb"
-        ]
-      },
-      {
         name: "Coincidencia por plantilla",
         category: "deteccion",
-        use: "Buscar una subimagen dentro de una imagen mayor.",
-        improve: "Genera un mapa de similitud para localizar patrones concretos.",
+        use: "Buscar una subimagen dentro de una imagen mayor con matchTemplate. Genera un mapa de similitud para localizar el patron.",
+        improve: "Permite encontrar objetos concretos sin entrenamiento, con un unico ejemplo.",
         when: "Cuando el objeto mantiene forma y escala relativamente estables.",
         notWhen: "No conviene si el objeto cambia mucho de escala, rotacion, iluminacion o deformacion respecto de la plantilla.",
         files: [
@@ -921,7 +963,7 @@
       {
         name: "Deteccion de rostros con Haar",
         category: "deteccion",
-        use: "Localizar rostros mediante un clasificador clasico entrenado.",
+        use: "Localizar rostros mediante un clasificador clasico en cascada entrenado con caracteristicas de Haar.",
         improve: "Automatiza la deteccion facial sin segmentacion manual previa.",
         when: "Cuando se necesita una deteccion rapida de rostros frontales en condiciones razonables.",
         notWhen: "No conviene en rostros muy borrosos, de perfil, con baja iluminacion o condiciones alejadas del entrenamiento clasico.",
@@ -930,97 +972,191 @@
         ]
       },
       {
+        name: "Deteccion de landmarks con MediaPipe",
+        category: "deteccion",
+        use: "Detectar puntos anatomicos estructurados (landmarks) en rostros, manos y cuerpo con modelos TFLite preentrenados. Face Mesh: 478 landmarks; Hand Landmarker: 21 por mano; Pose Landmarker: 33 corporales. Devuelve coordenadas normalizadas [0,1].",
+        improve: "Permite analizar postura, gestos y expresion facial con precision sin entrenar un modelo propio. Los modelos corren en CPU en tiempo real a partir de archivos .task.",
+        when: "Cuando se necesita seguimiento estructurado de manos, cara o cuerpo en video o imagen estatica con baja latencia.",
+        notWhen: "No conviene para deteccion de objetos generales ni cuando el sujeto esta muy ocluido, en perfiles extremos o fuera del rango de entrenamiento del modelo.",
+        files: [
+          "009 - vision_artificial_aplicada/002 - PRA/01_Deteccion_Puntos_Clave_Faciales_original.ipynb",
+          "009 - vision_artificial_aplicada/002 - PRA/02_Control_Volumen_con_Manos.ipynb",
+          "009 - vision_artificial_aplicada/002 - PRA/04_Proyecto_Pose_y_Despliegue.ipynb",
+          "011 - clase magistral_dev_despliegue/002 - PRA/notebooks/03_Integracion_Gradio_y_MediaPipe.ipynb"
+        ]
+      },
+      {
+        name: "Geometria y gestos desde landmarks",
+        category: "deteccion",
+        use: "Calcular distancias euclidianas y angulos entre landmarks para reconocer gestos o medir configuraciones corporales. La distancia entre punta de pulgar (id=4) e indice (id=8) se mapea al rango de volumen del sistema operativo con pycaw.",
+        improve: "Transforma coordenadas brutas en semantica gestual accionable: pinch, puno cerrado, angulo de codo, inclinacion de cabeza.",
+        when: "Cuando se tienen landmarks confiables y se quiere derivar eventos o metricas de la configuracion espacial.",
+        notWhen: "No conviene como unica fuente de verdad si los landmarks son inestables por oclusion, velocidad o baja luminosidad.",
+        files: [
+          "009 - vision_artificial_aplicada/002 - PRA/02_Control_Volumen_con_Manos.ipynb",
+          "009 - vision_artificial_aplicada/003 - LAB/Analisis_Avanzado_Landmarks_Faciales.ipynb",
+          "009 - vision_artificial_aplicada/003 - LAB/Variantes_Control_Volumen.ipynb"
+        ]
+      },
+
+      /* ── APRENDIZAJE ──────────────────────────────────────────────── */
+      {
         name: "Normalizacion para redes neuronales",
         category: "aprendizaje",
-        use: "Escalar pixeles o variables numericas a rangos estables antes de entrenar o inferir. El rango tipico es [0, 1] dividiendo por 255; MobileNet espera [-1, 1].",
-        improve: "Hace que el entrenamiento sea mas estable y que las entradas coincidan con lo esperado por TensorFlow, Keras, PyTorch o MobileNetV2.",
-        when: "Antes de entrenar CNNs, MLPs, modelos exportados desde Teachable Machine o modelos preentrenados.",
-        notWhen: "No conviene mezclar normalizaciones distintas sin revisar el modelo: algunas redes esperan [0, 1] y otras [-1, 1] o estadisticas de ImageNet.",
+        use: "Escalar pixeles a rangos estables antes de entrenar o inferir. Tipicamente [0,1] dividiendo por 255; MobileNetV2 espera [-1,1]; modelos de HF usan estadisticas de ImageNet.",
+        improve: "Hace que el entrenamiento sea mas estable y que las entradas coincidan con lo esperado por el modelo.",
+        when: "Antes de entrenar CNNs, MLPs o usar modelos preentrenados.",
+        notWhen: "No conviene mezclar normalizaciones distintas sin revisar el modelo; cada arquitectura tiene sus propias expectativas.",
         files: [
-          "008_redes_neuronales_parte_1/001_Red_Neuronal.ipynb",
-          "008_redes_neuronales_parte_1/002_Clasificacion.ipynb",
-          "008_redes_neuronales_parte_1/003_CNNs_Full.ipynb",
-          "008_redes_neuronales_parte_1/004_Teachable_Machine_Dataset_Propio_Gradio.ipynb",
-          "009_redes_neuronales_parte_2/01_Fundamentos_Red_Neuronal_Simple.ipynb",
-          "009_redes_neuronales_parte_2/02_Clasificacion_Letras_MLP.ipynb",
-          "009_redes_neuronales_parte_2/05_Clasificacion_Preentrenados_ResNet18.ipynb"
+          "008 - redes_neuronales_parte_1/002 - PRA/001_Red_Neuronal.ipynb",
+          "008 - redes_neuronales_parte_1/002 - PRA/003_CNNs_Full.ipynb",
+          "008 - redes_neuronales_parte_2/002 - PRA/01_Fundamentos_Red_Neuronal_Simple_colab.ipynb",
+          "008 - redes_neuronales_parte_2/002 - PRA/05_Clasificacion_Preentrenados_ResNet18.ipynb"
         ]
       },
       {
         name: "Perceptron multicapa (MLP)",
         category: "aprendizaje",
-        use: "Clasificar datos con capas Dense apiladas (Flatten + Dense + Softmax o Sigmoid). Cada neurona aprende combinaciones lineales de todas las entradas, seguidas de activacion no lineal (ReLU).",
-        improve: "Introduce los conceptos fundamentales: propagacion hacia adelante, funcion de perdida, descenso del gradiente y actualizacion de pesos. Sirve como baseline para comparar con arquitecturas mas complejas.",
-        when: "Como primera red antes de una CNN, o cuando los patrones no dependen de la vecindad espacial (datos tabulares, regresion numerica).",
-        notWhen: "No conviene como solucion final en imagenes donde la topologia 2D importa (letras similares como i/l o c/o, bordes, texturas), porque Flatten destruye la estructura espacial y genera confusiones sistematicas.",
+        use: "Clasificar datos con capas Dense apiladas (Flatten + Dense + Softmax). Cada neurona aprende combinaciones lineales de todas las entradas, seguidas de activacion ReLU.",
+        improve: "Introduce propagacion hacia adelante, funcion de perdida, descenso del gradiente y actualizacion de pesos. Sirve como baseline para comparar con CNNs.",
+        when: "Como primera red antes de una CNN, o cuando los patrones no dependen de la vecindad espacial.",
+        notWhen: "No conviene como solucion final en imagenes donde la topologia 2D importa; Flatten destruye la estructura espacial.",
         files: [
-          "008_redes_neuronales_parte_1/001_Red_Neuronal.ipynb",
-          "008_redes_neuronales_parte_1/002_Clasificacion.ipynb",
-          "009_redes_neuronales_parte_2/01_Fundamentos_Red_Neuronal_Simple.ipynb",
-          "009_redes_neuronales_parte_2/02_Clasificacion_Letras_MLP.ipynb"
+          "008 - redes_neuronales_parte_1/002 - PRA/001_Red_Neuronal.ipynb",
+          "008 - redes_neuronales_parte_1/002 - PRA/002_Clasificacion.ipynb",
+          "008 - redes_neuronales_parte_2/002 - PRA/01_Fundamentos_Red_Neuronal_Simple_colab.ipynb",
+          "008 - redes_neuronales_parte_2/002 - PRA/02_Clasificacion_Letras_MLP.ipynb"
         ]
       },
       {
         name: "Redes convolucionales y pooling",
         category: "aprendizaje",
         use: "Aprender filtros locales con Conv2D y reducir mapas de caracteristicas con MaxPooling. Cada filtro 3x3 tiene solo 9 pesos compartidos para toda la imagen.",
-        improve: "Conserva la estructura espacial de la imagen y permite detectar bordes, curvas, texturas y formas utiles para clasificar. Supera al MLP en letras y formas similares porque el contexto local importa.",
-        when: "Cuando el problema depende de la vecindad entre pixeles: digitos, letras, gatos/perros, frutas o cualquier patron visual con estructura espacial.",
-        notWhen: "No conviene como primera opcion si hay muy pocos datos y no se controla el sobreajuste; en ese caso conviene transferencia de aprendizaje o aumento de datos.",
+        improve: "Conserva la estructura espacial y permite detectar bordes, curvas, texturas y formas. Supera al MLP en letras y formas similares porque el contexto local importa.",
+        when: "Cuando el problema depende de la vecindad entre pixeles: digitos, letras, frutas u objetos con estructura visual.",
+        notWhen: "No conviene con muy pocos datos y sin control del sobreajuste; en ese caso conviene transfer learning o data augmentation.",
         files: [
-          "008_redes_neuronales_parte_1/003_CNNs_Full.ipynb",
-          "009_redes_neuronales_parte_2/03_Clasificacion_Letras_CNN.ipynb",
-          "010_redes_neuronales_parte_3/clasificador_frutas_extended.ipynb",
-          "010_redes_neuronales_parte_3/comparacion_modelos.ipynb"
+          "008 - redes_neuronales_parte_1/002 - PRA/003_CNNs_Full.ipynb",
+          "008 - redes_neuronales_parte_2/002 - PRA/03_Clasificacion_Letras_CNN.ipynb",
+          "008 - redes_neuronales_parte_3/clasificador_frutas_extended.ipynb",
+          "008 - redes_neuronales_parte_3/comparacion_modelos.ipynb"
         ]
       },
       {
         name: "Visualizacion de filtros y activaciones CNN",
         category: "aprendizaje",
-        use: "Ver que zonas activa cada filtro convolucional y que mapas de caracteristicas produce una capa ante una imagen concreta. Permite comparar lo que aprenden capas tempranas y profundas.",
-        improve: "Ayuda a entender que 'aprende' la red: bordes y orientaciones en capas iniciales, formas y patrones complejos en capas profundas. Permite detectar filtros muertos, sobreajuste o sesgos de aprendizaje.",
-        when: "Para interpretar modelos ya entrenados, diagnosticar aprendizaje deficiente, comunicar el funcionamiento interno de una CNN o demostrar la jerarquia de representaciones.",
-        notWhen: "No conviene en modelos sin entrenar o mal convergidos, porque los filtros son aleatorios y las activaciones no son interpretables.",
+        use: "Extraer pesos de filtros convolucionales y calcular feature maps ante una imagen de entrada. Permite comparar filtros aleatorios vs entrenados y ver que activa cada capa.",
+        improve: "Abre la caja negra: bordes y orientaciones en capas tempranas, formas complejas en capas profundas. Permite detectar filtros muertos, sobreajuste o sesgos.",
+        when: "Para interpretar modelos entrenados, diagnosticar aprendizaje deficiente o demostrar la jerarquia de representaciones.",
+        notWhen: "No conviene en modelos sin entrenar o mal convergidos; los filtros aleatorios no son interpretables.",
         files: [
-          "009_redes_neuronales_parte_2/04_Visualizacion_Filtros_y_Activaciones_CNN.ipynb"
+          "008 - redes_neuronales_parte_2/002 - PRA/04_Visualizacion_Filtros_y_Activaciones_CNN.ipynb",
+          "008 - redes_neuronales_parte_3/una_convolucion_por_dentro_random.ipynb",
+          "008 - redes_neuronales_parte_3/una_convolucion_por_dentro_train.ipynb"
         ]
       },
       {
         name: "Modelos preentrenados y transfer learning",
         category: "aprendizaje",
-        use: "Reutilizar redes ya entrenadas como ResNet18, MobileNetV2, ViT, CLIP o DETR. Se pueden usar como extractores de caracteristicas o fine-tunearse con datos propios.",
-        improve: "Reduce la necesidad de entrenar desde cero y aprovecha representaciones visuales aprendidas en datasets grandes (ImageNet, LAION). MobileNetV2 espera entradas normalizadas a [-1, 1].",
+        use: "Reutilizar redes ya entrenadas como ResNet18, MobileNetV2, ViT, CLIP o DETR. En transfer learning se congela el backbone y se reentrena solo la cabeza de clasificacion con datos propios.",
+        improve: "Reduce la necesidad de entrenar desde cero y aprovecha representaciones aprendidas en datasets grandes. MobileNetV2 espera entradas normalizadas a [-1,1].",
         when: "Cuando se dispone de pocos datos propios, se necesita inferencia rapida o se quiere comparar modelos modernos de vision.",
-        notWhen: "No conviene asumir que el modelo entiende el contexto local: hay que revisar sesgos, etiquetas, licencias y tipo de datos de entrenamiento.",
+        notWhen: "No conviene asumir que el modelo entiende el contexto local sin revisar sesgos, etiquetas y tipo de datos de entrenamiento.",
         files: [
-          "009_redes_neuronales_parte_2/05_Clasificacion_Preentrenados_ResNet18.ipynb",
-          "009_redes_neuronales_parte_2/06_Transfer_Learning_MobileNetV2.ipynb",
-          "009_redes_neuronales_parte_2/07_Modelos_Preentrenados_HuggingFace.ipynb",
-          "009_redes_neuronales_parte_2/12_Laboratorio_OCR_Investigacion_Critica.ipynb"
+          "008 - redes_neuronales_parte_2/002 - PRA/05_Clasificacion_Preentrenados_ResNet18.ipynb",
+          "008 - redes_neuronales_parte_2/002 - PRA/06_Transfer_Learning_MobileNetV2.ipynb",
+          "008 - redes_neuronales_parte_2/002 - PRA/07_Modelos_Preentrenados_HuggingFace.ipynb",
+          "008 - redes_neuronales_parte_3/clasificador_frutas_extended.ipynb"
         ]
       },
       {
-        name: "Interfaces con Gradio y Spaces",
+        name: "Interfaces con Gradio y gr.Interface",
         category: "aprendizaje",
-        use: "Convertir un clasificador o pipeline en una interfaz web para probar imagenes nuevas. Con share=True se genera un enlace publico temporal; Hugging Face Spaces permite despliegue permanente.",
-        improve: "Permite experimentar fuera del notebook, detectar fallas del dataset y comunicar resultados de forma interactiva. Las barras de probabilidad muestran cuanto confian todas las clases, no solo la ganadora.",
-        when: "En prototipos academicos, pruebas con usuarios, demos de modelos o despliegues simples en Hugging Face Spaces.",
+        use: "Convertir un clasificador o pipeline en una interfaz web para probar imagenes nuevas. gr.Interface define una funcion, inputs y outputs. Con share=True genera enlace publico temporal.",
+        improve: "Permite experimentar fuera del notebook, detectar fallas del dataset y comunicar resultados de forma interactiva.",
+        when: "En prototipos academicos, pruebas con usuarios o demos de modelos simples con un solo flujo de entrada/salida.",
         notWhen: "No conviene publicar un demo sin controlar dependencias, tiempos de carga, ejemplos ambiguos y limitaciones del modelo.",
         files: [
-          "008_redes_neuronales_parte_1/004_Teachable_Machine_Dataset_Propio_Gradio.ipynb",
-          "009_redes_neuronales_parte_2/08_Laboratorio_Desarrollo_Space_Gradio.ipynb",
-          "009_redes_neuronales_parte_2/09_Cheatsheet_Desarrollo_Space.ipynb"
+          "008 - redes_neuronales_parte_1/002 - PRA/004_Teachable_Machine_Dataset_Propio_Gradio.ipynb",
+          "008 - redes_neuronales_parte_2/003 - LAB/rodriguez-carmen-pdi_Space_Gradio/app.py",
+          "009 - vision_artificial_aplicada/002 - PRA/03_Integracion_Gradio_y_MediaPipe.ipynb"
+        ]
+      },
+      {
+        name: "Interfaces avanzadas con gr.Blocks y patron Skills",
+        category: "aprendizaje",
+        use: "Construir aplicaciones Gradio con layouts personalizados, multiples funciones y eventos complejos. El patron de 3 capas separa: modelo (funcion Python), Skills (logica de negocio encapsulada) e interfaz (gr.Blocks con componentes y eventos).",
+        improve: "Permite componer multiples modelos en una sola interfaz, reusar Skills en distintas vistas y publicar aplicaciones mantenibles en Hugging Face Spaces.",
+        when: "Cuando gr.Interface resulta insuficiente o se integran mas de un modelo o tarea.",
+        notWhen: "No conviene si la aplicacion es una funcion simple con un solo input y output; gr.Interface es mas rapido y claro.",
+        files: [
+          "009 - vision_artificial_aplicada/002 - PRA/03_Integracion_Gradio_y_MediaPipe.ipynb",
+          "011 - clase magistral_dev_despliegue/002 - PRA/notebooks/03_Integracion_Gradio_y_MediaPipe.ipynb",
+          "011 - clase magistral_dev_despliegue/002 - PRA/notebooks/06_Cheatsheet_Desarrollo_Space.ipynb"
+        ]
+      },
+      {
+        name: "Despliegue en Hugging Face Spaces con git",
+        category: "aprendizaje",
+        use: "Publicar una aplicacion Gradio de forma permanente en HF Spaces. Flujo: crear Space → configurar segundo remote git → escribir app.py y requirements.txt → git push. HF ejecuta la aplicacion automaticamente. Se puede usar doble remote para tener GitHub y HF Spaces en paralelo.",
+        improve: "Permite tener la aplicacion accesible publicamente desde cualquier navegador, sin servidor propio.",
+        when: "Para publicar demos, proyectos finales, aplicaciones academicas o prototipos de vision artificial.",
+        notWhen: "No conviene para aplicaciones con GPU pesada en el plan gratuito (CPU-only por defecto) ni para las que necesitan almacenamiento persistente de datos de usuario.",
+        files: [
+          "011 - clase magistral_dev_despliegue/002 - PRA/notebooks/04_Proyecto_Pose_y_Despliegue.ipynb",
+          "011 - clase magistral_dev_despliegue/002 - PRA/notebooks/06_Cheatsheet_Desarrollo_Space.ipynb",
+          "008 - redes_neuronales_parte_2/003 - LAB/rodriguez-carmen-pdi_Space_Gradio/app.py"
         ]
       },
       {
         name: "OCR e investigacion critica",
         category: "aprendizaje",
-        use: "Evaluar modelos que extraen texto de imagenes y contrastar afirmaciones tecnicas con fuentes primarias.",
+        use: "Evaluar modelos que extraen texto de imagenes y contrastar afirmaciones tecnicas con fuentes primarias (papers, documentacion oficial). Se prueban herramientas OCR con metricas de precision y se analizan condiciones de fallo.",
         improve: "Integra procesamiento de imagenes, validacion de resultados y criterio academico frente a herramientas de IA.",
-        when: "Cuando se trabaja con documentos, texto impreso, manuscritos o seleccion de modelos externos para una tarea real.",
-        notWhen: "No conviene confiar solo en la salida de un modelo o LLM: hay que verificar fuentes, errores y limites del sistema.",
+        when: "Cuando se trabaja con documentos, texto impreso, manuscritos o cuando se evalua un modelo externo para una tarea real.",
+        notWhen: "No conviene confiar solo en la salida de un modelo o LLM; hay que verificar fuentes, errores y limites del sistema.",
         files: [
-          "009_redes_neuronales_parte_2/12_Laboratorio_OCR_Investigacion_Critica.ipynb"
+          "008 - redes_neuronales_parte_2/003 - LAB/10_Laboratorio_OCR_Investigacion_Critica.ipynb"
+        ]
+      },
+
+      /* ── GENERACION ───────────────────────────────────────────────── */
+      {
+        name: "Proceso de difusion forward y reverse",
+        category: "generacion",
+        use: "Entrenar una U-Net que aprende a invertir la adicion iterativa de ruido gaussiano. Proceso forward: agrega ruido en T pasos hasta destruir la imagen (fijo, no aprendido). Proceso reverse: la red predice y elimina el ruido paso a paso para reconstruir o generar una imagen.",
+        improve: "Base conceptual de todos los modelos generativos modernos (Stable Diffusion, DALL-E). Permite generar imagenes nuevas a partir de ruido puro.",
+        when: "Como fundamento antes de usar pipelines de Stable Diffusion o para entender schedulers y el rol de la U-Net.",
+        notWhen: "No conviene ejecutar con T=1000 pasos en CPU sin aceleracion; el tiempo de generacion es prohibitivo sin GPU.",
+        files: [
+          "010 - modelos_difusion/01_Introduccion_Conceptual_Difusion.ipynb",
+          "010 - modelos_difusion/02_Paradigmas_y_Modelos_Difusion.ipynb"
+        ]
+      },
+      {
+        name: "Condicionamiento por texto (text-to-image)",
+        category: "generacion",
+        use: "Guiar el proceso de denoising con un embedding de texto via cross-attention. El pipeline combina un text encoder (CLIP), una U-Net con cross-attention y un VAE que opera en espacio latente comprimido (Latent Diffusion Model).",
+        improve: "Permite generar imagenes que corresponden a descripciones en lenguaje natural sin imagen de entrada.",
+        when: "Para generar contenido visual desde un prompt textual: prototipado, arte generativo o aumento de datos sintetico.",
+        notWhen: "No conviene para tareas que requieren control preciso de la composicion sin tecnicas adicionales (ControlNet, LoRA, negative prompts).",
+        files: [
+          "010 - modelos_difusion/02_Paradigmas_y_Modelos_Difusion.ipynb",
+          "010 - modelos_difusion/04_Text_to_Image_SDXL_Turbo.ipynb",
+          "010 - modelos_difusion/05_Text_to_Image_SDXS_CPU.ipynb"
+        ]
+      },
+      {
+        name: "Aceleracion de difusion: SDXL Turbo, SDXS, LCM-LoRA",
+        category: "generacion",
+        use: "Reducir los pasos de denoising de 1000 a 1-4. SDXL Turbo usa destilacion adversarial (ADD) para generar en 1 paso. LCM-LoRA reformula el proceso como consistencia latente (2-4 pasos) y puede acelerar cualquier modelo existente. SDXS es una variante comprimida optimizada para CPU.",
+        improve: "Reduce el tiempo de generacion de minutos a segundos. LCM-LoRA no requiere reentrenamiento completo del modelo base.",
+        when: "Para generacion rapida en prototipos, demos en tiempo casi-real o entornos con recursos limitados (CPU o GPU baja).",
+        notWhen: "No conviene cuando la calidad maxima es prioritaria; los modelos de 1 paso sacrifican algo de detalle y coherencia.",
+        files: [
+          "010 - modelos_difusion/04_Text_to_Image_SDXL_Turbo.ipynb",
+          "010 - modelos_difusion/05_Text_to_Image_SDXS_CPU.ipynb",
+          "010 - modelos_difusion/06_Aceleracion_LCM_LoRA.ipynb"
         ]
       }
     ];
@@ -1031,7 +1167,8 @@
       segmentacion: "Segmentacion",
       geometria:    "Geometria",
       deteccion:    "Deteccion",
-      aprendizaje:  "Aprendizaje"
+      aprendizaje:  "Aprendizaje",
+      generacion:   "Generacion"
     };
 
     const cards        = document.getElementById("cards");
@@ -1094,7 +1231,8 @@
           t.use.toLowerCase().includes(q) ||
           t.improve.toLowerCase().includes(q) ||
           t.when.toLowerCase().includes(q) ||
-          t.notWhen.toLowerCase().includes(q);
+          t.notWhen.toLowerCase().includes(q) ||
+          t.files.some(f => f.toLowerCase().includes(q));
         return matchQ && (cat === "todas" || t.category === cat);
       });
       render(res);
