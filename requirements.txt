@@ -11,11 +11,28 @@ Pillow>=10.0.0
 # Visualizacion
 matplotlib>=3.7.0
 pandas>=2.0.0
+seaborn>=0.13.0
 
 # Cuadernos y entorno interactivo
 jupyter>=1.0.0
 ipykernel>=6.29.0
 watermark>=2.4.3
+
+# Machine learning clasico y metricas
+scikit-learn>=1.3.0
+psutil>=5.9.0
+requests>=2.31.0
+
+# Redes neuronales, vision profunda y datasets
+tensorflow>=2.16.0
+tensorflow-datasets>=4.9.0
+torch>=2.2.0
+torchvision>=0.17.0
+transformers>=4.40.0
+
+# Interfaces, despliegue didactico y descarga de datasets/modelos
+gradio>=4.0.0
+gdown>=5.0.0
 
 # Introduccion visual (unidades iniciales)
 # Nota: py5 requiere Java. Ver https://py5coding.org/content/install.html
@@ -24,3 +41,6 @@ py5
 # Nota para ejecucion local:
 # `google.colab.patches` se usa solo en Colab y no forma parte
 # de las dependencias necesarias en un entorno Python local.
+# Algunas celdas de las unidades 008, 009 y 010 descargan datasets o pesos
+# preentrenados desde internet; si se trabaja sin conexion, conviene usar Colab
+# o ejecutar primero esas celdas en un entorno con acceso a red.

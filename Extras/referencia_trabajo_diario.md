@@ -39,7 +39,8 @@ python -m pip install ipykernel
 ```powershell
 .\venv\Scripts\Activate.ps1
 python -m pip install -r requirements.txt
-python -c "import cv2, numpy, PIL, matplotlib; print('Librerias principales OK')"
+python -c "import cv2, numpy, PIL, matplotlib, pandas; print('Librerias principales OK')"
+python -c "import tensorflow, sklearn, gradio; print('Redes neuronales basicas OK')"
 python -c "import py5; print('py5 OK')"
 git status
 git pull
@@ -69,8 +70,17 @@ python -m pip install -r requirements.txt
 Verificacion:
 
 ```powershell
-python -c "import cv2, numpy, PIL, matplotlib; print('Librerias principales OK')"
+python -c "import cv2, numpy, PIL, matplotlib, pandas; print('Librerias principales OK')"
 ```
+
+Para notebooks de redes neuronales, Gradio o Hugging Face:
+
+```powershell
+python -c "import tensorflow, sklearn, gradio; print('Redes neuronales basicas OK')"
+python -c "import torch, torchvision, transformers; print('Modelos preentrenados OK')"
+```
+
+Si estos comandos tardan o descargan paquetes pesados, es normal: las unidades `008`, `009` y `010` usan TensorFlow, PyTorch, Transformers y datasets externos.
 
 ### `python` no se reconoce
 
@@ -124,6 +134,15 @@ Ejemplo:
 ```python
 img = cv2.imread("img/imagen.jpg")
 ```
+
+### Los notebooks de redes neuronales tardan mucho
+
+En las unidades `008_redes_neuronales_parte_1`, `009_redes_neuronales_parte_2` y `010_redes_neuronales_parte_3` puede haber descargas de datasets, pesos preentrenados o entrenamiento de CNNs. Para esos casos:
+
+- ejecutar las celdas en orden y leer los mensajes de descarga
+- preferir Google Colab si el equipo local no tiene recursos suficientes
+- reiniciar kernel si se instalo una libreria nueva dentro del notebook
+- verificar conexion a internet antes de usar `tensorflow_datasets`, `torchvision`, `transformers`, `gdown` o Gradio
 
 ### `git pull` falla por cambios locales
 

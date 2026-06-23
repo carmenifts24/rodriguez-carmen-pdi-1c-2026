@@ -45,16 +45,30 @@ python -m pip install -r requirements.txt
 ## 6. Verificar librerias principales
 
 ```powershell
-python -c "import cv2, numpy, PIL, matplotlib; print('Librerias principales OK')"
+python -c "import cv2, numpy, PIL, matplotlib, pandas; print('Librerias principales OK')"
 ```
 
-## 7. Verificar `py5`
+## 7. Verificar librerias de redes neuronales
+
+```powershell
+python -c "import tensorflow, sklearn, gradio; print('Redes neuronales basicas OK')"
+```
+
+Para notebooks con modelos preentrenados de la unidad 009, tambien puede verificarse:
+
+```powershell
+python -c "import torch, torchvision, transformers; print('Modelos preentrenados OK')"
+```
+
+Nota: TensorFlow, PyTorch y Transformers son paquetes grandes. La instalacion puede tardar varios minutos y algunos notebooks descargan datasets o pesos desde internet.
+
+## 8. Verificar `py5`
 
 ```powershell
 python -c "import py5; print('py5 OK')"
 ```
 
-## 8. Si `py5` falla por Java
+## 9. Si `py5` falla por Java
 
 ```powershell
 python -m pip install install-jdk
@@ -63,19 +77,19 @@ python -c "import jdk; print('Java installed to', jdk.install('17'))"
 
 Esto instala Java 17 para el usuario actual.
 
-## 9. Si `py5` sigue fallando al abrir ventana
+## 10. Si `py5` sigue fallando al abrir ventana
 
 ```powershell
 python -m pip install glfw
 ```
 
-## 10. Abrir VS Code en la carpeta del proyecto
+## 11. Abrir VS Code en la carpeta del proyecto
 
 ```powershell
 code .
 ```
 
-## 11. Elegir el interprete o kernel correcto
+## 12. Elegir el interprete o kernel correcto
 
 En VS Code, seleccionar:
 
@@ -85,7 +99,7 @@ En VS Code, seleccionar:
 
 Si usas notebooks, despues de instalar paquetes conviene reiniciar el kernel.
 
-## 12. Cerrar el entorno al terminar
+## 13. Cerrar el entorno al terminar
 
 ```powershell
 deactivate
@@ -98,6 +112,7 @@ cd "C:\Proyectos\rodriguez-carmen-pdi-1c-2026"
 python -m venv venv
 .\venv\Scripts\Activate.ps1
 python -m pip install -r requirements.txt
-python -c "import cv2, numpy, PIL, matplotlib; print('Librerias principales OK')"
+python -c "import cv2, numpy, PIL, matplotlib, pandas; print('Librerias principales OK')"
+python -c "import tensorflow, sklearn, gradio; print('Redes neuronales basicas OK')"
 python -c "import py5; print('py5 OK')"
 ```

@@ -21,8 +21,11 @@ Estado actual del recorrido:
 - `003 - camara_oscura`: registro y material de trabajo asociado a la experiencia de camara oscura
 - `004 - librerias_fundamentos_pdi`: procesamiento con librerias de Python, segmentacion y preprocesamiento
 - `005  - computer_vision_parte_1`: vision por computadora clasica con OpenCV
-- `006 - TFI_1`: trabajo final integrador de mejora y restauracion de imagenes
-- `006_fotografia_digital`: trabajo practico complementario sobre lenguaje fotografico y composicion visual
+- `006_TFI_1`: trabajo final integrador de mejora y restauracion de imagenes
+- `007_fotografia_digital`: trabajo practico complementario sobre lenguaje fotografico y composicion visual
+- `008_redes_neuronales_parte_1`: primera introduccion a redes neuronales, clasificacion de imagenes, CNNs y Gradio
+- `009_redes_neuronales_parte_2`: redes neuronales aplicadas, modelos preentrenados, transferencia, Hugging Face y OCR
+- `010_redes_neuronales_parte_3`: entrenamiento y comparacion de CNNs para clasificacion de frutas, visualizacion de convoluciones y pruebas con camara
 
 ## Tecnologias y librerias
 
@@ -38,8 +41,19 @@ Principales librerias usadas en la cursada:
 - `jupyter`
 - `ipykernel`
 - `py5`
+- `tensorflow`
+- `tensorflow-datasets`
+- `scikit-learn`
+- `seaborn`
+- `torch`
+- `torchvision`
+- `transformers`
+- `gradio`
+- `gdown`
 
 Nota: `py5` requiere Java. Si aparece un error relacionado con Java, conviene revisar la documentacion oficial de instalacion de `py5`.
+
+Nota sobre redes neuronales: las unidades `008`, `009` y `010` pueden descargar datasets o pesos preentrenados desde internet. Para entrenamientos pesados, inferencia con modelos grandes o acceso a camara/webcam, Google Colab puede ser mas comodo que la ejecucion local.
 
 ## Instalacion local
 
@@ -99,6 +113,7 @@ python -m pip install -r requirements.txt
 ```bash
 python -c "import cv2, numpy, PIL, matplotlib, pandas; print('Librerias principales OK')"
 python -c "import py5; print('py5 OK')"
+python -c "import tensorflow, sklearn, gradio; print('Redes neuronales basicas OK')"
 ```
 
 ## Guias utiles incluidas
@@ -134,24 +149,50 @@ rodriguez-carmen-pdi-1c-2026/
 |   `-- 003 - LAB/
 |-- 005  - computer_vision_parte_1/
 |   `-- 002 - PRA/
-|-- 006 - TFI_1/
+|-- 006_TFI_1/
 |   |-- imagenes_tfi1/
 |   |-- salidas_tfi1/
 |   |-- README.md
 |   |-- dashboard_tfi1_tecnicas.html
 |   |-- TFI_1_Consigna_y_Rubrica.md
-|   `-- TFI_1 - mejora y restauracion de imagenes.ipynb
-`-- 006_fotografia_digital/
+|   `-- TFI_1_Mejora y restauracion de imagenes.ipynb
+|-- 007_fotografia_digital/
 |   |-- README.md
 |   |-- De la camara oscura a la imagen intencional.pdf
 |   |-- De la camara oscura a la imagen intencional.pptx
-|   |-- 001_imagenes/
-|   |   |-- originales/
-|   |   |-- procesadas/
-|   |   `-- descartes/
 |   |-- 002_codigo/
 |   |   `-- Trabajo Practico 006 - Fotografia Digital.ipynb
 |   `-- 003_recursos/
+|-- 008_redes_neuronales_parte_1/
+|   |-- README.md
+|   |-- datos/
+|   |-- 001_Red_Neuronal.ipynb
+|   |-- 002_Clasificacion.ipynb
+|   |-- 003_CNNs_Full.ipynb
+|   `-- 004_Teachable_Machine_Dataset_Propio_Gradio.ipynb
+|-- 009_redes_neuronales_parte_2/
+|   |-- datos/
+|   |-- 01_Fundamentos_Red_Neuronal_Simple.ipynb
+|   |-- 02_Clasificacion_Letras_MLP.ipynb
+|   |-- 03_Clasificacion_Letras_CNN.ipynb
+|   |-- 04_Visualizacion_Filtros_y_Activaciones_CNN.ipynb
+|   |-- 05_Clasificacion_Preentrenados_ResNet18.ipynb
+|   |-- 06_Transfer_Learning_MobileNetV2.ipynb
+|   |-- 07_Modelos_Preentrenados_HuggingFace.ipynb
+|   |-- 08_Laboratorio_Desarrollo_Space_Gradio.ipynb
+|   |-- 09_Cheatsheet_Desarrollo_Space.ipynb
+|   |-- 10_Cheatsheet_Caja_de_Herramientas.ipynb
+|   |-- 11_Laboratorio_Integrador_Redes.ipynb
+|   `-- 12_Laboratorio_OCR_Investigacion_Critica.ipynb
+|-- 010_redes_neuronales_parte_3/
+|   |-- arq/
+|   |-- clasificador_frutas_extended.ipynb
+|   |-- comparacion_modelos.ipynb
+|   |-- crea_tu_propio_modelo_cnn.ipynb
+|   |-- probamos_el_modelo_con_camweb.ipynb
+|   |-- prueba_colab_desde_folder.ipynb
+|   |-- una_convolucion_por_dentro_random.ipynb
+|   `-- una_convolucion_por_dentro_train.ipynb
 `-- Extras/
 ```
 
@@ -317,14 +358,14 @@ Temas trabajados:
 - coincidencia por plantilla
 - deteccion de rostros con cascadas Haar
 
-### 006 - TFI_1
+### 006_TFI_1
 
 Unidad de integracion y cierre parcial del recorrido. El trabajo consiste en construir tres pipelines acotados de mejora y restauracion, comparar estrategias y justificar la decision final para cada tipo de imagen.
 
 Archivos principales:
 
 - `TFI_1_Consigna_y_Rubrica.md`: consigna, restricciones, entregables y rubrica de evaluacion.
-- `TFI_1 - mejora y restauracion de imagenes.ipynb`: notebook de resolucion del trabajo.
+- `TFI_1_Mejora y restauracion de imagenes.ipynb`: notebook de resolucion del trabajo.
 - `README.md`: resumen especifico del TFI, casos trabajados, tecnicas usadas y limites.
 - `dashboard_tfi1_tecnicas.html`: tablero visual con tecnicas aplicadas, explicacion de uso y referencias de busqueda dentro del proyecto.
 - `imagenes_tfi1/`: imagenes originales seleccionadas.
@@ -350,7 +391,7 @@ Tecnicas integradas:
 - `inpainting` puntual
 - guardado de salidas finales y tabla comparativa con `pandas`
 
-### 006_fotografia_digital
+### 007_fotografia_digital
 
 Trabajo practico complementario sobre lenguaje fotografico aplicado. Todas las imagenes fueron capturadas por la estudiante. El trabajo integra teoria fotografica y procesamiento digital en cinco partes:
 
@@ -363,8 +404,7 @@ Trabajo practico complementario sobre lenguaje fotografico aplicado. Todas las i
 Archivos principales:
 
 - `002_codigo/Trabajo Practico 006 - Fotografia Digital.ipynb`: notebook de resolucion
-- `001_imagenes/originales/`: fotografias propias usadas como insumo
-- `001_imagenes/procesadas/`: resultados generados por el notebook
+- carpetas de recursos fotograficos y documentos en `003_recursos/`
 - `De la camara oscura a la imagen intencional.pdf`: presentacion conceptual del recorrido
 - `README.md`: documentacion especifica del trabajo
 
@@ -375,6 +415,75 @@ Tecnicas aplicadas:
 - ecualizacion global del histograma en escala de grises
 - analisis de metricas de luminosidad y contraste con `numpy` y `pandas`
 - visualizacion comparativa y anotacion de mapas de reencuadre con `matplotlib`
+
+### 008_redes_neuronales_parte_1
+
+Unidad de entrada a redes neuronales con foco didactico. Parte de una regresion simple de Celsius a Fahrenheit, avanza hacia clasificacion de letras y culmina con CNNs para imagenes y una actividad con Teachable Machine + Gradio.
+
+Notebooks principales:
+
+- `001_Red_Neuronal.ipynb`: primera red neuronal y lectura de pesos aprendidos.
+- `002_Clasificacion.ipynb`: clasificacion multiclase de letras manuscritas.
+- `003_CNNs_Full.ipynb`: CNNs sobre MNIST y `cats_vs_dogs`, con comparacion entre datos controlados e imagenes reales.
+- `004_Teachable_Machine_Dataset_Propio_Gradio.ipynb`: diseno de dataset propio, exportacion de modelo e interfaz Gradio.
+
+Temas trabajados:
+
+- normalizacion de datos y separacion entrenamiento/prueba
+- redes densas y redes convolucionales
+- matrices de confusion e interpretacion de errores
+- sesgo de dataset, fondos, iluminacion y variacion de encuadre
+- despliegue didactico de clasificadores con Gradio
+
+### 009_redes_neuronales_parte_2
+
+Unidad de profundizacion en redes neuronales para imagenes. Repite conceptos base con mayor detalle y suma modelos preentrenados, transferencia de aprendizaje, Hugging Face, Spaces, Gradio y OCR con investigacion critica.
+
+Notebooks principales:
+
+- `01_Fundamentos_Red_Neuronal_Simple.ipynb`
+- `02_Clasificacion_Letras_MLP.ipynb`
+- `03_Clasificacion_Letras_CNN.ipynb`
+- `04_Visualizacion_Filtros_y_Activaciones_CNN.ipynb`
+- `05_Clasificacion_Preentrenados_ResNet18.ipynb`
+- `06_Transfer_Learning_MobileNetV2.ipynb`
+- `07_Modelos_Preentrenados_HuggingFace.ipynb`
+- `08_Laboratorio_Desarrollo_Space_Gradio.ipynb`
+- `09_Cheatsheet_Desarrollo_Space.ipynb`
+- `10_Cheatsheet_Caja_de_Herramientas.ipynb`
+- `11_Laboratorio_Integrador_Redes.ipynb`
+- `12_Laboratorio_OCR_Investigacion_Critica.ipynb`
+
+Temas trabajados:
+
+- comparacion MLP vs CNN
+- visualizacion de filtros y activaciones
+- inferencia con ResNet18, ViT, CLIP y DETR
+- transferencia de aprendizaje con MobileNetV2
+- construccion de demos con Gradio y Hugging Face Spaces
+- OCR como caso de investigacion tecnica y validacion de fuentes
+
+### 010_redes_neuronales_parte_3
+
+Unidad orientada a experimentacion con CNNs propias para clasificacion de frutas y comprension interna de las convoluciones. Incluye notebooks de entrenamiento, comparacion de arquitecturas, prueba con camara y visualizacion de filtros reales o aleatorios.
+
+Archivos principales:
+
+- `clasificador_frutas_extended.ipynb`: entrenamiento extendido de CNN para naranjas y manzanas.
+- `comparacion_modelos.ipynb`: comparacion de modelos y estrategias.
+- `crea_tu_propio_modelo_cnn.ipynb`: plantilla configurable para construir una CNN propia.
+- `probamos_el_modelo_con_camweb.ipynb`: prueba interactiva con camara en Colab.
+- `prueba_colab_desde_folder.ipynb`: flujo de entrenamiento/validacion desde carpeta.
+- `una_convolucion_por_dentro_random.ipynb`: visualizacion pedagogica de filtros aleatorios.
+- `una_convolucion_por_dentro_train.ipynb`: visualizacion de filtros aprendidos por un modelo entrenado.
+
+Temas trabajados:
+
+- preparacion de datasets de imagenes por carpeta
+- entrenamiento y evaluacion de CNNs propias
+- comparacion de arquitecturas y metricas
+- inspeccion de filtros, activaciones y max pooling
+- prueba de inferencia con imagenes reales o camara web
 
 ## Como trabajar con el material
 

@@ -3,44 +3,61 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard de Tecnicas de Tratamiento de Imagenes</title>
+  <title>Dashboard de Tecnicas de Tratamiento de Imagenes · PDI</title>
   <style>
     :root {
-      --bg: #f4efe7;
-      --panel: #fffaf2;
-      --panel-strong: #f0e4d3;
-      --text: #1f1b16;
-      --muted: #6a5f52;
-      --line: #d9c8b3;
-      --accent: #b85042;
-      --accent-2: #3c6e71;
-      --accent-3: #e3a72f;
-      --ok: #4f772d;
-      --shadow: 0 16px 40px rgba(57, 41, 24, 0.10);
-      --radius: 18px;
+      --bg:            #060e1c;
+      --panel:         #0c1830;
+      --panel-strong:  #0f1f3a;
+      --text:          #dde8f8;
+      --muted:         #7a9fc2;
+      --line:          rgba(79, 142, 247, 0.15);
+      --accent:        #4f8ef7;
+      --accent-2:      #22d4e8;
+      --accent-3:      #9b8ff8;
+      --ok:            #3dd68c;
+      --warn:          #fb923c;
+      --shadow:        0 16px 40px rgba(0, 8, 30, 0.55);
+      --shadow-hover:  0 20px 52px rgba(5, 15, 50, 0.70), 0 0 0 1px rgba(79, 142, 247, 0.22);
+      --radius:        18px;
+      --learn:         #38bdf8;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
       font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       color: var(--text);
       background:
-        radial-gradient(circle at top left, rgba(184, 80, 66, 0.12), transparent 28%),
-        radial-gradient(circle at top right, rgba(60, 110, 113, 0.12), transparent 24%),
-        linear-gradient(180deg, #f8f3ec 0%, var(--bg) 100%);
+        radial-gradient(circle at 15% 8%,  rgba(79, 142, 247, 0.16), transparent 32%),
+        radial-gradient(circle at 85% 5%,  rgba(34, 212, 232, 0.10), transparent 28%),
+        radial-gradient(circle at 92% 88%, rgba(155, 143, 248, 0.09), transparent 38%),
+        radial-gradient(circle at 5%  92%, rgba(56, 189, 248, 0.07), transparent 30%),
+        linear-gradient(175deg, #040c1a 0%, #06101f 55%, #050d1c 100%);
       min-height: 100vh;
     }
 
-    .wrap {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 32px 20px 48px;
+    /* Dot grid pattern — evoca mapas de activaciones / grids de neuronas */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(79, 142, 247, 0.07) 1px, transparent 1px);
+      background-size: 38px 38px;
+      pointer-events: none;
+      z-index: 0;
     }
 
+    .wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 1420px;
+      margin: 0 auto;
+      padding: 32px 20px 52px;
+    }
+
+    /* ── Hero ───────────────────────────────────────── */
     .hero {
       display: grid;
       grid-template-columns: 1.5fr 1fr;
@@ -54,13 +71,13 @@
     .panel,
     .tech-card {
       background: var(--panel);
-      border: 1px solid rgba(217, 200, 179, 0.85);
+      border: 1px solid rgba(79, 142, 247, 0.14);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
     }
 
     .hero-card {
-      padding: 28px;
+      padding: 28px 30px;
       position: relative;
       overflow: hidden;
     }
@@ -68,26 +85,40 @@
     .hero-card::after {
       content: "";
       position: absolute;
-      width: 220px;
-      height: 220px;
-      right: -60px;
-      top: -60px;
+      width: 260px;
+      height: 260px;
+      right: -70px;
+      top: -70px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(184, 80, 66, 0.18), transparent 70%);
+      background: radial-gradient(circle, rgba(79, 142, 247, 0.20), transparent 68%);
+    }
+
+    /* Banda decorativa superior del hero */
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent) 0%, var(--accent-2) 50%, var(--accent-3) 100%);
+      border-radius: var(--radius) var(--radius) 0 0;
     }
 
     h1 {
       margin: 0 0 10px;
-      font-size: clamp(2rem, 3vw, 3.2rem);
-      line-height: 1.05;
+      font-size: clamp(1.9rem, 3vw, 3rem);
+      line-height: 1.07;
       letter-spacing: -0.03em;
+      background: linear-gradient(130deg, #a8c8ff 0%, #e0eeff 60%, #c8f0ff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
     .subtitle {
       max-width: 70ch;
       color: var(--muted);
       font-size: 1rem;
-      line-height: 1.6;
+      line-height: 1.65;
       margin: 0;
     }
 
@@ -99,47 +130,68 @@
     }
 
     .tag {
-      padding: 8px 12px;
+      padding: 7px 13px;
       border-radius: 999px;
-      background: rgba(60, 110, 113, 0.10);
-      color: var(--accent-2);
-      border: 1px solid rgba(60, 110, 113, 0.18);
-      font-size: 0.92rem;
+      background: rgba(79, 142, 247, 0.10);
+      color: var(--accent);
+      border: 1px solid rgba(79, 142, 247, 0.22);
+      font-size: 0.88rem;
       font-weight: 600;
+      letter-spacing: 0.01em;
     }
 
+    /* ── Summary cards ──────────────────────────────── */
     .summary-grid {
       display: grid;
       gap: 16px;
     }
 
     .summary-card {
-      padding: 20px;
-      min-height: 132px;
+      padding: 22px;
+      min-height: 130px;
       display: flex;
       flex-direction: column;
       justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .summary-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent-2), var(--accent));
+      border-radius: var(--radius) var(--radius) 0 0;
     }
 
     .summary-label {
       color: var(--muted);
-      font-size: 0.92rem;
+      font-size: 0.88rem;
       margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      font-weight: 600;
     }
 
     .summary-value {
-      font-size: 2rem;
+      font-size: 2.2rem;
       font-weight: 800;
       letter-spacing: -0.03em;
+      background: linear-gradient(120deg, var(--accent) 0%, var(--accent-2) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
     .summary-note {
       margin-top: 8px;
       color: var(--muted);
       line-height: 1.45;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
     }
 
+    /* ── Filters ────────────────────────────────────── */
     .filters {
       padding: 18px;
       display: grid;
@@ -151,10 +203,12 @@
 
     label {
       display: block;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       color: var(--muted);
       margin-bottom: 6px;
       font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
     }
 
     input,
@@ -162,53 +216,62 @@
     button {
       width: 100%;
       border-radius: 12px;
-      border: 1px solid var(--line);
-      background: #fff;
+      border: 1px solid rgba(79, 142, 247, 0.20);
+      background: rgba(6, 14, 28, 0.80);
       padding: 12px 14px;
       font-size: 0.97rem;
+      color: var(--text);
+    }
+
+    select option {
+      background: #0c1830;
       color: var(--text);
     }
 
     input:focus,
     select:focus,
     button:focus {
-      outline: 2px solid rgba(184, 80, 66, 0.22);
+      outline: 2px solid rgba(79, 142, 247, 0.30);
       outline-offset: 1px;
       border-color: var(--accent);
     }
 
+    input::placeholder { color: rgba(122, 159, 194, 0.55); }
+
     button {
       cursor: pointer;
-      background: var(--accent);
+      background: linear-gradient(135deg, var(--accent) 0%, #3a7ae8 100%);
       color: #fff;
       font-weight: 700;
-      transition: transform 0.15s ease, filter 0.15s ease;
+      border: none;
+      transition: transform 0.15s ease, filter 0.15s ease, box-shadow 0.15s ease;
     }
 
     button:hover {
-      filter: brightness(1.05);
+      filter: brightness(1.10);
       transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(79, 142, 247, 0.35);
     }
 
+    /* ── Layout ─────────────────────────────────────── */
     .layout {
       display: grid;
       grid-template-columns: 320px 1fr;
       gap: 22px;
     }
 
-    .panel {
-      padding: 20px;
-    }
+    .panel { padding: 22px; }
 
     .panel h2 {
-      margin: 0 0 14px;
-      font-size: 1.1rem;
+      margin: 0 0 16px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: 0.01em;
     }
 
-    .legend {
-      display: grid;
-      gap: 10px;
-    }
+    /* ── Legend ─────────────────────────────────────── */
+    .legend { display: grid; gap: 12px; }
 
     .legend-item {
       display: flex;
@@ -216,82 +279,80 @@
       gap: 10px;
       color: var(--muted);
       line-height: 1.45;
-      font-size: 0.95rem;
+      font-size: 0.92rem;
     }
 
     .swatch {
-      width: 14px;
-      height: 14px;
+      width: 12px;
+      height: 12px;
       border-radius: 50%;
-      flex: 0 0 14px;
+      flex: 0 0 12px;
+      box-shadow: 0 0 8px currentColor;
     }
 
-    .swatch-core { background: var(--accent); }
-    .swatch-contrast { background: var(--accent-3); }
-    .swatch-seg { background: var(--accent-2); }
-    .swatch-geo { background: var(--ok); }
-    .swatch-detect { background: #6d597a; }
+    .swatch-core    { background: var(--accent);   color: var(--accent); }
+    .swatch-contrast{ background: var(--accent-2); color: var(--accent-2); }
+    .swatch-seg     { background: var(--accent-3); color: var(--accent-3); }
+    .swatch-geo     { background: var(--ok);       color: var(--ok); }
+    .swatch-detect  { background: var(--warn);     color: var(--warn); }
+    .swatch-learn   { background: var(--learn);    color: var(--learn); }
 
-    .stats-list {
-      display: grid;
-      gap: 12px;
-      margin-top: 18px;
-    }
+    /* ── Stats ──────────────────────────────────────── */
+    .stats-list { display: grid; gap: 12px; margin-top: 20px; }
 
     .stats-line {
-      padding: 12px 14px;
-      background: var(--panel-strong);
+      padding: 13px 15px;
+      background: rgba(79, 142, 247, 0.06);
+      border: 1px solid rgba(79, 142, 247, 0.10);
       border-radius: 14px;
     }
 
     .stats-line strong {
       display: block;
-      margin-bottom: 4px;
-      font-size: 1rem;
+      margin-bottom: 5px;
+      font-size: 0.93rem;
+      color: var(--text);
     }
 
     .stats-line span {
       color: var(--muted);
-      font-size: 0.92rem;
-      line-height: 1.45;
+      font-size: 0.90rem;
+      line-height: 1.5;
     }
 
+    /* ── Results header ─────────────────────────────── */
     .results-head {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
       gap: 14px;
-      margin-bottom: 14px;
+      margin-bottom: 16px;
     }
 
-    .results-head h2 {
-      margin: 0;
-      font-size: 1.25rem;
-    }
+    .results-head h2 { margin: 0; font-size: 1.2rem; }
 
-    .results-count {
-      color: var(--muted);
-      font-size: 0.96rem;
-    }
+    .results-count { color: var(--muted); font-size: 0.94rem; }
 
+    /* ── Tech cards ─────────────────────────────────── */
     .cards {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
       gap: 16px;
     }
 
     .tech-card {
-      padding: 18px;
+      padding: 18px 20px;
       display: flex;
       flex-direction: column;
       gap: 12px;
       transform: translateY(0);
-      transition: transform 0.18s ease, box-shadow 0.18s ease;
+      transition: transform 0.20s ease, box-shadow 0.20s ease, border-color 0.20s ease;
     }
 
     .tech-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 18px 42px rgba(57, 41, 24, 0.16);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+      border-color: rgba(79, 142, 247, 0.30);
     }
 
     .tech-top {
@@ -303,131 +364,137 @@
 
     .tech-title {
       margin: 0;
-      font-size: 1.08rem;
+      font-size: 1.05rem;
       line-height: 1.3;
+      color: var(--text);
     }
 
+    /* ── Badges ─────────────────────────────────────── */
     .badge {
       white-space: nowrap;
-      font-size: 0.78rem;
+      font-size: 0.76rem;
       font-weight: 700;
-      padding: 6px 10px;
+      padding: 5px 10px;
       border-radius: 999px;
       border: 1px solid transparent;
+      letter-spacing: 0.03em;
     }
 
     .cat-nucleo {
-      background: rgba(184, 80, 66, 0.10);
+      background: rgba(79, 142, 247, 0.12);
       color: var(--accent);
-      border-color: rgba(184, 80, 66, 0.18);
+      border-color: rgba(79, 142, 247, 0.22);
     }
 
     .cat-mejora {
-      background: rgba(227, 167, 47, 0.16);
-      color: #8a6100;
-      border-color: rgba(227, 167, 47, 0.24);
+      background: rgba(34, 212, 232, 0.10);
+      color: var(--accent-2);
+      border-color: rgba(34, 212, 232, 0.22);
     }
 
     .cat-segmentacion {
-      background: rgba(60, 110, 113, 0.10);
-      color: var(--accent-2);
-      border-color: rgba(60, 110, 113, 0.18);
+      background: rgba(155, 143, 248, 0.11);
+      color: var(--accent-3);
+      border-color: rgba(155, 143, 248, 0.24);
     }
 
     .cat-geometria {
-      background: rgba(79, 119, 45, 0.12);
+      background: rgba(61, 214, 140, 0.10);
       color: var(--ok);
-      border-color: rgba(79, 119, 45, 0.20);
+      border-color: rgba(61, 214, 140, 0.22);
     }
 
     .cat-deteccion {
-      background: rgba(109, 89, 122, 0.12);
-      color: #6d597a;
-      border-color: rgba(109, 89, 122, 0.22);
+      background: rgba(251, 146, 60, 0.10);
+      color: var(--warn);
+      border-color: rgba(251, 146, 60, 0.22);
     }
 
+    .cat-aprendizaje {
+      background: rgba(56, 189, 248, 0.10);
+      color: var(--learn);
+      border-color: rgba(56, 189, 248, 0.22);
+    }
+
+    /* ── Tech sections ──────────────────────────────── */
     .tech-section strong {
       display: block;
-      font-size: 0.86rem;
-      margin-bottom: 4px;
+      font-size: 0.82rem;
+      margin-bottom: 5px;
       color: var(--muted);
       text-transform: uppercase;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.07em;
     }
 
     .tech-section p {
       margin: 0;
-      line-height: 1.55;
-      font-size: 0.96rem;
+      line-height: 1.58;
+      font-size: 0.93rem;
+      color: #b8ceea;
     }
 
     .file-list {
       display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
+      flex-direction: column;
+      gap: 5px;
     }
 
     .file-chip {
-      display: inline-flex;
-      align-items: center;
-      padding: 7px 10px;
-      border-radius: 999px;
-      background: #fff;
-      border: 1px solid var(--line);
-      color: var(--text);
-      font-size: 0.85rem;
-      line-height: 1.3;
+      display: block;
+      padding: 5px 9px;
+      border-radius: 6px;
+      background: rgba(79, 142, 247, 0.07);
+      border: 1px solid rgba(79, 142, 247, 0.14);
+      color: var(--muted);
+      font-size: 0.79rem;
+      font-family: "Consolas", "Courier New", monospace;
+      line-height: 1.45;
+      word-break: break-all;
+      overflow-wrap: anywhere;
     }
 
     .caution-note {
       margin-top: auto;
-      padding-top: 2px;
-      color: var(--muted);
-      font-size: 0.9rem;
-      line-height: 1.45;
+      padding: 10px 12px;
+      background: rgba(251, 146, 60, 0.06);
+      border: 1px solid rgba(251, 146, 60, 0.14);
+      border-radius: 10px;
+      color: rgba(251, 180, 110, 0.80);
+      font-size: 0.88rem;
+      line-height: 1.48;
     }
+
+    .caution-note strong { color: rgba(251, 146, 60, 0.90); }
 
     .empty {
       display: none;
-      padding: 24px;
+      padding: 28px;
       text-align: center;
       color: var(--muted);
       background: var(--panel);
-      border: 1px dashed var(--line);
+      border: 1px dashed rgba(79, 142, 247, 0.20);
       border-radius: var(--radius);
     }
 
     .footer-note {
-      margin-top: 22px;
+      margin-top: 24px;
       color: var(--muted);
-      font-size: 0.94rem;
-      line-height: 1.55;
+      font-size: 0.90rem;
+      line-height: 1.6;
+      border-top: 1px solid rgba(79, 142, 247, 0.10);
+      padding-top: 18px;
     }
 
+    /* ── Responsive ─────────────────────────────────── */
     @media (max-width: 1040px) {
-      .hero,
-      .layout {
-        grid-template-columns: 1fr;
-      }
-
-      .filters {
-        grid-template-columns: 1fr 1fr;
-      }
+      .hero, .layout { grid-template-columns: 1fr; }
+      .filters { grid-template-columns: 1fr 1fr; }
     }
 
     @media (max-width: 680px) {
-      .wrap {
-        padding: 20px 14px 34px;
-      }
-
-      .filters {
-        grid-template-columns: 1fr;
-      }
-
-      .results-head {
-        flex-direction: column;
-        align-items: flex-start;
-      }
+      .wrap { padding: 18px 14px 36px; }
+      .filters { grid-template-columns: 1fr; }
+      .results-head { flex-direction: column; align-items: flex-start; }
     }
   </style>
 </head>
@@ -435,14 +502,15 @@
   <div class="wrap">
     <section class="hero">
       <article class="hero-card">
-        <h1>Dashboard de tecnicas de tratamiento de imagenes</h1>
+        <h1>Dashboard · Tecnicas de Tratamiento de Imagenes</h1>
         <p class="subtitle">
-          Resumen visual de las tecnicas aplicadas en el proyecto. Esta version agrupa los metodos principales, muestra para que se usan y ayuda a identificar en que momentos conviene o no conviene aplicarlos dentro de un flujo de analisis de imagen.
+          Resumen visual y consultable de las tecnicas aplicadas en el proyecto, desde procesamiento clasico de imagenes hasta redes neuronales profundas. Consolida metodos de las unidades 004, 005, 006, 008 y 009 en un solo tablero, sin duplicados.
         </p>
         <div class="tag-row">
-          <span class="tag">PDI</span>
+          <span class="tag">PDI · IFTS 24</span>
           <span class="tag">Resumen unificado</span>
           <span class="tag">Sin tecnicas duplicadas</span>
+          <span class="tag">Deep Learning incluido</span>
           <span class="tag">Consulta rapida</span>
         </div>
       </article>
@@ -451,12 +519,12 @@
         <article class="summary-card">
           <div class="summary-label">Tecnicas registradas</div>
           <div class="summary-value" id="totalTech">0</div>
-          <div class="summary-note">Incluye mejora, segmentacion, geometria, deteccion y tecnicas base de representacion.</div>
+          <div class="summary-note">Incluye mejora, segmentacion, geometria, deteccion, tecnicas base y aprendizaje profundo.</div>
         </article>
         <article class="summary-card">
           <div class="summary-label">Familias principales</div>
-          <div class="summary-value">5</div>
-          <div class="summary-note">Nucleo, mejora, segmentacion, geometria y deteccion/descripcion.</div>
+          <div class="summary-value">6</div>
+          <div class="summary-note">Nucleo, mejora, segmentacion, geometria, deteccion y aprendizaje profundo.</div>
         </article>
       </div>
     </section>
@@ -464,7 +532,7 @@
     <section class="filters">
       <div>
         <label for="searchInput">Buscar tecnica o palabra clave</label>
-        <input id="searchInput" type="text" placeholder="Ejemplo: contraste, contornos, segmentacion, ruido">
+        <input id="searchInput" type="text" placeholder="Ejemplo: contraste, contornos, CNN, transfer learning...">
       </div>
       <div>
         <label for="categoryFilter">Categoria</label>
@@ -475,6 +543,7 @@
           <option value="segmentacion">Segmentacion</option>
           <option value="geometria">Geometria</option>
           <option value="deteccion">Deteccion</option>
+          <option value="aprendizaje">Aprendizaje profundo</option>
         </select>
       </div>
       <div>
@@ -492,24 +561,25 @@
           <div class="legend-item"><span class="swatch swatch-seg"></span> Segmentacion: umbralado, color, mascaras y morfologia.</div>
           <div class="legend-item"><span class="swatch swatch-geo"></span> Geometria: recortes, perspectiva, rotacion, volteo y escalado.</div>
           <div class="legend-item"><span class="swatch swatch-detect"></span> Deteccion: bordes, contornos, medidas, plantillas y Haar.</div>
+          <div class="legend-item"><span class="swatch swatch-learn"></span> Aprendizaje: normalizacion, MLP, CNNs, modelos preentrenados, Gradio y OCR.</div>
         </div>
 
         <div class="stats-list">
           <div class="stats-line">
             <strong>Pipeline recomendado</strong>
-            <span>Conversion de color -> histograma/canales -> suavizado opcional -> umbralizacion o segmentacion -> morfologia -> contornos -> medicion.</span>
+            <span>Conversion de color → histograma/canales → suavizado opcional → umbralizacion o segmentacion → morfologia → contornos → medicion.</span>
           </div>
           <div class="stats-line">
             <strong>Decision clave</strong>
             <span>Elegir la tecnica segun el defecto principal: contraste, ruido, iluminacion desigual, color apagado, mascara o dano localizado.</span>
           </div>
           <div class="stats-line">
-            <strong>Lectura recomendada</strong>
-            <span>Usa este tablero para repasar primero la idea general y luego bajar a cada tecnica segun tu necesidad.</span>
+            <strong>MLP vs CNN</strong>
+            <span>MLP aplana la imagen y pierde estructura espacial. CNN conserva vecindad y aprende filtros locales. Para letras o formas similares, CNN es mas confiable.</span>
           </div>
           <div class="stats-line">
             <strong>Archivos donde aparece</strong>
-            <span>Cada tarjeta incluye notebooks o laboratorios representativos donde esa tecnica fue usada dentro del repo.</span>
+            <span>Cada tarjeta incluye notebooks o laboratorios representativos donde esa tecnica fue usada dentro del repositorio.</span>
           </div>
         </div>
       </aside>
@@ -524,7 +594,7 @@
         <div class="empty" id="emptyState">No hay tecnicas que coincidan con los filtros actuales.</div>
 
         <p class="footer-note">
-          Este dashboard fue generado a partir del resumen del repositorio y consolida las tecnicas principales en una sola entrada. Cada tarjeta incluye referencias y una advertencia sobre casos donde no conviene aplicar la tecnica.
+          Dashboard generado a partir del resumen del repositorio. Consolida las tecnicas principales en una sola entrada sin duplicados. Cada tarjeta incluye referencias a notebooks y una nota de cautela sobre casos donde no conviene aplicar la tecnica.
         </p>
       </main>
     </section>
@@ -540,7 +610,7 @@
         when: "Cuando la imagen se ve bien pero el analisis falla en el espacio original.",
         notWhen: "No conviene convertir sin un objetivo claro, porque cada cambio puede descartar o mezclar informacion relevante para otra etapa.",
         files: [
-          "006 - TFI_1/TFI_1 - mejora y restauracion de imagenes.ipynb",
+          "006_TFI_1/TFI_1_Mejora y restauracion de imagenes.ipynb",
           "004 - librerias_fundamentos_pdi/002 - PRA/002 - imagenes en color y canales.ipynb",
           "004 - librerias_fundamentos_pdi/002 - PRA/007 - recuperacion y preprocesamiento de imagenes propias.ipynb",
           "005  - computer_vision_parte_1/002 - PRA/001 - introduccion a opencv y espacios de color.ipynb",
@@ -555,7 +625,7 @@
         when: "Cuando el problema principal es color debil o baja saturacion y se quiere evitar una correccion global agresiva.",
         notWhen: "No conviene si la imagen ya tiene colores intensos, dominantes fuertes o si se busca conservar fidelidad cromatica documental.",
         files: [
-          "006 - TFI_1/TFI_1 - mejora y restauracion de imagenes.ipynb",
+          "006_TFI_1/TFI_1_Mejora y restauracion de imagenes.ipynb",
           "005  - computer_vision_parte_1/002 - PRA/001B - practicas_hsv.ipynb",
           "004 - librerias_fundamentos_pdi/002 - PRA/006 - laboratorio 2 - segmentacion simple por color.ipynb"
         ]
@@ -582,7 +652,7 @@
         when: "Cuando la imagen esta subexpuesta, sobreexpuesta o con rango tonal comprimido.",
         notWhen: "No conviene cuando la iluminacion es muy irregular o hay zonas casi saturadas, porque puede lavar claros o empastar sombras.",
         files: [
-          "006 - TFI_1/TFI_1 - mejora y restauracion de imagenes.ipynb",
+          "006_TFI_1/TFI_1_Mejora y restauracion de imagenes.ipynb",
           "004 - librerias_fundamentos_pdi/002 - PRA/007 - recuperacion y preprocesamiento de imagenes propias.ipynb",
           "004 - librerias_fundamentos_pdi/003 - LAB/2026_PDI_RODRIGUEZ_ rec_preproc_imag_propias.ipynb",
           "005  - computer_vision_parte_1/002 - PRA/003 - mejora de imagen y ecualizacion basica.ipynb",
@@ -597,7 +667,7 @@
         when: "Cuando el contraste global es bajo y se busca una mejora rapida.",
         notWhen: "No conviene cuando hay mucho ruido, manchas o iluminacion desigual, porque puede amplificar defectos en toda la imagen.",
         files: [
-          "006 - TFI_1/TFI_1 - mejora y restauracion de imagenes.ipynb",
+          "006_TFI_1/TFI_1_Mejora y restauracion de imagenes.ipynb",
           "005  - computer_vision_parte_1/002 - PRA/003 - mejora de imagen y ecualizacion basica.ipynb",
           "005  - computer_vision_parte_1/002 - PRA/003B - mejora de imagen y ecualizacion basica img1.ipynb",
           "005  - computer_vision_parte_1/002 - PRA/004 - comparacion de estrategias de ecualizacion.ipynb"
@@ -611,7 +681,7 @@
         when: "Cuando hay iluminacion no uniforme o interes por detalles locales.",
         notWhen: "No conviene con parametros altos si la imagen tiene mucho ruido o textura de soporte, porque puede exagerarlos y generar aspecto artificial.",
         files: [
-          "006 - TFI_1/TFI_1 - mejora y restauracion de imagenes.ipynb",
+          "006_TFI_1/TFI_1_Mejora y restauracion de imagenes.ipynb",
           "004 - librerias_fundamentos_pdi/002 - PRA/007 - recuperacion y preprocesamiento de imagenes propias.ipynb",
           "004 - librerias_fundamentos_pdi/003 - LAB/2026_PDI_RODRIGUEZ_ rec_preproc_imag_propias.ipynb",
           "005  - computer_vision_parte_1/002 - PRA/004 - comparacion de estrategias de ecualizacion.ipynb"
@@ -666,7 +736,7 @@
         when: "Cuando importa estudiar sensibilidad a la orientacion o practicar transformaciones basicas.",
         notWhen: "No conviene aplicarlo por costumbre: solo corresponde si la orientacion afecta la lectura o la comparacion.",
         files: [
-          "006 - TFI_1/TFI_1 - mejora y restauracion de imagenes.ipynb",
+          "006_TFI_1/TFI_1_Mejora y restauracion de imagenes.ipynb",
           "005  - computer_vision_parte_1/002 - PRA/004b - operaciones basicas con imagenes.ipynb",
           "005  - computer_vision_parte_1/002 - PRA/004C - operaciones basicas con imagenes actividad.ipynb"
         ]
@@ -703,7 +773,7 @@
         when: "Antes de segmentar o detectar bordes en imagenes ruidosas.",
         notWhen: "No conviene usarlo con demasiada intensidad cuando los detalles finos son importantes, porque puede borrar bordes y textura util.",
         files: [
-          "006 - TFI_1/TFI_1 - mejora y restauracion de imagenes.ipynb",
+          "006_TFI_1/TFI_1_Mejora y restauracion de imagenes.ipynb",
           "004 - librerias_fundamentos_pdi/002 - PRA/007 - recuperacion y preprocesamiento de imagenes propias.ipynb",
           "005  - computer_vision_parte_1/002 - PRA/006b - filtros de suavizado y reduccion de ruido.ipynb",
           "005  - computer_vision_parte_1/002 - PRA/004 - comparacion de estrategias de ecualizacion.ipynb"
@@ -780,7 +850,7 @@
         when: "Cuando la mascara tiene agujeros, puntos sueltos o bordes rotos, o cuando se necesita preparar una mascara de danos.",
         notWhen: "No conviene si la mascara inicial es mala o si el kernel es muy grande, porque puede borrar estructuras reales o deformarlas.",
         files: [
-          "006 - TFI_1/TFI_1 - mejora y restauracion de imagenes.ipynb",
+          "006_TFI_1/TFI_1_Mejora y restauracion de imagenes.ipynb",
           "005  - computer_vision_parte_1/002 - PRA/006c - morfologia matematica para limpieza de mascaras.ipynb",
           "005  - computer_vision_parte_1/002 - PRA/exploratorios/laboratorio guiado de exploracion - color, paleta y segmentacion.ipynb",
           "005  - computer_vision_parte_1/002 - PRA/007 - deteccion de contornos.ipynb"
@@ -833,7 +903,7 @@
         when: "Cuando hay rayas, manchas o faltantes localizados y existe una mascara del dano.",
         notWhen: "No conviene aplicarlo sin una mascara precisa de dano, porque puede inventar contenido y alterar informacion real.",
         files: [
-          "006 - TFI_1/TFI_1 - mejora y restauracion de imagenes.ipynb",
+          "006_TFI_1/TFI_1_Mejora y restauracion de imagenes.ipynb",
           "005  - computer_vision_parte_1/002 - PRA/006d - restauracion y algoritmos de inpainting.ipynb"
         ]
       },
@@ -858,45 +928,135 @@
         files: [
           "005  - computer_vision_parte_1/002 - PRA/010 - deteccion de rostros con haar.ipynb"
         ]
+      },
+      {
+        name: "Normalizacion para redes neuronales",
+        category: "aprendizaje",
+        use: "Escalar pixeles o variables numericas a rangos estables antes de entrenar o inferir. El rango tipico es [0, 1] dividiendo por 255; MobileNet espera [-1, 1].",
+        improve: "Hace que el entrenamiento sea mas estable y que las entradas coincidan con lo esperado por TensorFlow, Keras, PyTorch o MobileNetV2.",
+        when: "Antes de entrenar CNNs, MLPs, modelos exportados desde Teachable Machine o modelos preentrenados.",
+        notWhen: "No conviene mezclar normalizaciones distintas sin revisar el modelo: algunas redes esperan [0, 1] y otras [-1, 1] o estadisticas de ImageNet.",
+        files: [
+          "008_redes_neuronales_parte_1/001_Red_Neuronal.ipynb",
+          "008_redes_neuronales_parte_1/002_Clasificacion.ipynb",
+          "008_redes_neuronales_parte_1/003_CNNs_Full.ipynb",
+          "008_redes_neuronales_parte_1/004_Teachable_Machine_Dataset_Propio_Gradio.ipynb",
+          "009_redes_neuronales_parte_2/01_Fundamentos_Red_Neuronal_Simple.ipynb",
+          "009_redes_neuronales_parte_2/02_Clasificacion_Letras_MLP.ipynb",
+          "009_redes_neuronales_parte_2/05_Clasificacion_Preentrenados_ResNet18.ipynb"
+        ]
+      },
+      {
+        name: "Perceptron multicapa (MLP)",
+        category: "aprendizaje",
+        use: "Clasificar datos con capas Dense apiladas (Flatten + Dense + Softmax o Sigmoid). Cada neurona aprende combinaciones lineales de todas las entradas, seguidas de activacion no lineal (ReLU).",
+        improve: "Introduce los conceptos fundamentales: propagacion hacia adelante, funcion de perdida, descenso del gradiente y actualizacion de pesos. Sirve como baseline para comparar con arquitecturas mas complejas.",
+        when: "Como primera red antes de una CNN, o cuando los patrones no dependen de la vecindad espacial (datos tabulares, regresion numerica).",
+        notWhen: "No conviene como solucion final en imagenes donde la topologia 2D importa (letras similares como i/l o c/o, bordes, texturas), porque Flatten destruye la estructura espacial y genera confusiones sistematicas.",
+        files: [
+          "008_redes_neuronales_parte_1/001_Red_Neuronal.ipynb",
+          "008_redes_neuronales_parte_1/002_Clasificacion.ipynb",
+          "009_redes_neuronales_parte_2/01_Fundamentos_Red_Neuronal_Simple.ipynb",
+          "009_redes_neuronales_parte_2/02_Clasificacion_Letras_MLP.ipynb"
+        ]
+      },
+      {
+        name: "Redes convolucionales y pooling",
+        category: "aprendizaje",
+        use: "Aprender filtros locales con Conv2D y reducir mapas de caracteristicas con MaxPooling. Cada filtro 3x3 tiene solo 9 pesos compartidos para toda la imagen.",
+        improve: "Conserva la estructura espacial de la imagen y permite detectar bordes, curvas, texturas y formas utiles para clasificar. Supera al MLP en letras y formas similares porque el contexto local importa.",
+        when: "Cuando el problema depende de la vecindad entre pixeles: digitos, letras, gatos/perros, frutas o cualquier patron visual con estructura espacial.",
+        notWhen: "No conviene como primera opcion si hay muy pocos datos y no se controla el sobreajuste; en ese caso conviene transferencia de aprendizaje o aumento de datos.",
+        files: [
+          "008_redes_neuronales_parte_1/003_CNNs_Full.ipynb",
+          "009_redes_neuronales_parte_2/03_Clasificacion_Letras_CNN.ipynb",
+          "010_redes_neuronales_parte_3/clasificador_frutas_extended.ipynb",
+          "010_redes_neuronales_parte_3/comparacion_modelos.ipynb"
+        ]
+      },
+      {
+        name: "Visualizacion de filtros y activaciones CNN",
+        category: "aprendizaje",
+        use: "Ver que zonas activa cada filtro convolucional y que mapas de caracteristicas produce una capa ante una imagen concreta. Permite comparar lo que aprenden capas tempranas y profundas.",
+        improve: "Ayuda a entender que 'aprende' la red: bordes y orientaciones en capas iniciales, formas y patrones complejos en capas profundas. Permite detectar filtros muertos, sobreajuste o sesgos de aprendizaje.",
+        when: "Para interpretar modelos ya entrenados, diagnosticar aprendizaje deficiente, comunicar el funcionamiento interno de una CNN o demostrar la jerarquia de representaciones.",
+        notWhen: "No conviene en modelos sin entrenar o mal convergidos, porque los filtros son aleatorios y las activaciones no son interpretables.",
+        files: [
+          "009_redes_neuronales_parte_2/04_Visualizacion_Filtros_y_Activaciones_CNN.ipynb"
+        ]
+      },
+      {
+        name: "Modelos preentrenados y transfer learning",
+        category: "aprendizaje",
+        use: "Reutilizar redes ya entrenadas como ResNet18, MobileNetV2, ViT, CLIP o DETR. Se pueden usar como extractores de caracteristicas o fine-tunearse con datos propios.",
+        improve: "Reduce la necesidad de entrenar desde cero y aprovecha representaciones visuales aprendidas en datasets grandes (ImageNet, LAION). MobileNetV2 espera entradas normalizadas a [-1, 1].",
+        when: "Cuando se dispone de pocos datos propios, se necesita inferencia rapida o se quiere comparar modelos modernos de vision.",
+        notWhen: "No conviene asumir que el modelo entiende el contexto local: hay que revisar sesgos, etiquetas, licencias y tipo de datos de entrenamiento.",
+        files: [
+          "009_redes_neuronales_parte_2/05_Clasificacion_Preentrenados_ResNet18.ipynb",
+          "009_redes_neuronales_parte_2/06_Transfer_Learning_MobileNetV2.ipynb",
+          "009_redes_neuronales_parte_2/07_Modelos_Preentrenados_HuggingFace.ipynb",
+          "009_redes_neuronales_parte_2/12_Laboratorio_OCR_Investigacion_Critica.ipynb"
+        ]
+      },
+      {
+        name: "Interfaces con Gradio y Spaces",
+        category: "aprendizaje",
+        use: "Convertir un clasificador o pipeline en una interfaz web para probar imagenes nuevas. Con share=True se genera un enlace publico temporal; Hugging Face Spaces permite despliegue permanente.",
+        improve: "Permite experimentar fuera del notebook, detectar fallas del dataset y comunicar resultados de forma interactiva. Las barras de probabilidad muestran cuanto confian todas las clases, no solo la ganadora.",
+        when: "En prototipos academicos, pruebas con usuarios, demos de modelos o despliegues simples en Hugging Face Spaces.",
+        notWhen: "No conviene publicar un demo sin controlar dependencias, tiempos de carga, ejemplos ambiguos y limitaciones del modelo.",
+        files: [
+          "008_redes_neuronales_parte_1/004_Teachable_Machine_Dataset_Propio_Gradio.ipynb",
+          "009_redes_neuronales_parte_2/08_Laboratorio_Desarrollo_Space_Gradio.ipynb",
+          "009_redes_neuronales_parte_2/09_Cheatsheet_Desarrollo_Space.ipynb"
+        ]
+      },
+      {
+        name: "OCR e investigacion critica",
+        category: "aprendizaje",
+        use: "Evaluar modelos que extraen texto de imagenes y contrastar afirmaciones tecnicas con fuentes primarias.",
+        improve: "Integra procesamiento de imagenes, validacion de resultados y criterio academico frente a herramientas de IA.",
+        when: "Cuando se trabaja con documentos, texto impreso, manuscritos o seleccion de modelos externos para una tarea real.",
+        notWhen: "No conviene confiar solo en la salida de un modelo o LLM: hay que verificar fuentes, errores y limites del sistema.",
+        files: [
+          "009_redes_neuronales_parte_2/12_Laboratorio_OCR_Investigacion_Critica.ipynb"
+        ]
       }
     ];
 
     const categoryLabels = {
-      nucleo: "Nucleo",
-      mejora: "Mejora",
+      nucleo:       "Nucleo",
+      mejora:       "Mejora",
       segmentacion: "Segmentacion",
-      geometria: "Geometria",
-      deteccion: "Deteccion"
+      geometria:    "Geometria",
+      deteccion:    "Deteccion",
+      aprendizaje:  "Aprendizaje"
     };
 
-    const cards = document.getElementById("cards");
-    const searchInput = document.getElementById("searchInput");
-    const categoryFilter = document.getElementById("categoryFilter");
-    const resetButton = document.getElementById("resetButton");
-    const resultsCount = document.getElementById("resultsCount");
-    const emptyState = document.getElementById("emptyState");
-    const totalTech = document.getElementById("totalTech");
+    const cards        = document.getElementById("cards");
+    const searchInput  = document.getElementById("searchInput");
+    const catFilter    = document.getElementById("categoryFilter");
+    const resetBtn     = document.getElementById("resetButton");
+    const resultCount  = document.getElementById("resultsCount");
+    const emptyState   = document.getElementById("emptyState");
+    const totalTech    = document.getElementById("totalTech");
 
     totalTech.textContent = techniques.length;
 
-    function categoryClass(category) {
-      return `cat-${category}`;
-    }
-
     function render(data) {
       cards.innerHTML = "";
-
       data.forEach(item => {
         const card = document.createElement("article");
         card.className = "tech-card";
         const fileChips = item.files
-          .map(file => `<span class="file-chip">${file}</span>`)
+          .map(f => `<span class="file-chip">${f}</span>`)
           .join("");
 
         card.innerHTML = `
           <div class="tech-top">
             <h3 class="tech-title">${item.name}</h3>
-            <span class="badge ${categoryClass(item.category)}">${categoryLabels[item.category]}</span>
+            <span class="badge cat-${item.category}">${categoryLabels[item.category]}</span>
           </div>
           <div class="tech-section">
             <strong>Para que se utiliza</strong>
@@ -915,41 +1075,36 @@
             <div class="file-list">${fileChips}</div>
           </div>
           <div class="caution-note">
-            <strong>Cuando no conviene utilizar:</strong> ${item.notWhen}
+            <strong>Cuando no conviene:</strong> ${item.notWhen}
           </div>
         `;
-
         cards.appendChild(card);
       });
 
-      resultsCount.textContent = `Mostrando ${data.length} tecnica${data.length === 1 ? "" : "s"}`;
+      resultCount.textContent = `Mostrando ${data.length} tecnica${data.length === 1 ? "" : "s"}`;
       emptyState.style.display = data.length ? "none" : "block";
     }
 
     function filterTechniques() {
-      const search = searchInput.value.trim().toLowerCase();
-      const category = categoryFilter.value;
-      const filtered = techniques.filter(item => {
-        const matchesSearch =
-          item.name.toLowerCase().includes(search) ||
-          item.use.toLowerCase().includes(search) ||
-          item.improve.toLowerCase().includes(search) ||
-          item.when.toLowerCase().includes(search) ||
-          item.notWhen.toLowerCase().includes(search);
-
-        const matchesCategory = category === "todas" || item.category === category;
-
-        return matchesSearch && matchesCategory;
+      const q    = searchInput.value.trim().toLowerCase();
+      const cat  = catFilter.value;
+      const res  = techniques.filter(t => {
+        const matchQ = !q ||
+          t.name.toLowerCase().includes(q) ||
+          t.use.toLowerCase().includes(q) ||
+          t.improve.toLowerCase().includes(q) ||
+          t.when.toLowerCase().includes(q) ||
+          t.notWhen.toLowerCase().includes(q);
+        return matchQ && (cat === "todas" || t.category === cat);
       });
-
-      render(filtered);
+      render(res);
     }
 
-    searchInput.addEventListener("input", filterTechniques);
-    categoryFilter.addEventListener("change", filterTechniques);
-    resetButton.addEventListener("click", () => {
+    searchInput.addEventListener("input",  filterTechniques);
+    catFilter.addEventListener("change",   filterTechniques);
+    resetBtn.addEventListener("click", () => {
       searchInput.value = "";
-      categoryFilter.value = "todas";
+      catFilter.value   = "todas";
       filterTechniques();
     });
 
